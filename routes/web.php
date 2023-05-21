@@ -33,6 +33,20 @@ Route::middleware(["auth", "is_admin"])->group(function(){
 
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/admin', function () {
+        return "Painel de Admin";
+    })->middleware('check.role:admin');
+
+    Route::get('/manager', function () {
+        return "Painel de Manager";
+    })->middleware('check.role:manager');
+
+    Route::get('/employee', function () {
+        return "Painel de Employee";
+    })->middleware('check.role:employee');
+});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

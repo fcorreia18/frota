@@ -46,6 +46,16 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME . auth()->user()->is_admin?"admin/dashboard":"user/dashboard");
+        $redirectRoute = '';
+
+        if ($user->auth_level === 'admin') {
+            $redirectRoute = 'admin.dashboard';
+        } elseif ($user->auth_level === 'manager') {
+            $redirectRoute = 'manager.dashboard';
+        } elseif ($user->auth_level === 'employee') {
+            $redirectRoute = 'employee.dashboard';
+        }
+
+        return redirect()->route($redirectRoute);
     }
 }
