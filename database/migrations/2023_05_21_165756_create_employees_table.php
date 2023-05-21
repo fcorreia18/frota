@@ -20,10 +20,8 @@ return new class extends Migration
             $table->date('license_due_date');
             $table->string('address');
             $table->integer('contact');
-            $table->string('email')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamps();
-
             $table->foreign('id_company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
         });
     }

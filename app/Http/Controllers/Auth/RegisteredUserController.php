@@ -30,15 +30,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $status =   $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        dd($status);
+        exit;
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
+            'auth_level' => $request->auth_level,
+            'id_employee' => 1,
             'password' => Hash::make($request->password),
         ]);
 
@@ -55,7 +57,8 @@ class RegisteredUserController extends Controller
         } elseif ($user->auth_level === 'employee') {
             $redirectRoute = 'employee.dashboard';
         }
-
+dd($request);
+die;
         return redirect()->route($redirectRoute);
     }
 }
