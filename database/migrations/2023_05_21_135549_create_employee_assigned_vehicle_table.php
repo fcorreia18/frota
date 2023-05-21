@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('employee_assigned_vehicle', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_employee')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('auth_level', ['admin', 'manager', 'employee']);
-            $table->rememberToken();
+            $table->unsignedBigInteger('id_employee');
+            $table->unsignedBigInteger('id_vehicle');
+            $table->date('date');
             $table->timestamps();
 
             $table->foreign('id_employee')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_vehicle')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('employee_assigned_vehicle');
     }
 };

@@ -13,15 +13,31 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'id_employee',
         'email',
         'password',
+        'auth_level',
     ];
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +58,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+     /**
+     * Get the employee associated with the user.
+     */
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'id_employee');
+    }
 }
