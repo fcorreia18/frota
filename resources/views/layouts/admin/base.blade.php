@@ -1,38 +1,69 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light theme-1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>{{ config('app.name', 'Laravel') }} - ADMIN</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Scripts -->
+    @vite(['resources/css/frota.css', 'resources/js/frota.js'])
+    @livewireStyles
+</head>
 
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.admin.navigation')
+<body class="py-5 md:py-0 bg-black/[0.15] dark:bg-transparent">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        @include('layouts.admin.mobile-header')
+    </div>
+    <!-- END: Mobile Menu -->
+    <div class="flex mt-[4.7rem] md:mt-0 overflow-hidden">
+
+        {{-- SIDE MENU --}}
+
+        {{-- @if (isset($sidemenu))
+            {{ $sidemenu }}
+        @endif --}}
+            @include('layouts.admin.side-menu')
+        {{-- END SIDE MENU --}}
+
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <!-- BEGIN: Top Bar -->
+            <div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+                <!-- BEGIN: Breadcrumb -->
+                <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">SIMPLES</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
+                <!-- END: Breadcrumb -->
+
+                <!-- BEGIN: Notifications -->
+                @include('layouts.admin.notifications-component')
+                <!-- END: Notifications -->
+
+                <!-- BEGIN: Account Menu -->
+                @include('layouts.admin.profile-icon')
+                <!-- END: Account Menu -->
+
+            </div>
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{ $slot }}
+            <!-- END: Content -->
         </div>
+    </div>
 
-    </body>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcUcow5QHjitBVOfkTdy44l7jnaoFzW1k&libraries=places">
+    </script>
+    @livewireScripts
+</body>
+
 </html>

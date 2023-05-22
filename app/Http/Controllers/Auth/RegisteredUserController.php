@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'id_employee' => 1,
             'password' => Hash::make($request->password),
         ]);
-        dd($user,  $request);
+        // dd($user,  $request);
 
         event(new Registered($user));
 

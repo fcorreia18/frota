@@ -16,15 +16,18 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
-    // Route::post('register', function(Request $request){
-    //     dd("entrei", $request);
-    // });
 
-    Route::get('/', [AuthenticatedSessionController::class, 'create'])
-    ->name('login');
 
+    Route::get('/', [AuthenticatedSessionController::class, 'create']);
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
+
+    //ERROR HANDLER not working well
+    Route::get('', function () {
+        return redirect()->route("login")->with("error", "acesso negado");
+    })
+        ->name('login.error');
+    //ERROR HANDLER
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

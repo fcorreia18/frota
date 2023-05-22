@@ -13,28 +13,27 @@ class AppLayout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($layout = 'app')
-    {
-        $this->layout = $layout;
-    }
+    // public function __construct($layout = 'admin')
+    // {
+    //     $this->layout = $layout;
+    // }
 
     /**
      * Get the view / contents that represents the component.
      */
     public function render(): View
     {
-        if (Auth::check()) {
-            $authLevel = Auth::user()->auth_level;
+        // if (Auth::check()) {
+        //     $authLevel = Auth::user()->auth_level;
 
-            if ($authLevel === 'admin') {
-                return view('layouts.admin-layout');
-            } elseif ($authLevel === 'manager') {
-                return view('layouts.manager-layout');
-            } elseif ($authLevel === 'employee') {
-                return view('layouts.employee-layout');
-            }
-        }
-
+        //     if ($authLevel === 'admin') {
+        //         return view('layouts.admin.base');
+        //     } elseif ($authLevel === 'manager') {
+        //         return view('layouts.manager.base');
+        //     } elseif ($authLevel === 'employee') {
+        //         return view('layouts.employee.base');
+        //     }
+        // }
         return view('layouts.app');
     }
 }

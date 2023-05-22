@@ -1,6 +1,29 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    
+    {{-- Error Handler --}}
+    @if (session('error'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'error',
+                title: "{{ session('error') }}"
+            })
+        </script>
+    @endif
+
     <!-- BEGIN: Login Form -->
     <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
         <div

@@ -18,37 +18,53 @@ use Illuminate\Support\Facades\Route;
 
 
 
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/admin', [AdminDashboardComponent::class, 'render'])->middleware('check.role:admin');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//     Route::get('/manager', function () {
+//         return "Painel de Manager";
+//     })->middleware('check.role:manager')->name("manager.dashboard");
+
+//     Route::get('/employee', function () {
+//         return "Painel de Employee";
+//     })->middleware('check.role:employee')->name("employee.dashboard");
+// });
+
+
+Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
+    Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
+    Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
+
+   
+    //ADMIN/COMPANIES ROUTES
+    Route::prefix('companies')->group(function () {
+     
+        Route::get('/', [CompanyComponent::class, 'index'])->name('admin.companies.index');
+        Route::get('/add-company', [CompanyComponent::class, 'create'])->name('admin.company.create');
+        Route::post('/add-company', [CompanyComponent::class, 'store'])->name('admin.company.store');
+        Route::get('/edit-company/{id}', [CompanyComponent::class, 'edit'])->name('admin.company.edit');
+        Route::put('/edit-company/{id}', [CompanyComponent::class, 'update'])->name('admin.company.update');
+        Route::delete('/delete-company/{id}', [CompanyComponent::class, 'destroy'])->name('admin.company.destroy');
+    
+    });
+    //->middleware('middleware_subgrupo');
+
+    
+    //ADMIN/EMPLOYEES ROUTES
+    Route::prefix('employees')->group(function () {
+
+        Route::get('/', [EmployeeComponent::class, 'index'])->name('admin.employees.index');
+        
+    });
+
+    //ADMIN/MANAGER ROUTES
+    Route::prefix('manager')->group(function () {
+
+        Route::get('/', function () {
+            return 'Página inicial do subgrupo do admin';
+        })->name('admin.subgrupo.dashboard');
+    });
 });
-Route::middleware("auth")->group(function(){
-    Route::get("/manager/dashboard", ManagerDashboardComponent::class)->name("manager.dashboard");
-});
 
-Route::middleware(["auth", "is_admin"])->group(function(){
-    Route::get("/admin", AdminDashboardComponent::class)->name("admin.dashboard");
 
-});
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/admin', function () {
-        return "Painel de Admin";
-    })->middleware('check.role:admin');
-
-    Route::get('/manager', function () {
-        return "Painel de Manager";
-    })->middleware('check.role:manager');
-
-    Route::get('/employee', function () {
-        return "Painel de Employee";
-    })->middleware('check.role:employee');
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

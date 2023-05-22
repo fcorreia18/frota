@@ -22,13 +22,13 @@
             <!-- BEGIN: Login Info -->
             <div class="hidden xl:flex flex-col min-h-screen">
                 <a href="" class="-intro-x flex items-center pt-5 pl-5">
-                    <img alt="Midone - HTML Admin Template" class="w-32"
+                    <img alt=" " class="w-32"
                         src="<?= asset('/dist/images/etic-logo.png') ?>">
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                 </a>
 
                 <div class="my-auto">
-                    <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16"
+                    <img alt="" class="-intro-x w-1/2 -mt-16"
                         src="https://tinker.left4code.com/dist/images/illustration.svg">
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Insira os seus dados <br>
                         para fazer login.</div>
@@ -44,6 +44,6 @@
 
 
     <!-- BEGIN: JS Assets-->
-    <script src="<?= asset('/dist/js/app.js') ?>"></script>
+    <script src=""></script>
 
 </html>
