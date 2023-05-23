@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\AdminDashboardComponent;
+use App\Http\Livewire\Admin\Companies\Show;
 use App\Http\Livewire\ManagerDashboardComponent;
+use App\Http\Livewire\Teste;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 //         return "Painel de Employee";
 //     })->middleware('check.role:employee')->name("employee.dashboard");
 // });
-
+Route::get("/teste", Teste::class);
 
 Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
     Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
@@ -39,7 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
      
-        Route::get('/', [CompanyComponent::class, 'index'])->name('admin.companies.index');
+        Route::get('/', Show::class)->name('admin.companies.index');
         Route::get('/add-company', [CompanyComponent::class, 'create'])->name('admin.company.create');
         Route::post('/add-company', [CompanyComponent::class, 'store'])->name('admin.company.store');
         Route::get('/edit-company/{id}', [CompanyComponent::class, 'edit'])->name('admin.company.edit');

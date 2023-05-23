@@ -8,7 +8,7 @@ class AdminDashboardComponent extends Component
 {
 
     public $count = 0;
-    public $post = "testando";
+    public $post;
 
     public function increment()
     {

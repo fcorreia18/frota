@@ -45,7 +45,7 @@
                     <!-- Email Address -->
                     <div>
                         <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="" type="email" name="email" :value="old('email')"
+                        <x-text-input id="email" class="" type="email" name="email" value="ptarso@etic.co.ao"
                             required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
@@ -55,7 +55,7 @@
                         <x-input-label for="password" :value="__('Password')" />
 
                         <x-text-input id="password" class="" type="password" name="password" required
-                            autocomplete="current-password" />
+                            autocomplete="current-password"  value="1q2w3e4r"/>
 
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
@@ -63,9 +63,12 @@
                     <!-- Remember Me -->
 
                     <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
-                        <div class="flex items-center mr-auto">
+                        {{-- <div class="flex items-center mr-auto">
                             <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
-                            <label class="cursor-pointer select-none" for="remember-me">Le{{ __('Lembrar-me') }}</label>
+                            <label class="cursor-pointer select-none" for="remember-me">{{ __('') }}</label>
+                        </div> --}}
+                        <div class="flex items-center mr-auto">
+
                         </div>
                         @if (Route::has('password.request'))
                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

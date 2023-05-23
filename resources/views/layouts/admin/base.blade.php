@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} - ADMIN</title>
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/frota.css', 'resources/js/frota.js'])
     @livewireStyles
@@ -27,7 +27,7 @@
         {{-- @if (isset($sidemenu))
             {{ $sidemenu }}
         @endif --}}
-            @include('layouts.admin.side-menu')
+        @include('layouts.admin.side-menu')
         {{-- END SIDE MENU --}}
 
         <!-- BEGIN: Content -->
@@ -35,12 +35,11 @@
             <!-- BEGIN: Top Bar -->
             <div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
                 <!-- BEGIN: Breadcrumb -->
-                <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">SIMPLES</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                    </ol>
-                </nav>
+
+                @if (isset($breadCrumb))
+                    {{ $breadCrumb }}
+                @endif
+                
                 <!-- END: Breadcrumb -->
 
                 <!-- BEGIN: Notifications -->
@@ -58,12 +57,12 @@
             <!-- END: Content -->
         </div>
     </div>
+    @livewireScripts
 
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcUcow5QHjitBVOfkTdy44l7jnaoFzW1k&libraries=places">
     </script>
-    @livewireScripts
 </body>
 
 </html>

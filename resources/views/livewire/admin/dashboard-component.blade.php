@@ -1,4 +1,11 @@
-  
+<x-slot name="breadCrumb">
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">SIMPLES</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+        </ol>
+    </nav>
+</x-slot>
 <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">

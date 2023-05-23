@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
+        QueryBuilder::macro('search',function(string $field, $searchTerm){
+            return $searchTerm ? $this->where($field,'like','%'.$searchTerm.'%'):$this;
+        });
     }
 }
