@@ -8,6 +8,8 @@
 
     <title>{{ config('app.name', 'Laravel') }} - ADMIN</title>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Scripts -->
     @vite(['resources/css/frota.css', 'resources/js/frota.js'])
     @livewireStyles
@@ -39,7 +41,7 @@
                 @if (isset($breadCrumb))
                     {{ $breadCrumb }}
                 @endif
-                
+
                 <!-- END: Breadcrumb -->
 
                 <!-- BEGIN: Notifications -->
@@ -57,12 +59,17 @@
             <!-- END: Content -->
         </div>
     </div>
-    @livewireScripts
 
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcUcow5QHjitBVOfkTdy44l7jnaoFzW1k&libraries=places">
     </script>
+
+    @if (isset($scripts))
+        {{ $scripts }}
+    @endif
+
+    @livewireScripts
 </body>
 
 </html>

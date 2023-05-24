@@ -2331,7 +2331,7 @@ select{
       opacity: 1;
     }
 .modal.show > .modal-dialog{
-    margin-top: 4rem;
+    margin-top: 10rem;
 }
 .modal .modal-dialog {
       width: 90%;
@@ -2343,7 +2343,7 @@ select{
     }
 @media (min-width: 640px) {
     .modal .modal-dialog {
-        width: 460px
+        width: 600px
     }
         .modal .modal-dialog.modal-sm {
           width: 300px;

@@ -14,14 +14,8 @@ class Show extends Component
     use WithPagination;
 
    
-    public $count = 0;
-
-    public function increment()
-    {
-
-        $this->count++;
-    }
-    public $search = "Esat";
+   
+    public $search;
 
     public function render()
     {
