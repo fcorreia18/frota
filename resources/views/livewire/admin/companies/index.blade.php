@@ -36,7 +36,7 @@
                         <option value="remaining_stock">Email</option>
                     </select>
                 </div>
-               
+
                 <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Valor</label>
                     <x-text-input class="sm:w-40 2xl:w-full mt-2 sm:mt-0 py-2 mb-2"
@@ -83,122 +83,91 @@
             <div class="shadow-sm mt-3 bg-white p-4 col-lg-12">
                 <div class="table-responsive">
                     {{-- MESSAGE --}}
-                    <div class="event_message" id="mess"></div>
-                    <table class="table table-striped" id="companys" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
+                    
+                    <x-table>
+                        <x-slot name="head">
+                            <x-table.heading >
+                                #
+                            </x-table.heading >
+                
+                            <x-table.heading sortable>
+                                Empresa
+                            </x-table.heading >
+                            <x-table.heading sortable>
+                                NIF
+                            </x-table.heading >
+                            <x-table.heading sortable>
+                                Endereço
+                            </x-table.heading >
+                            <x-table.heading sortable>
+                                Email
+                            </x-table.heading >
+                            <x-table.heading sortable>
+                                Contactos
+                            </x-table.heading >
+                            <x-table.heading class="text-center">
+                                Acções
+                            </x-table.heading >
 
-                                <th>
-                                    Empresa
-                                </th>
-                                <th>
-                                    NIF
-                                </th>
-                                <th>
-                                    Endereço
-                                </th>
-                                <th>
-                                    Email
-                                </th>
-                                <th>
-                                    Contactos
-                                </th>
-                                <th class="text-center">
-                                    Acções
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </x-slot>
 
-                            <?php if (!empty($companies) && $companies->total()) : foreach ($companies as $key => $company) : ?>
-                            <tr>
-                                <td>
-                                    <?= $key + 1 ?>
-                                </td>
+                        <x-slot name="body">
+                            <x-table.row>
+                                <x-table.cell>
+                                    One
+                                </x-table.cell>
+                                <x-table.cell>
+                                    Two
+                                </x-table.cell>
+                                <x-table.cell>
+                                    d
+                                </x-table.cell>
+                                <x-table.cell>
+                                    Twogh
+                                </x-table.cell>
+                                <x-table.cell>
+                                    Twog
+                                </x-table.cell>
+                                <x-table.cell>
+                                    f
+                                </x-table.cell>
+                                <x-table.cell>
+                                    Twoh
+                                </x-table.cell>
 
-                                <td>
-                                    <?= $company->name ?>
+                            </x-table.row>
 
-                                </td>
-                                <td>
-                                    <?= $company->nif ?>
+                        </x-slot>
 
-                                </td>
-                                <td>
-                                    <?= $company->address ?>
-
-                                </td>
-                                <td>
-                                    <?= $company->email ?>
-
-                                </td>
-                                <td>
-                                    <?= $company->contact ?>
-
-                                </td>
-                                <td>
-                                    <div class="flex lg:justify-center items-center">
-                                        <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600" data-tw-toggle="modal" data-tw-target="#header-footer-modal-preview-company{{$company->id}}">
-                                            <i data-lucide="edit" class="w-5 h-5"></i>
-                                        </button>
-                                       
-                                        <form action="{{route("admin.company.destroy", $company->id)}}" method="post">
-                                            @method("delete")
-                                            @csrf
-                                            <button class="btn btn-danger mr-1 mb-2" onclick="deleteConfirm(event)">
-                                                <i data-lucide="trash" class="w-5 h-5"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            @include('livewire.admin.companies.show',['company' => $company])
-                        {{-- 
-                        $this->insert('admin/companies/delete-company', ['company' => $company]);
-                        --}}
-                            <?php endforeach;
-                            else : ?>
-                            <tr>
-                                <td colspan="7">
-                                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"> </i> Não
-                                        existem dados a pra serem apresentados </p>
-                                </td>
-                            </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                    </x-table>
                 </div>
             </div>
         </div>
     </div>
 
 
-   
 
-<x-slot name="scripts">
-    <script>
-        window.deleteConfirm = function(event) {
-            event.preventDefault();
-            let form = event.target.form;
-            Swal.fire({
-                title: 'Tem certeza?',
-                text: "Essa acção é irreversível!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonText: 'cancelar',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'sim, apagar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                   form.submit();
-                }
-            })
-        }
-    </script>
-</x-slot>
+
+    <x-slot name="scripts">
+        <script>
+            window.deleteConfirm = function(event) {
+                event.preventDefault();
+                let form = event.target.form;
+                Swal.fire({
+                    title: 'Tem certeza?',
+                    text: "Essa acção é irreversível!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonText: 'cancelar',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'sim, apagar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                })
+            }
+        </script>
+    </x-slot>
 </div>
