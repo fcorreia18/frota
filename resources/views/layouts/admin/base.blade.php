@@ -70,6 +70,7 @@
     @endif
 
     @livewireScripts
+    
 </body>
 
 </html>

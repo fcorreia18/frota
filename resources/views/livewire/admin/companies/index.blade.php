@@ -15,13 +15,22 @@
         <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
-
-            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#add-company"><i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
+                data-tw-target="#add-company">
+                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
             </x-blue-primary-button>
 
         </div>
     </div>
-
+    <div class="error-section">
+        @if ($errors->any())
+            <ul class="error-list">
+                @foreach ($errors->all() as $error)
+                    <li class="error-item">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
 
     <div class="intro-y box p-5 mt-5">
         <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
@@ -149,7 +158,7 @@
                                             </form>
                                         </div>
                                     </x-table.cell>
-                                    @include('livewire.admin.companies.show', ['company' => $company])
+                                    @include('livewire.admin.companies.edit', ['company' => $company])
 
                                 </x-table.row>
                             @empty
@@ -169,9 +178,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <x-slot name="scripts">
         <script>
@@ -194,5 +200,41 @@
                 })
             }
         </script>
+        <script>
+            document.addEventListener('livewire:load', function() {
+                Livewire.on('show-success-message', function(message) {
+                    let closeModal = document.querySelector('#add-company').remove()
+                    Swal.fire({
+                        icon: 'success',
+                        text: message,
+                        title: 'Cadastro bem sucedido',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                });
+
+                Livewire.on('show-error-message', function(message) {
+
+                    let closeModal = document.querySelector('#add-company').remove();
+
+
+                    Swal.fire({
+                        title: '',
+                        icon: 'warning',
+                        html: message,
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonText: 'Entendi',
+                        cancelButtonText: 'Fechar',
+                    }).then((result) => {
+                        document.querySelector('#add-company').remove()
+                    })
+                });
+            });
+        </script>
     </x-slot>
+
+    @include('livewire.admin.companies.add')
+
 </div>

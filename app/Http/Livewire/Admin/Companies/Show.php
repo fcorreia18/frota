@@ -15,13 +15,42 @@ class Show extends Component
     use WithPagination;
 
 
+    public $name;
+    public $email;
+    public $nif;
+    public $address;
+    public $contact;
+    public $showToast = false;
+
+    protected $rules = [
+        'name' => 'required|string|min:3',
+        'email' => 'required|string|email',
+        'nif' => 'required|string|min:3|max:10',
+        'address' => 'required|string|min:4|max:50',
+        'contact' => 'required|string|min:9|max:14',
+    ];
+
+    protected $messages = [
+        'name.required' => 'O campo nome é obrigatório.',
+        'name.min' => 'O campo nome deve ter pelo menos 3 caracteres.',
+        'email.required' => 'O campo email é obrigatório.',
+        'email.email' => 'O campo email deve ser um endereço de email válido.',
+        'nif.required' => 'O campo NIF é obrigatório.',
+        'nif.min' => 'O campo NIF deve ter pelo menos 3 caracteres.',
+        'nif.max' => 'O campo NIF deve ter no máximo 10 caracteres.',
+        'address.required' => 'O campo endereço é obrigatório.',
+        'address.min' => 'O campo endereço deve ter pelo menos 4 caracteres.',
+        'address.max' => 'O campo endereço deve ter no máximo 50 caracteres.',
+        'contact.required' => 'O campo contato é obrigatório.',
+        'contact.min' => 'O campo contato deve ter pelo menos 9 caracteres.',
+        'contact.max' => 'O campo contato deve ter no máximo 14 caracteres.',
+    ];
+
 
     public $search;
     public $searchField = "name";
     public $sortField="name";
     public $sortDirection = "asc";
-
-
 
 
     public function sortBy($field)
@@ -39,18 +68,61 @@ class Show extends Component
 
 
 
-    public function save()
+
+
+    protected function showToast($type, $message)
     {
-    }
-    /**
-     * Display the company profile form.
-     */
-    public function edit(Request $request)
-    {
-        return view('admin.company.edit', [
-            'company' => $request->company(),
+        $this->showToast = true;
+        $this->dispatchBrowserEvent('show-toast', [
+            'type' => $type,
+            'message' => $message,
         ]);
     }
+    public function store()
+    {
+        try {
+            $this->validate();
+            $this->emit('show-success-message', 'A empresa foi cadastrada com sucesso!');
+
+        } catch (\Throwable $th) {
+            $this->emit('show-error-message', $th->getMessage());
+
+        }
+
+        
+        $this->emit('reset-show-toast');
+         // Restante do seu código para o envio do formulário...
+
+        // Se o envio for bem-sucedido, exiba uma notificação toast de sucesso
+        // $this->showToast('success', 'Formulário enviado com sucesso!');
+
+        // Execution doesn't reach here if validation fails.
+
+        // Company::create([
+
+        //     'name' => $this->name,
+
+        //     'email' => $this->email,
+
+        // ]);
+
+    }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function update(Request $request): RedirectResponse #ProfileUpdateRequest $request
     {
