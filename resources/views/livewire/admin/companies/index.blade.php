@@ -16,10 +16,9 @@
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
 
-            <x-blue-primary-button x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')" data-tw-toggle="modal"
-                data-tw-target="#add-company"><i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#add-company"><i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
             </x-blue-primary-button>
+
         </div>
     </div>
 
@@ -30,10 +29,10 @@
                 <div class="sm:flex items-center sm:mr-4">
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Campos</label>
                     <select id="tabulator-html-filter-field"
-                        class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto">
-                        <option value="name">Nome</option>
+                        class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto" wire:model="searchField">
+                        <option value="name" selected>Nome</option>
                         <option value="category">NIF</option>
-                        <option value="remaining_stock">Email</option>
+                        <option value="email">Email</option>
                     </select>
                 </div>
 
@@ -83,63 +82,89 @@
             <div class="shadow-sm mt-3 bg-white p-4 col-lg-12">
                 <div class="table-responsive">
                     {{-- MESSAGE --}}
-                    
+
                     <x-table>
                         <x-slot name="head">
-                            <x-table.heading >
+                            <x-table.heading>
                                 #
-                            </x-table.heading >
-                
-                            <x-table.heading sortable>
+                            </x-table.heading>
+
+                            <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
                                 Empresa
-                            </x-table.heading >
-                            <x-table.heading sortable>
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
                                 NIF
-                            </x-table.heading >
-                            <x-table.heading sortable>
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
                                 Endereço
-                            </x-table.heading >
-                            <x-table.heading sortable>
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
                                 Email
-                            </x-table.heading >
-                            <x-table.heading sortable>
-                                Contactos
-                            </x-table.heading >
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
+                                Contacto
+                            </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
-                            </x-table.heading >
+                            </x-table.heading>
 
                         </x-slot>
 
                         <x-slot name="body">
-                            <x-table.row>
-                                <x-table.cell>
-                                    One
-                                </x-table.cell>
-                                <x-table.cell>
-                                    Two
-                                </x-table.cell>
-                                <x-table.cell>
-                                    d
-                                </x-table.cell>
-                                <x-table.cell>
-                                    Twogh
-                                </x-table.cell>
-                                <x-table.cell>
-                                    Twog
-                                </x-table.cell>
-                                <x-table.cell>
-                                    f
-                                </x-table.cell>
-                                <x-table.cell>
-                                    Twoh
-                                </x-table.cell>
+                            @forelse ($companies as $key => $company)
+                                <x-table.row>
+                                    <x-table.cell>
+                                        {{ $key + 1 }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->name }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->nif }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->address }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->email }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->contact }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        <div class="flex lg:justify-center items-center">
+                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
+                                                data-tw-toggle="modal"
+                                                data-tw-target="#header-footer-modal-preview-company{{ $company->id }}">
+                                                <i data-lucide="edit" class="w-5 h-5"></i>
+                                            </button>
 
-                            </x-table.row>
+                                            <form action="{{ route('admin.company.destroy', $company->id) }}"
+                                                method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger mr-1 mb-2" onclick="deleteConfirm(event)">
+                                                    <i data-lucide="trash" class="w-5 h-5"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </x-table.cell>
+                                    @include('livewire.admin.companies.show', ['company' => $company])
 
+                                </x-table.row>
+                            @empty
+                                <x-table.row>
+                                    <x-table.cell colspan="7">
+                                        <p class="alert alert-warning"><i class="fa fa-exclamation-x-table.rowiangle">
+                                            </i> Não
+                                            existem dados a pra serem apresentados </p>
+                                    </x-table.cell>
+
+                                </x-table.row>
+                            @endforelse
                         </x-slot>
-
                     </x-table>
+                    {{ $companies->links() }}
                 </div>
             </div>
         </div>
