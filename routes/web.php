@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Admin\Companies\Save;
 use App\Http\Livewire\AdminDashboardComponent;
-use App\Http\Livewire\Admin\Companies\Show;
+use App\Http\Livewire\Admin\Companies\AdminCompanyComponent;
+use App\Http\Livewire\Admin\Employees\ManageEmployee;
 use App\Http\Livewire\ManagerDashboardComponent;
-use App\Http\Livewire\Teste;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,17 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/admin', [AdminDashboardComponent::class, 'render'])->middleware('check.role:admin');
 
-//     Route::get('/manager', function () {
-//         return "Painel de Manager";
-//     })->middleware('check.role:manager')->name("manager.dashboard");
-
-//     Route::get('/employee', function () {
-//         return "Painel de Employee";
-//     })->middleware('check.role:employee')->name("employee.dashboard");
-// });
 
 
 Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
@@ -42,19 +32,23 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
      
-        Route::get('/', Show::class)->name('admin.companies.index');
+        Route::get('/', AdminCompanyComponent::class)->name('admin.companies.index');
         Route::post('/add-company', [Save::class])->name('admin.company.store');
-        Route::put('/edit-company/{id}', [Show::class, 'update'])->name('admin.company.update');
-        Route::delete('/delete-company/{id}', [Show::class, 'destroy'])->name('admin.company.destroy');
+        Route::put('/edit-company/{id}', [AdminCompanyComponent::class, 'update'])->name('admin.company.update');
+        Route::delete('/delete-company/{id}', [AdminCompanyComponent::class, 'destroy'])->name('admin.company.destroy');
     
     });
-    //->middleware('middleware_subgrupo');
+    //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
     
     //ADMIN/EMPLOYEES ROUTES
     Route::prefix('employees')->group(function () {
 
-        Route::get('/', [EmployeeComponent::class, 'index'])->name('admin.employees.index');
+        Route::get('/', ManageEmployee::class)->name('admin.employees.index');
+        Route::post('/add-employee', [ManageEmployee::class, 'store'])->name('admin.employee.store');
+        Route::put('/edit-employee/{id}', [ManageEmployee::class, 'update'])->name('admin.employee.update');
+        Route::delete('/delete-employee/{id}', [ManageEmployee::class, 'destroy'])->name('admin.employee.destroy');
+    
         
     });
 

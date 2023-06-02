@@ -5,19 +5,19 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Frota</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+                <li class="breadcrumb-item active" aria-current="page">Funcionarios</li>
             </ol>
         </nav>
     </x-slot>
 
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
+        <h2 class="text-lg font-medium mr-auto">Lista de Funcionarios</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-company">
-                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
+                data-tw-target="#add-employee">
+                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Novo funcionário') }}
             </x-blue-primary-button>
 
         </div>
@@ -40,7 +40,7 @@
                     <select id="tabulator-html-filter-field"
                         class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto" wire:model="searchField">
                         <option value="name" selected>Nome</option>
-                        <option value="nif">NIF</option>
+                        <option value="nif">Nº de Identidade</option>
                         <option value="email">Email</option>
                     </select>
                 </div>
@@ -99,10 +99,10 @@
                             </x-table.heading>
 
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
-                                Empresa
+                                Nome
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                NIF
+                                Nº de Identidade
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
                                 Endereço
@@ -120,35 +120,35 @@
                         </x-slot>
 
                         <x-slot name="body">
-                            @forelse ($companies as $key => $company)
+                            @forelse ($employees as $key => $employee)
                                 <x-table.row>
                                     <x-table.cell>
                                         {{ $key + 1 }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->name }}
+                                        {{ $employee->name }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->nif }}
+                                        {{ $employee->id_number }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->address }}
+                                        {{ $employee->address }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->email }}
+                                        {{ $employee->user }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->contact }}
+                                        {{ $employee->contact }}
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
                                             <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
                                                 data-tw-toggle="modal"
-                                                data-tw-target="#header-footer-modal-preview-company{{ $company->id }}">
+                                                data-tw-target="#header-footer-modal-preview-employee{{ $employee->id }}">
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
 
-                                            <form action="{{ route('admin.company.destroy', $company->id) }}"
+                                            <form action="{{ route('admin.employee.destroy', $employee->id) }}"
                                                 method="post">
                                                 @method('delete')
                                                 @csrf
@@ -158,7 +158,7 @@
                                             </form>
                                         </div>
                                     </x-table.cell>
-                                    @include('livewire.admin.companies.edit', ['company' => $company])
+                                    @include('livewire.admin.employees.edit', ['employee' => $employee])
 
                                 </x-table.row>
                             @empty
@@ -173,7 +173,6 @@
                             @endforelse
                         </x-slot>
                     </x-table>
-                    {{ $companies->links() }}
                 </div>
             </div>
         </div>
@@ -203,7 +202,7 @@
         <script>
             document.addEventListener('livewire:load', function() {
                 Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-company').remove()
+                    let closeModal = document.querySelector('#add-employee').remove()
                     Swal.fire({
                         icon: 'success',
                         text: message,
@@ -215,7 +214,7 @@
 
                 Livewire.on('show-error-message', function(message) {
 
-                    let closeModal = document.querySelector('#add-company').remove();
+                    let closeModal = document.querySelector('#add-employee').remove();
 
 
                     Swal.fire({
@@ -229,13 +228,13 @@
                         cancelButtonText: 'Fechar',
                     }).then((result) => {
                         console.log(result);
-                        // document.querySelector('#add-company').remove()
+                        // document.querySelector('#add-employee').remove()
                     })
                 });
             });
         </script>
     </x-slot>
 
-    @include('livewire.admin.companies.add')
+    @include('livewire.admin.employees.add')
 
 </div>

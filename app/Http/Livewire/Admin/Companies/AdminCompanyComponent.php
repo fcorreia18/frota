@@ -10,7 +10,7 @@ use App\Models\Company;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Show extends Component
+class AdminCompanyComponent extends Component
 {
     use WithPagination;
 
@@ -31,19 +31,19 @@ class Show extends Component
     ];
 
     protected $messages = [
-        'name.required' => 'O campo nome é obrigatório.',
-        'name.min' => 'O campo nome deve ter pelo menos 3 caracteres.',
-        'email.required' => 'O campo email é obrigatório.',
-        'email.email' => 'O campo email deve ser um endereço de email válido.',
-        'nif.required' => 'O campo NIF é obrigatório.',
-        'nif.min' => 'O campo NIF deve ter pelo menos 3 caracteres.',
-        'nif.max' => 'O campo NIF deve ter no máximo 10 caracteres.',
-        'address.required' => 'O campo endereço é obrigatório.',
-        'address.min' => 'O campo endereço deve ter pelo menos 4 caracteres.',
-        'address.max' => 'O campo endereço deve ter no máximo 50 caracteres.',
-        'contact.required' => 'O campo contato é obrigatório.',
-        'contact.min' => 'O campo contato deve ter pelo menos 9 caracteres.',
-        'contact.max' => 'O campo contato deve ter no máximo 14 caracteres.',
+        'name.required' => 'O campo de nome é obrigatório.',
+        'name.min' => 'O campo de nome deve ter pelo menos 3 caracteres.',
+        'email.required' => 'O campo de email é obrigatório.',
+        'email.email' => 'O campo de email deve ser um endereço de email válido.',
+        'nif.required' => 'O campo de NIF é obrigatório.',
+        'nif.min' => 'O campo de NIF deve ter pelo menos 3 caracteres.',
+        'nif.max' => 'O campo de NIF deve ter no máximo 10 caracteres.',
+        'address.required' => 'O campo de endereço é obrigatório.',
+        'address.min' => 'O campo de endereço deve ter pelo menos 4 caracteres.',
+        'address.max' => 'O campo de endereço deve ter no máximo 50 caracteres.',
+        'contact.required' => 'O campo de contato é obrigatório.',
+        'contact.min' => 'O campo de contato deve ter pelo menos 9 caracteres.',
+        'contact.max' => 'O campo de contato deve ter no máximo 14 caracteres.',
     ];
 
 
@@ -52,6 +52,9 @@ class Show extends Component
     public $sortField="name";
     public $sortDirection = "asc";
 
+    public function resetSearch(){
+        $this->search = "";
+    }
 
     public function sortBy($field)
     {
@@ -60,6 +63,7 @@ class Show extends Component
 
         $this->sortField = $field;
     }
+
 
     public function render()
     {
@@ -78,6 +82,7 @@ class Show extends Component
             'message' => $message,
         ]);
     }
+
     public function store()
     {
         try {
@@ -93,29 +98,10 @@ class Show extends Component
         $this->emit('reset-show-toast');
          // Restante do seu código para o envio do formulário...
 
-        // Se o envio for bem-sucedido, exiba uma notificação toast de sucesso
-        // $this->showToast('success', 'Formulário enviado com sucesso!');
-
-        // Execution doesn't reach here if validation fails.
-
-        // Company::create([
-
-        //     'name' => $this->name,
-
-        //     'email' => $this->email,
-
-        // ]);
+    
 
     }
   
-
-
-
-
-
-
-
-
 
 
 
@@ -144,8 +130,7 @@ class Show extends Component
     {
 
         $company = $request->company();
-
-        Auth::logout();
+        dd($company);
 
         $company->delete();
 

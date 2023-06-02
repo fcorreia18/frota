@@ -7,14 +7,7 @@ use Livewire\Component;
 class AdminDashboardComponent extends Component
 {
 
-    public $count = 0;
-    public $post;
 
-    public function increment()
-    {
-
-        $this->count++;
-    }
     public function total(){
         return 3;
     }
