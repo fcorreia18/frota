@@ -69,10 +69,13 @@ class ManageEmployee extends Component
     {
         // $employees = Employee::with('user')->get();
         // Ou
-        $employees = Employee::all()->load('user');
-        return view('livewire.admin.employees.index', ['employees' => $employees])->layout(\App\View\Components\AdminLayout::class);
+        // $employees = Employee::all()->load('user');
+        return view('livewire.admin.employees.index', ['employees' =>  Employee::search($this->searchField, $this->search)->with('user')->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
     }
 
+    public function save(){
+        dd("entre");
+    }
 
 
 
@@ -86,7 +89,7 @@ class ManageEmployee extends Component
         ]);
     }
 
-    public function store()
+    public function storee()
     {
         try {
             $this->validate();

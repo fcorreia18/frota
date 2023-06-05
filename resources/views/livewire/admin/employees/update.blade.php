@@ -8,7 +8,7 @@
 
             </div>
             <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
+            <!-- BEGIN: Modal Body --> 
             <form wire:submit.prevent="update($employee->id)">
                 <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
 

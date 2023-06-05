@@ -12,7 +12,7 @@
 
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Lista de Funcionarios</h2>
+        <h2 class="text-lg font-medium mr-auto">Lista de Funcionarios </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
@@ -40,8 +40,8 @@
                     <select id="tabulator-html-filter-field"
                         class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto" wire:model="searchField">
                         <option value="name" selected>Nome</option>
-                        <option value="nif">Nº de Identidade</option>
-                        <option value="email">Email</option>
+                        <option value="id_number">Nº de Identidade</option>
+                        <option value="driver_license">Nº da Carta</option>
                     </select>
                 </div>
 
@@ -101,17 +101,17 @@
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
                                 Nome
                             </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                Nº de Identidade
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
-                                Endereço
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Email
-                            </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
                                 Contacto
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('id_number')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                                Nº de Identidade
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('driver_license')" :direction="$sortField === 'email' ? $sortDirection : null">
+                                Nº Carta de Condução
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('license_due_date')" :direction="$sortField === 'email' ? $sortDirection : null">
+                                Validade
                             </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
@@ -129,16 +129,16 @@
                                         {{ $employee->name }}
                                     </x-table.cell>
                                     <x-table.cell>
+                                        {{ $employee->contact }}
+                                    </x-table.cell>
+                                    <x-table.cell>
                                         {{ $employee->id_number }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $employee->address }}
+                                        {{ $employee->driver_license }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $employee->user }}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                        {{ $employee->contact }}
+                                        {{ $employee->license_due_date}}
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
@@ -158,7 +158,7 @@
                                             </form>
                                         </div>
                                     </x-table.cell>
-                                    @include('livewire.admin.employees.edit', ['employee' => $employee])
+                                    <livewire:admin.employees.update :employee="$employee" :wire:key="$employee->id">
 
                                 </x-table.row>
                             @empty
@@ -173,6 +173,7 @@
                             @endforelse
                         </x-slot>
                     </x-table>
+                    {{ $employees->links() }}
                 </div>
             </div>
         </div>
@@ -235,6 +236,8 @@
         </script>
     </x-slot>
 
-    @include('livewire.admin.employees.add')
+    {{-- @include('livewire.admin.employees.add') --}}
+    <livewire:admin.employees.store>
+        {{-- @livewire('admin.employees.store') --}}
 
 </div>
