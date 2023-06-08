@@ -238,8 +238,9 @@
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.employees.update :employee="$employee" :wire:key="$employee->id" />
-
+    @if (!empty($employee))
+        <livewire:admin.employees.update :employee="$employee" :wire:key="$employee->id" />
+    @endif
     {{-- Fim Adicionar Funcionário --}}
 
 

@@ -49,13 +49,13 @@
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Valor</label>
                     <x-text-input class="sm:w-40 2xl:w-full mt-2 sm:mt-0 py-2 mb-2"
                         style="border:1px solid rgba(94, 94, 94, 0.48)" placeholder="digite..." wire:model="search"
-                        name="search" id="search"/>
+                        name="search" id="search" />
 
                 </div>
                 <div class="mt-2 xl:mt-0">
 
-                    <button id="tabulator-html-filter-reset" type="button"
-                        class="btn btn-pending-soft w-24 mr-1 mb-2" wire:click="resetSearch">limpar</button>
+                    <button id="tabulator-html-filter-reset" type="button" class="btn btn-pending-soft w-24 mr-1 mb-2"
+                        wire:click="resetSearch">limpar</button>
                 </div>
             </form>
             <div class="flex mt-5 sm:mt-0">
@@ -240,8 +240,9 @@
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.companies.update :company="$company" :wire:key="$company->id" />
-
+    @if (!empty($company))
+        <livewire:admin.companies.update :company="$company" :wire:key="$company->id" />
+    @endif
     {{-- Fim Adicionar Funcionário --}}
 
 </div>
