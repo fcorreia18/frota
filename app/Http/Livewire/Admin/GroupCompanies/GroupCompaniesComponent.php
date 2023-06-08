@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Companies;
+namespace App\Http\Livewire\Admin\GroupCompanies;
 
 use App\Models\Company;
+use App\Models\GroupCompanies;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-
-class CompaniesComponent extends Component
+class GroupCompaniesComponent extends Component
 {
     use WithPagination;
-
-
     public $search;
     public $searchField = "name";
     public $sortField="name";
     public $sortDirection = "asc";
+
 
     public function resetSearch(){
         $this->search = "";
@@ -29,10 +28,8 @@ class CompaniesComponent extends Component
         $this->sortField = $field;
     }
 
-
     public function render()
     {
-        return view('livewire.admin.companies.index', ['companies' => Company::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.group-companies.index',['groupCompanies' => GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
     }
-  
 }

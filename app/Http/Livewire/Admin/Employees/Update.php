@@ -9,8 +9,10 @@ use Livewire\Component;
 
 class Update extends Component
 {
+    public $employee;
     public function render()
     {
+        // $employees = Employee::all()->load('user');
         return view('livewire.admin.employees.update');
     }
 
@@ -25,6 +27,6 @@ class Update extends Component
 
         $request->employee()->save();
 
-        return Redirect::route('admin.employee.edit')->with('status', 'admin.employee-updated');
+        return Redirect::route('admin.employee.index')->with('status', 'admin.employee-updated');
     }
 }

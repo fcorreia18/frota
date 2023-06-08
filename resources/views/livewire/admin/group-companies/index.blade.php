@@ -5,19 +5,19 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Frota</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+                <li class="breadcrumb-item active" aria-current="page">Grupo de Empresa</li>
             </ol>
         </nav>
     </x-slot>
 
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
+        <h2 class="text-lg font-medium mr-auto">Lista de Grupo de Empresas </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-company">
-                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Nova Empresa') }}
+                data-tw-target="#add-groupCompany">
+                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Novo Grupo') }}
             </x-blue-primary-button>
 
         </div>
@@ -40,8 +40,8 @@
                     <select id="tabulator-html-filter-field"
                         class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto" wire:model="searchField">
                         <option value="name" selected>Nome</option>
-                        <option value="nif">NIF</option>
-                        <option value="email">Email</option>
+                        <option value="id_number">Nº de Identidade</option>
+                        <option value="driver_license">Nº da Carta</option>
                     </select>
                 </div>
 
@@ -49,13 +49,13 @@
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Valor</label>
                     <x-text-input class="sm:w-40 2xl:w-full mt-2 sm:mt-0 py-2 mb-2"
                         style="border:1px solid rgba(94, 94, 94, 0.48)" placeholder="digite..." wire:model="search"
-                        name="search" id="search"/>
+                        name="search" id="search" />
 
                 </div>
                 <div class="mt-2 xl:mt-0">
 
-                    <button id="tabulator-html-filter-reset" type="button"
-                        class="btn btn-pending-soft w-24 mr-1 mb-2" wire:click="resetSearch">limpar</button>
+                    <button id="tabulator-html-filter-reset" type="button" class="btn btn-pending-soft w-24 mr-1 mb-2"
+                        wire:click="resetSearch">limpar</button>
                 </div>
             </form>
             <div class="flex mt-5 sm:mt-0">
@@ -99,19 +99,19 @@
                             </x-table.heading>
 
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
-                                Empresa
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                NIF
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
-                                Endereço
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Email
+                                Nome
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
                                 Contacto
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('id_number')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                                Nº de Identidade
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('driver_license')" :direction="$sortField === 'email' ? $sortDirection : null">
+                                Nº Carta de Condução
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('license_due_date')" :direction="$sortField === 'email' ? $sortDirection : null">
+                                Validade
                             </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
@@ -120,35 +120,35 @@
                         </x-slot>
 
                         <x-slot name="body">
-                            @forelse ($companies as $key => $company)
+                            @forelse ($groupCompanies as $key => $groupCompany)
                                 <x-table.row>
                                     <x-table.cell>
                                         {{ $key + 1 }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->name }}
+                                        {{ $groupCompany->name }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->nif }}
+                                        {{ $groupCompany->contact }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->address }}
+                                        {{ $groupCompany->id_number }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->email }}
+                                        {{ $groupCompany->driver_license }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->contact }}
+                                        {{ $groupCompany->license_due_date }}
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
                                             <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
                                                 data-tw-toggle="modal"
-                                                data-tw-target="#header-footer-modal-preview-company{{ $company->id }}">
+                                                data-tw-target="#header-footer-modal-preview-groupCompany{{ $groupCompany->id }}">
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
 
-                                            <form action="{{ route('admin.company.destroy', $company->id) }}"
+                                            <form action="{{ route('admin.groupCompany.destroy', $groupCompany->id) }}"
                                                 method="post">
                                                 @method('delete')
                                                 @csrf
@@ -158,7 +158,6 @@
                                             </form>
                                         </div>
                                     </x-table.cell>
-
                                 </x-table.row>
                             @empty
                                 <x-table.row>
@@ -172,12 +171,11 @@
                             @endforelse
                         </x-slot>
                     </x-table>
-                    {{ $companies->links() }}
+                    {{ $group-companies->links() }}
                 </div>
             </div>
         </div>
     </div>
-
     <x-slot name="scripts">
         <script>
             window.deleteConfirm = function(event) {
@@ -202,7 +200,7 @@
         <script>
             document.addEventListener('livewire:load', function() {
                 Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-company').remove()
+                    let closeModal = document.querySelector('#add-groupCompany').remove()
                     Swal.fire({
                         icon: 'success',
                         text: message,
@@ -214,7 +212,7 @@
 
                 Livewire.on('show-error-message', function(message) {
 
-                    let closeModal = document.querySelector('#add-company').remove();
+                    let closeModal = document.querySelector('#add-groupCompany').remove();
 
 
                     Swal.fire({
@@ -228,7 +226,7 @@
                         cancelButtonText: 'Fechar',
                     }).then((result) => {
                         console.log(result);
-                        // document.querySelector('#add-company').remove()
+                        // document.querySelector('#add-groupCompany').remove()
                     })
                 });
             });
@@ -236,12 +234,13 @@
     </x-slot>
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.companies.store />
+    <livewire:admin.group-companies.store />
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.companies.update :company="$company" :wire:key="$company->id" />
+    <livewire:admin.group-companies.update :groupCompany="$groupCompany" :wire:key="$groupCompany->id" />
 
     {{-- Fim Adicionar Funcionário --}}
+
 
 </div>

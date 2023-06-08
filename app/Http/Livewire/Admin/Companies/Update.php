@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class Update extends Component
 {
+    public $company;
+
     public function render()
     {
         return view('livewire.admin.companies.update');
@@ -23,7 +25,7 @@ class Update extends Component
 
         $request->company()->save();
 
-        return Redirect::route('admin.company.edit')->with('status', 'admin.company-updated');
+        return Redirect::route('admin.company.index')->with('status', 'admin.company-updated');
     }
 
 }
