@@ -16,8 +16,8 @@
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-groupCompany">
-                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Novo Grupo') }}
+                data-tw-target="#add-groupCompany" >
+                <i class="w-4 h-4" data-lucide="plus"></i><a href="{{ route('admin.group-companies.create') }}">Novo Grupo</a> 
             </x-blue-primary-button>
 
         </div>
@@ -40,8 +40,7 @@
                     <select id="tabulator-html-filter-field"
                         class="form-select w-full sm:w-32 2xl:w-full mt-2 sm:mt-0 sm:w-auto" wire:model="searchField">
                         <option value="name" selected>Nome</option>
-                        <option value="id_number">Nº de Identidade</option>
-                        <option value="driver_license">Nº da Carta</option>
+
                     </select>
                 </div>
 
@@ -54,7 +53,7 @@
                 </div>
                 <div class="mt-2 xl:mt-0">
 
-                    <button id="tabulator-html-filter-reset" type="button" class="btn btn-pending-soft w-24 mr-1 mb-2"
+                    <button id="tabulator-html-filter-reset" type="button" class="btn alert-warning w-24 mr-1 mb-2 text-white"
                         wire:click="resetSearch">limpar</button>
                 </div>
             </form>
@@ -101,18 +100,6 @@
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
                                 Nome
                             </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
-                                Contacto
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('id_number')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                Nº de Identidade
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('driver_license')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Nº Carta de Condução
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('license_due_date')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Validade
-                            </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
                             </x-table.heading>
@@ -120,6 +107,7 @@
                         </x-slot>
 
                         <x-slot name="body">
+                            {{-- {{dd($groupCompanies)}} --}}
                             @forelse ($groupCompanies as $key => $groupCompany)
                                 <x-table.row>
                                     <x-table.cell>
@@ -129,18 +117,6 @@
                                         {{ $groupCompany->name }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $groupCompany->contact }}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                        {{ $groupCompany->id_number }}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                        {{ $groupCompany->driver_license }}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                        {{ $groupCompany->license_due_date }}
-                                    </x-table.cell>
-                                    <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
                                             <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
                                                 data-tw-toggle="modal"
@@ -148,7 +124,7 @@
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
 
-                                            <form action="{{ route('admin.groupCompany.destroy', $groupCompany->id) }}"
+                                            <form action="{{ route('admin.group-company.destroy', $groupCompany->id) }}"
                                                 method="post">
                                                 @method('delete')
                                                 @csrf
@@ -162,7 +138,7 @@
                             @empty
                                 <x-table.row>
                                     <x-table.cell colspan="7">
-                                        <p class="alert alert-warning"><i class="fa fa-exclamation-x-table.rowiangle">
+                                        <p class="alert alert-warning text-center text-white font-bold text-base"><i class="fa fa-exclamation-x-table.rowiangle">
                                             </i> Não
                                             existem dados a pra serem apresentados </p>
                                     </x-table.cell>
@@ -171,7 +147,7 @@
                             @endforelse
                         </x-slot>
                     </x-table>
-                    {{ $group-companies->links() }}
+                    {{ $groupCompanies->links() }}
                 </div>
             </div>
         </div>
@@ -238,8 +214,9 @@
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.group-companies.update :groupCompany="$groupCompany" :wire:key="$groupCompany->id" />
-
+    @if (!empty($groupCompany))
+        <livewire:admin.group-companies.update :groupCompany="$groupCompany" :wire:key="$groupCompany->id" />
+    @endif
     {{-- Fim Adicionar Funcionário --}}
 
 

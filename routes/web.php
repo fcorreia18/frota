@@ -6,6 +6,10 @@ use App\Http\Livewire\Admin\Companies\CompaniesComponent;
 use App\Http\Livewire\Admin\Companies\Store as CompanyStore;
 use App\Http\Livewire\Admin\Employees\EmployeeComponent;
 use App\Http\Livewire\Admin\Employees\Store  as EmployeeStore;
+use App\Http\Livewire\Admin\GroupCompanies\Create;
+use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
+use App\Http\Livewire\Admin\GroupCompanies\Store;
+use App\Http\Livewire\Admin\GroupCompanies\Update;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,13 +32,23 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
     Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
 
-   
+     //ADMIN/GROUP-COMPANIES ROUTES
+     Route::prefix('group-companies')->group(function () {
+     
+        Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
+        Route::get('/create-group', Create::class)->name('admin.group-companies.create');
+        Route::post('/add-group', [Store::class])->name('admin.company.store');
+        Route::put('/update-group/{id}', [Update::class, 'update'])->name('admin.group-company.update');
+        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('admin.group-company.destroy');
+    
+    });
+
     //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
      
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
         Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
-        Route::put('/edit-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
+        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
         Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');
     
     });
@@ -46,7 +60,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
         Route::get('/', EmployeeComponent::class)->name('admin.employees.index');
         Route::post('/add-employee', EmployeeStore::class)->name('admin.employee.store');
-        Route::put('/edit-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
+        Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
         Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
     
         

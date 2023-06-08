@@ -25,7 +25,7 @@ class Update extends Component
 
         $request->company()->save();
 
-        return Redirect::route('admin.company.index')->with('status', 'admin.company-updated');
+        return Redirect::route('admin.companies.index')->with('status', 'admin.company-updated');
     }
 
 }

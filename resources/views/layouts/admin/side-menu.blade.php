@@ -59,7 +59,7 @@
                </a>
                <ul class="">
                    <li>
-                       <a href="#" class="side-menu">
+                       <a href="{{ route('admin.group-companies.index') }}" class="side-menu">
                            <div class="side-menu__icon">
                                <i data-lucide="activity"></i>
                            </div>
