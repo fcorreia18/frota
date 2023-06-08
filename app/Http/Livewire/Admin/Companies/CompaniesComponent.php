@@ -29,10 +29,13 @@ class CompaniesComponent extends Component
         $this->sortField = $field;
     }
 
+    protected $listeners = [
+        'companiesAdd' => '$refresh',
+    ];
 
     public function render()
     {
-        return view('livewire.admin.companies.index', ['companies' => Company::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.companies.index', ['companies' => Company::search($this->searchField, $this->search)->with('grupo')->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
     }
   
 }

@@ -97,7 +97,9 @@
                             <x-table.heading>
                                 #
                             </x-table.heading>
-
+                            <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                                Grupo
+                            </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
                                 Empresa
                             </x-table.heading>
@@ -124,6 +126,9 @@
                                 <x-table.row>
                                     <x-table.cell>
                                         {{ $key + 1 }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $company->group->name? $company->group->name : "Sem relação" }}
                                     </x-table.cell>
                                     <x-table.cell>
                                         {{ $company->name }}

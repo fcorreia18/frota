@@ -6,6 +6,7 @@ use App\Http\Livewire\Admin\Companies\CompaniesComponent;
 use App\Http\Livewire\Admin\Companies\Store as CompanyStore;
 use App\Http\Livewire\Admin\Employees\EmployeeComponent;
 use App\Http\Livewire\Admin\Employees\Store  as EmployeeStore;
+use App\Http\Livewire\Admin\GroupCompanies\AddCompaniesToGroup;
 use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
 use App\Http\Livewire\Admin\GroupCompanies\Store;
@@ -40,7 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         Route::post('/add-group', [Store::class])->name('admin.company.store');
         Route::put('/update-group/{id}', [Update::class, 'update'])->name('admin.group-company.update');
         Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('admin.group-company.destroy');
-    
+        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
     });
 
     //ADMIN/COMPANIES ROUTES

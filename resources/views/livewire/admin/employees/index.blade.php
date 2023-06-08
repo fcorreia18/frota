@@ -158,6 +158,9 @@
                                             </form>
                                         </div>
                                     </x-table.cell>
+                                    @include('livewire.admin.employees.teste', ['employee' => $employee])
+                                    {{-- <livewire:admin.employees.update :employee="$employee" :wire:key="'-update-'.$employee->id" /> --}}
+
                                 </x-table.row>
                             @empty
                                 <x-table.row>
@@ -234,12 +237,11 @@
     </x-slot>
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.employees.store />
+    <livewire:admin.employees.store :wire:key="1" />
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
     @if (!empty($employee))
-        <livewire:admin.employees.update :employee="$employee" :wire:key="$employee->id" />
     @endif
     {{-- Fim Adicionar Funcionário --}}
 

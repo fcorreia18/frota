@@ -16,8 +16,9 @@
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-groupCompany" >
-                <i class="w-4 h-4" data-lucide="plus"></i><a href="{{ route('admin.group-companies.create') }}">Novo Grupo</a> 
+                data-tw-target="#add-groupCompany">
+                <i class="w-4 h-4" data-lucide="plus"></i><a href="{{ route('admin.group-companies.create') }}">Novo
+                    Grupo</a>
             </x-blue-primary-button>
 
         </div>
@@ -32,9 +33,45 @@
         @endif
     </div>
 
-    
+    {{-- SUCCESS MESSAGE  --}}
+    @if (session()->has('message') && session()->has('show_buttons'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+        <button>Adicionar Novo Grupo de Empresas</button>
+        <button>Adicionar Empresas ao Grupo</button>
+    @endif
+   
+
+    <form wire:submit.prevent="save">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" wire:model="nome" id="nome" />
+        </div>
+
+        <div>
+            <label for="novaEmpresa">Nova Empresa:</label>
+            <input type="text" wire:model="novaEmpresa" id="novaEmpresa" />
+            <button type="button" wire:click="updatedNovaEmpresa">Adicionar Empresa</button>
+        </div>
+
+        <div>
+            <label>Empresas:</label>
+            @foreach ($empresas as $empresa)
+                <div>
+                    <input type="checkbox" wire:model="adicionarEmpresas" value="{{ $empresa->id }}" />
+                    <span>{{ $empresa->nome }}</span>
+                </div>
+            @endforeach
+        </div>
+
+        <button type="submit">Cadastrar Grupo de Empresas</button>
+    </form>
+
+  
+
     <x-slot name="scripts">
-      
+
     </x-slot>
-{{-- Se clicar em adicionar empresas, fazer um show da secção de empresas e adicionar as empresas através de um checkbox --}}
+    {{-- Se clicar em adicionar empresas, fazer um show da secção de empresas e adicionar as empresas através de um checkbox --}}
 </div>

@@ -10,4 +10,6 @@ class Create extends Component
     {
         return view('livewire.admin.group-companies.create')->layout(\App\View\Components\AdminLayout::class);
     }
+
+    
 }

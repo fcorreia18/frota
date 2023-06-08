@@ -10,15 +10,24 @@ use Livewire\Component;
 class Update extends Component
 {
     public $employee;
+
+
+    public function mount()
+    {
+        $this->listeners['resetSearch'] = 'ola';
+    }
     public function render()
     {
         // $employees = Employee::all()->load('user');
         return view('livewire.admin.employees.update');
     }
-
+    public function ola(){
+        dd("entrei");
+    }
 
     public function update(Request $request): RedirectResponse #ProfileUpdateRequest $request
     {
+        dd("entrei");
         $request->employee()->fill($request->validated());
 
         if ($request->employee()->isDirty('email')) {

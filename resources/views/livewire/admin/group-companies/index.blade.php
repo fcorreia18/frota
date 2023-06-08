@@ -118,9 +118,9 @@
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
-                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
-                                                data-tw-toggle="modal"
-                                                data-tw-target="#header-footer-modal-preview-groupCompany{{ $groupCompany->id }}">
+                                           
+                                            {{-- redirecionar para pagina de detalhes--}}
+                                            <button wire:click="exibirDetalhes({{ $groupCompany->id }})" class="btn btn-primary-soft mr-2 mb-2 text-gray-600"> 
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
 

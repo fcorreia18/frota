@@ -7,7 +7,6 @@
                 <!-- Aqui serão exibidas as mensagens de erro ou sucesso -->
             </div>
             <form wire:submit.prevent="store">
-
                 <!-- BEGIN: Modal Header -->
                 <div class="modal-header">
                     <h2 class="font-medium text-base mr-auto">Adicionar Empresa</h2>

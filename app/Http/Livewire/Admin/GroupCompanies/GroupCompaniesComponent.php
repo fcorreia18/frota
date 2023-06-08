@@ -14,6 +14,7 @@ class GroupCompaniesComponent extends Component
     public $searchField = "name";
     public $sortField="name";
     public $sortDirection = "asc";
+    protected $groupCompanies = [];
 
 
     public function resetSearch(){
@@ -28,8 +29,21 @@ class GroupCompaniesComponent extends Component
         $this->sortField = $field;
     }
 
+    public function mount()
+    {
+        $this->groupCompanies = GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1);
+    }
     public function render()
     {
-        return view('livewire.admin.group-companies.index',['groupCompanies' => GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.group-companies.index',['groupCompanies' =>  $this->groupCompanies,])->layout(\App\View\Components\AdminLayout::class);
+    }
+
+    // Evento para atualizar a lista após o cadastro
+    protected $listeners = ['groupCompaniesAdd' => 'updateList'];
+    
+    public function updateList()
+    {
+        $this->groupCompanies = GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1);
+
     }
 }
