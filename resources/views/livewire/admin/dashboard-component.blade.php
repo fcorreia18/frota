@@ -1,12 +1,14 @@
-<x-slot name="breadCrumb">
-    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">SIMPLES</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-        </ol>
-    </nav>
-</x-slot>
-<div class="grid grid-cols-12 gap-6">
+<div>
+
+    <x-slot name="breadCrumb">
+        <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">SIMPLES</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
+    </x-slot>
+    <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
@@ -30,7 +32,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{$this->total()}}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $this->total() }}</div>
                                     <div class="text-base text-slate-500 mt-1">Empresas</div>
                                 </div>
                             </div>
@@ -70,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-                            <a href=" {{route('admin.employees.index')}}">
+                            <a href=" {{ route('admin.employees.index') }}">
                                 <div class="report-box zoom-in">
                                     <div class="box p-5">
                                         <div class="flex">
@@ -82,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-3xl font-medium leading-8 mt-6">{{$this->total()}}</div>
+                                        <div class="text-3xl font-medium leading-8 mt-6">{{ $this->total() }}</div>
                                         <div class="text-base text-slate-500 mt-1">Usuários</div>
                                     </div>
                                 </div>
@@ -389,3 +391,93 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <h2>Estatísticas</h2>
+
+        <canvas id="grafico" width="400" height="200"></canvas>
+    </div>
+
+    
+    <x-slot name="scripts">
+        <script>
+            window.deleteConfirm = function(event) {
+                event.preventDefault();
+                let form = event.target.form;
+                Swal.fire({
+                    title: 'Tem certeza?',
+                    text: "Essa acção é irreversível!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonText: 'cancelar',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'sim, apagar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                })
+            }
+        </script>
+        <script>
+            document.addEventListener('livewire:load', function() {
+                Livewire.on('show-success-message', function(message) {
+                    let closeModal = document.querySelector('#add-groupCompany').remove()
+                    Swal.fire({
+                        icon: 'success',
+                        text: message,
+                        title: 'Cadastro bem sucedido',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                });
+
+                Livewire.on('show-error-message', function(message) {
+
+                    let closeModal = document.querySelector('#add-groupCompany').remove();
+
+
+                    Swal.fire({
+                        title: '',
+                        icon: 'warning',
+                        html: message,
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonText: 'Entendi',
+                        cancelButtonText: 'Fechar',
+                    }).then((result) => {
+                        console.log(result);
+                        // document.querySelector('#add-groupCompany').remove()
+                    })
+                });
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('livewire:load', function() {
+                console.log(@json($estatisticas))
+                var ctx = document.getElementById('grafico').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: @json($estatisticas['labels']),
+                        datasets: [{
+                            label: 'Vendas',
+                            data: @json($estatisticas['dados']),
+                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                            borderColor: 'rgba(0, 123, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            });
+        </script>
+    </x-slot>
+
+</div>
