@@ -25,15 +25,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-
-
-
 Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
     Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
     Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
 
-    //ADMIN/GROUP-COMPANIES ROUTES
     Route::prefix('group-companies')->group(function () {
 
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
@@ -44,7 +39,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
     });
 
-    //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
 
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
@@ -54,8 +48,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
-
-    //ADMIN/EMPLOYEES ROUTES
     Route::prefix('employees')->group(function () {
 
         Route::get('/', EmployeeComponent::class)->name('admin.employees.index');
@@ -64,13 +56,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
     });
 
-    //ADMIN/MANAGER ROUTES
-    Route::prefix('manager')->group(function () {
 
-        Route::get('/', function () {
-            return 'Página inicial do subgrupo do admin';
-        })->name('admin.subgrupo.dashboard');
-    });
 });
 
 
@@ -78,8 +64,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
 Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(function () {
 
-
-    //ADMIN/GROUP-COMPANIES ROUTES
     Route::prefix('group-companies')->group(function () {
 
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
@@ -90,7 +74,6 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
         Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
     });
 
-    //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
 
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
@@ -111,19 +94,19 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
 
+    // Route::prefix('reports')->group(function () {
 
+    //     Route::get('/reports/abastecimento', \App\Http\Livewire\Relatorios\Abastecimento::class)->name('relatorios.abastecimento');
 
-    //Manager/Reports ROUTES
-    Route::prefix('reports')->group(function () {
+    //     Route::get('/reports/manutencao', \App\Http\Livewire\Relatorios\Manutencao::class)->name('relatorios.manutencao');
 
-        Route::get('/reports/abastecimento', \App\Http\Livewire\Relatorios\Abastecimento::class)->name('relatorios.abastecimento');
+    //     Route::get('/reports/incidentes', \App\Http\Livewire\Relatorios\Incidentes::class)->name('relatorios.incidentes');
+        
+    //     Route::get('/relatorios/gastos-projeto', \App\Http\Livewire\Relatorios\GastosProjeto::class)->name('relatorios.gastos-projeto');
 
-        // Rotas para relatório de manutenção
-        Route::get('/reports/manutencao', \App\Http\Livewire\Relatorios\Manutencao::class)->name('relatorios.manutencao');
-
-        // Rotas para relatório de incidentes
-        Route::get('/reports/incidentes', \App\Http\Livewire\Relatorios\Incidentes::class)->name('relatorios.incidentes');
-    });
+    //     Route::get('/relatorios/gastos-veiculo-projeto', \App\Http\Livewire\Relatorios\GastosVeiculoProjeto::class)->name('relatorios.gastos-veiculo-projeto');
+    
+    // });
 });
 
 
