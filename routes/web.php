@@ -33,9 +33,9 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
     Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
 
-     //ADMIN/GROUP-COMPANIES ROUTES
-     Route::prefix('group-companies')->group(function () {
-     
+    //ADMIN/GROUP-COMPANIES ROUTES
+    Route::prefix('group-companies')->group(function () {
+
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
         Route::get('/create-group', Create::class)->name('admin.group-companies.create');
         Route::post('/add-group', [Store::class])->name('admin.company.store');
@@ -46,16 +46,15 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
     //ADMIN/COMPANIES ROUTES
     Route::prefix('companies')->group(function () {
-     
+
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
         Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
         Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
         Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');
-    
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
-    
+
     //ADMIN/EMPLOYEES ROUTES
     Route::prefix('employees')->group(function () {
 
@@ -63,8 +62,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         Route::post('/add-employee', EmployeeStore::class)->name('admin.employee.store');
         Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
         Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
-    
-        
     });
 
     //ADMIN/MANAGER ROUTES
@@ -75,6 +72,61 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         })->name('admin.subgrupo.dashboard');
     });
 });
+
+
+
+
+Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(function () {
+
+
+    //ADMIN/GROUP-COMPANIES ROUTES
+    Route::prefix('group-companies')->group(function () {
+
+        Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
+        Route::get('/create-group', Create::class)->name('admin.group-companies.create');
+        Route::post('/add-group', [Store::class])->name('admin.company.store');
+        Route::put('/update-group/{id}', [Update::class, 'update'])->name('admin.group-company.update');
+        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('admin.group-company.destroy');
+        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
+    });
+
+    //ADMIN/COMPANIES ROUTES
+    Route::prefix('companies')->group(function () {
+
+        Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
+        Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
+        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
+        Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');
+
+
+        //ADMIN/EMPLOYEES ROUTES
+        Route::prefix('employees')->group(function () {
+
+            Route::get('/', EmployeeComponent::class)->name('admin.employees.index');
+            Route::post('/add-employee', EmployeeStore::class)->name('admin.employee.store');
+            Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
+            Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
+        });
+    });
+    //->middleware('middleware_subgrupo'); in case to assign one more middleware
+
+
+
+
+    //Manager/Reports ROUTES
+    Route::prefix('reports')->group(function () {
+
+        Route::get('/reports/abastecimento', \App\Http\Livewire\Relatorios\Abastecimento::class)->name('relatorios.abastecimento');
+
+        // Rotas para relatório de manutenção
+        Route::get('/reports/manutencao', \App\Http\Livewire\Relatorios\Manutencao::class)->name('relatorios.manutencao');
+
+        // Rotas para relatório de incidentes
+        Route::get('/reports/incidentes', \App\Http\Livewire\Relatorios\Incidentes::class)->name('relatorios.incidentes');
+    });
+});
+
+
 
 
 require __DIR__ . '/auth.php';

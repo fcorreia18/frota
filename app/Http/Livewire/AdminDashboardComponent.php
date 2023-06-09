@@ -27,6 +27,23 @@ class AdminDashboardComponent extends Component
 
     public function render()
     {
+
+         // Consultar os dados necessários para o dashboard
+         $projetos = Projects::all();
+         $gastos = Gasto::all();
+ 
+         // Calcular os valores totais dos gastos por projeto
+         $gastosPorProjeto = $gastos->groupBy('projeto_id')->map(function ($gastos) {
+             return $gastos->sum('valor');
+         });
+ 
+         // Calcular os totais dos gastos e projetos
+         $totalGastos = $gastos->sum('valor');
+         $totalProjetos = $projetos->count();
+ 
+        //  return view('livewire.dashboard', compact('projetos', 'gastosPorProjeto', 'totalGastos', 'totalProjetos'));
+     
+
         return view('livewire.admin.dashboard-component', [
 
             'total_empresas' => 12,#Post::all()

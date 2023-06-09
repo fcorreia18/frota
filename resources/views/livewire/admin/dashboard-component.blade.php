@@ -398,7 +398,17 @@
         <canvas id="grafico" width="400" height="200"></canvas>
     </div>
 
-    
+    <div>
+        <h2>Informações Gerais:</h2>
+        <p>Total de Projetos: {{ $totalProjetos }}</p>
+        <p>Total de Gastos: R$ {{ $totalGastos }}</p>
+    </div>
+
+    <div>
+        <h2>Gráfico de Gastos por Projeto:</h2>
+        <canvas id="gastosPorProjetoChart"></canvas>
+    </div>
+
     <x-slot name="scripts">
         <script>
             window.deleteConfirm = function(event) {
@@ -458,7 +468,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             document.addEventListener('livewire:load', function() {
-                console.log(@json($estatisticas))
+                // console.log(@json($estatisticas))
                 var ctx = document.getElementById('grafico').getContext('2d');
                 var chart = new Chart(ctx, {
                     type: 'bar',
@@ -476,8 +486,31 @@
                         responsive: true,
                     }
                 });
+
+                
+                const gastosPorProjetoChart = new Chart(document.getElementById('gastosPorProjetoChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: @json($projetos->pluck('nome')),
+                        datasets: [{
+                            label: 'Gastos',
+                            data: @json($gastosPorProjeto->values()),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
             });
         </script>
+
     </x-slot>
 
 </div>
