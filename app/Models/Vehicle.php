@@ -24,4 +24,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(Maintenance::class, 'id_vehicle');
     }
+    
+    public function gastos()
+    {
+        return $this->hasMany(Gasto::class);
+    }
 }
