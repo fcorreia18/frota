@@ -468,7 +468,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             document.addEventListener('livewire:load', function() {
-                // console.log(@json($estatisticas))
+                // console.log(@json($statistics))
                 var ctx = document.getElementById('grafico').getContext('2d');
                 var chart = new Chart(ctx, {
                     type: 'bar',
@@ -491,10 +491,10 @@
                 const gastosPorProjetoChart = new Chart(document.getElementById('gastosPorProjetoChart'), {
                     type: 'bar',
                     data: {
-                        labels: @json($projetos->pluck('nome')),
+                        labels: @json($projects->pluck('name')),
                         datasets: [{
                             label: 'Gastos',
-                            data: @json($gastosPorProjeto->values()),
+                            data: @json($expensesPerProject->values()),
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
