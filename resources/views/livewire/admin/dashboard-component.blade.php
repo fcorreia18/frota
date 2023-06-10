@@ -400,8 +400,8 @@
 
     <div>
         <h2>Informações Gerais:</h2>
-        <p>Total de Projetos: {{ $totalProjetos }}</p>
-        <p>Total de Gastos: R$ {{ $totalGastos }}</p>
+        <p>Total de Projetos: {{ $totalProjects }}</p>
+        <p>Total de Gastos: R$ {{ $totalExpenses }}</p>
     </div>
 
     <div>
@@ -473,10 +473,10 @@
                 var chart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: @json($estatisticas['labels']),
+                        labels: @json($statistics['labels']),
                         datasets: [{
                             label: 'Vendas',
-                            data: @json($estatisticas['dados']),
+                            data: @json($statistics['data']),
                             backgroundColor: 'rgba(0, 123, 255, 0.5)',
                             borderColor: 'rgba(0, 123, 255, 1)',
                             borderWidth: 1

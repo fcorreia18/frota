@@ -66,29 +66,29 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
 
     Route::prefix('group-companies')->group(function () {
 
-        Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
-        Route::get('/create-group', Create::class)->name('admin.group-companies.create');
-        Route::post('/add-group', [Store::class])->name('admin.company.store');
-        Route::put('/update-group/{id}', [Update::class, 'update'])->name('admin.group-company.update');
-        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('admin.group-company.destroy');
-        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
+        Route::get('/', GroupCompaniesComponent::class)->name('manager.group-companies.index');
+        Route::get('/create-group', Create::class)->name('manager.group-companies.create');
+        Route::post('/add-group', [Store::class])->name('manager.company.store');
+        Route::put('/update-group/{id}', [Update::class, 'update'])->name('manager.group-company.update');
+        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('manager.group-company.destroy');
+        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('manager.group-company.companies.add');
     });
 
     Route::prefix('companies')->group(function () {
 
-        Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
-        Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
-        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
-        Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');
+        Route::get('/', CompaniesComponent::class)->name('manager.companies.index');
+        Route::post('/add-company', [CompanyStore::class])->name('manager.company.store');
+        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('manager.company.update');
+        Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('manager.company.destroy');
 
 
-        //ADMIN/EMPLOYEES ROUTES
+        //manager/EMPLOYEES ROUTES
         Route::prefix('employees')->group(function () {
 
-            Route::get('/', EmployeeComponent::class)->name('admin.employees.index');
-            Route::post('/add-employee', EmployeeStore::class)->name('admin.employee.store');
-            Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
-            Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
+            Route::get('/', EmployeeComponent::class)->name('manager.employees.index');
+            Route::post('/add-employee', EmployeeStore::class)->name('manager.employee.store');
+            Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('manager.employee.update');
+            Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('manager.employee.destroy');
         });
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware

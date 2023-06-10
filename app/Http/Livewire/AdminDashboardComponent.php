@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Expenses;
 use Livewire\Component;
+use App\Models\Projects;
 
 class AdminDashboardComponent extends Component
 {
@@ -12,16 +14,16 @@ class AdminDashboardComponent extends Component
         return 3;
     }
 
-    public $estatisticas;
+    public $statistics;
 
     public function mount()
     {
         // Consultar os dados necessários no banco de dados para as estatísticas
         
         // Definir os dados para as estatísticas
-        $this->estatisticas = [
+        $this->statistics = [
             'labels' => ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-            'dados' => [2, 20, 6, 12, 45, 18],
+            'data' => [2, 20, 6, 12, 45, 18],
         ];
     }
 
@@ -29,25 +31,25 @@ class AdminDashboardComponent extends Component
     {
 
          // Consultar os dados necessários para o dashboard
-         $projetos = Projects::all();
-         $gastos = Gasto::all();
+         $projects = Projects::all();
+         $expenses = Expenses::all();
  
-         // Calcular os valores totais dos gastos por projeto
-         $gastosPorProjeto = $gastos->groupBy('projeto_id')->map(function ($gastos) {
-             return $gastos->sum('valor');
+         // Calcular os valores totais dos expenses por projeto
+         $expensesPerProject = $expenses->groupBy('projeto_id')->map(function ($expenses) {
+             return $expenses->sum('valor');
          });
  
-         // Calcular os totais dos gastos e projetos
-         $totalGastos = $gastos->sum('valor');
-         $totalProjetos = $projetos->count();
+         // Calcular os totais dos expenses e projects
+         $totalExpenses = $expenses->sum('valor');
+         $totalProjects = $projects->count();
  
-        //  return view('livewire.dashboard', compact('projetos', 'gastosPorProjeto', 'totalGastos', 'totalProjetos'));
+         return view('livewire.dashboard', compact('projects', 'expensesPerProject', 'totalExpenses', 'totalprojects'));
      
 
         return view('livewire.admin.dashboard-component', [
 
-            'total_empresas' => 12,#Post::all()
-            'total_funcionarios' => 12,#Post::all()
+            'total_companies' => 12,#Post::all()
+            'total_employees' => 12,#Post::all()
 
         ])->layout(\App\View\Components\AdminLayout::class);
     }
