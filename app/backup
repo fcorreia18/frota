@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\GrupoEmpresas;
+use App\Models\Empresa;
+use Livewire\Component;
+
+class CreateGrupoEmpresas extends Component
+{
+    public $nome;
+    public $novaEmpresa;
+    public $adicionarEmpresas;
+    public $empresas;
+
+    public function mount()
+    {
+        $this->empresas = Empresa::all();
+    }
+
+    public function updatedNovaEmpresa()
+    {
+        if (!empty($this->novaEmpresa)) {
+            $empresa = new Empresa();
+            $empresa->nome = $this->novaEmpresa;
+            // Salvar a nova empresa no banco de dados
+            $empresa->save();
+
+            $this->empresas->push($empresa); // Adicionar a nova empresa à lista de empresas
+            $this->novaEmpresa = ''; // Limpar o campo de nova empresa
+        }
+    }
+
+    public function save()
+    {
+        // Lógica para salvar o grupo de empresas no banco de dados
+        $grupoEmpresas = new GrupoEmpresas();
+        $grupoEmpresas->nome = $this->nome;
+        // Associar as empresas selecionadas ao grupo de empresas
+        $grupoEmpresas->empresas()->sync($this->adicionarEmpresas);
+        // Salvar o grupo de empresas no banco de dados
+        $grupoEmpresas->save();
+
+        session()->flash('success', 'Grupo de empresas cadastrado com sucesso!');
+
+        $this->resetFields();
+
+        // Redirecionar para a lista de grupo de empresas
+        return redirect()->route('grupo-empresas.index');
+    }
+
+    private function resetFields()
+    {
+        $this->nome = '';
+        $this->novaEmpresa = '';
+        $this->adicionarEmpresas = [];
+    }
+
+    public function render()
+    {
+        return view('livewire.create-grupo-empresas', [
+            'empresas' => $this->empresas,
+        ]);
+    }
+}

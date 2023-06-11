@@ -10,26 +10,16 @@
         </nav>
     </x-slot>
 
-
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">Lista de Grupo de Empresas </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-groupCompany" >
-                <i class="w-4 h-4" data-lucide="plus"></i><a href="{{ route('admin.group-companies.create') }}">Novo Grupo</a> 
+            wire:click="$emit('toggleForm')">
+                <i class="w-4 h-4" data-lucide="plus"></i>Novo Grupo
             </x-blue-primary-button>
 
         </div>
-    </div>
-    <div class="error-section">
-        @if ($errors->any())
-            <ul class="error-list">
-                @foreach ($errors->all() as $error)
-                    <li class="error-item">{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
     </div>
 
     <div class="intro-y box p-5 mt-5">
@@ -53,8 +43,8 @@
                 </div>
                 <div class="mt-2 xl:mt-0">
 
-                    <button id="tabulator-html-filter-reset" type="button" class="btn alert-warning w-24 mr-1 mb-2 text-white"
-                        wire:click="resetSearch">limpar</button>
+                    <button id="tabulator-html-filter-reset" type="button"
+                        class="btn alert-warning w-24 mr-1 mb-2 text-white" wire:click="resetSearch">limpar</button>
                 </div>
             </form>
             <div class="flex mt-5 sm:mt-0">
@@ -118,27 +108,21 @@
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
-                                           
-                                            {{-- redirecionar para pagina de detalhes--}}
-                                            <button wire:click="exibirDetalhes({{ $groupCompany->id }})" class="btn btn-primary-soft mr-2 mb-2 text-gray-600"> 
+
+                                            {{-- redirecionar para pagina de detalhes --}}
+                                            <button wire:click="exibirDetalhes({{ $groupCompany->id }})"
+                                                class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
                                                 <i data-lucide="edit" class="w-5 h-5"></i>
                                             </button>
-
-                                            <form action="{{ route('admin.group-company.destroy', $groupCompany->id) }}"
-                                                method="post">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger mr-1 mb-2" onclick="deleteConfirm(event)">
-                                                    <i data-lucide="trash" class="w-5 h-5"></i>
-                                                </button>
-                                            </form>
+                                            <livewire:admin.group-companies.destroy :groupCompany="$groupCompany" :wire:key="'group-company-'.$groupCompany->id" />
                                         </div>
                                     </x-table.cell>
                                 </x-table.row>
                             @empty
                                 <x-table.row>
                                     <x-table.cell colspan="7">
-                                        <p class="alert alert-warning text-center text-white font-bold text-base"><i class="fa fa-exclamation-x-table.rowiangle">
+                                        <p class="alert alert-warning text-center text-white font-bold text-base"><i
+                                                class="fa fa-exclamation-x-table.rowiangle">
                                             </i> Não
                                             existem dados a pra serem apresentados </p>
                                     </x-table.cell>
@@ -152,11 +136,14 @@
             </div>
         </div>
     </div>
+   
     <x-slot name="scripts">
         <script>
-            window.deleteConfirm = function(event) {
+            window.deleteConfirm = function(event, id) {
                 event.preventDefault();
-                let form = event.target.form;
+                console.log(event,id)
+                let deleteButton = document.getElementById(`deleteGroup-${id}`);
+
                 Swal.fire({
                     title: 'Tem certeza?',
                     text: "Essa acção é irreversível!",
@@ -165,18 +152,17 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonText: 'cancelar',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'sim, apagar!'
+                    confirmButtonText:`sim, apagar o Grupo ${deleteButton.innerHTML}!`
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        form.submit();
+                        deleteButton.click()
                     }
                 })
             }
         </script>
         <script>
             document.addEventListener('livewire:load', function() {
-                Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-groupCompany').remove()
+                Livewire.on('groupAdd', function(message) {
                     Swal.fire({
                         icon: 'success',
                         text: message,
@@ -185,39 +171,16 @@
                         timer: 1500
                     })
                 });
-
-                Livewire.on('show-error-message', function(message) {
-
-                    let closeModal = document.querySelector('#add-groupCompany').remove();
-
-
-                    Swal.fire({
-                        title: '',
-                        icon: 'warning',
-                        html: message,
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText: 'Entendi',
-                        cancelButtonText: 'Fechar',
-                    }).then((result) => {
-                        console.log(result);
-                        // document.querySelector('#add-groupCompany').remove()
-                    })
-                });
             });
         </script>
     </x-slot>
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.group-companies.store />
+    <livewire:admin.group-companies.create />
     {{-- Fim Adicionar Funcionário --}}
-
     {{-- Início Adicionar Funcionário --}}
     @if (!empty($groupCompany))
         <livewire:admin.group-companies.update :groupCompany="$groupCompany" :wire:key="$groupCompany->id" />
     @endif
     {{-- Fim Adicionar Funcionário --}}
-
-
 </div>
