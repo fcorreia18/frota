@@ -82,7 +82,7 @@
                </ul>
            </li>
            <li>
-               <a href="{{ route('admin.employees.index') }}" class="side-menu">
+               <a href="{{ route('admin.users.index') }}" class="side-menu">
                    <div class="side-menu__icon">
                        <i data-lucide="users"></i>
                    </div>

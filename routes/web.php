@@ -4,12 +4,11 @@
 use App\Http\Livewire\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Companies\CompaniesComponent;
 use App\Http\Livewire\Admin\Companies\Store as CompanyStore;
-use App\Http\Livewire\Admin\Employees\EmployeeComponent;
-use App\Http\Livewire\Admin\Employees\Store  as EmployeeStore;
+use App\Http\Livewire\Admin\Users\UserComponent;
+use App\Http\Livewire\Admin\Users\Update as UserUpdate;
 use App\Http\Livewire\Admin\GroupCompanies\AddCompaniesToGroup;
 use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
-use App\Http\Livewire\Admin\GroupCompanies\Show;
 use App\Http\Livewire\Admin\GroupCompanies\Store;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
 use Illuminate\Support\Facades\Route;
@@ -31,28 +30,20 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
 
     Route::prefix('group-companies')->group(function () {
-
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
         Route::get('/update/{groupId}', Update::class)->name('admin.group-company.update');
-        Route::post('/add', [Store::class])->name('admin.company.store');
     });
 
     Route::prefix('companies')->group(function () {
-
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
-        Route::get('/create', Create::class)->name('admin.group-companies.create');
-        Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
-        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
-        Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');
+        Route::get('/create', Create::class)->name('admin.company.create');
+        Route::put('/update/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
-    Route::prefix('employees')->group(function () {
-
-        Route::get('/', EmployeeComponent::class)->name('admin.employees.index');
-        Route::post('/add-employee', EmployeeStore::class)->name('admin.employee.store');
-        Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('admin.employee.update');
-        Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('admin.employee.destroy');
+    Route::prefix('users')->group(function () {
+        Route::get('/', UserComponent::class)->name('admin.users.index');
+        Route::get('/update/{userId}', UserUpdate::class)->name('admin.user.update');
     });
 
 
@@ -82,13 +73,13 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
 
 
         //manager/EMPLOYEES ROUTES
-        Route::prefix('employees')->group(function () {
+        // Route::prefix('employees')->group(function () {
 
-            Route::get('/', EmployeeComponent::class)->name('manager.employees.index');
-            Route::post('/add-employee', EmployeeStore::class)->name('manager.employee.store');
-            Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('manager.employee.update');
-            Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('manager.employee.destroy');
-        });
+        //     Route::get('/', EmployeeComponent::class)->name('manager.employees.index');
+        //     Route::post('/add-employee', EmployeeStore::class)->name('manager.employee.store');
+        //     Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('manager.employee.update');
+        //     Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('manager.employee.destroy');
+        // });
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 

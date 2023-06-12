@@ -16,9 +16,15 @@
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-                data-tw-target="#add-employee">
-                <i class="w-4 h-4" data-lucide="plus"></i>{{ __('Novo funcionário') }}
-            </x-blue-primary-button>
+            wire:click="$emit('toggleForm')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Novo Utilizador
+        </x-blue-primary-button>
 
         </div>
     </div>
@@ -120,6 +126,7 @@
                         </x-slot>
 
                         <x-slot name="body">
+
                             @forelse ($employees as $key => $employee)
                                 <x-table.row>
                                     <x-table.cell>
@@ -142,25 +149,27 @@
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
-                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
-                                                data-tw-toggle="modal"
-                                                data-tw-target="#header-footer-modal-preview-employee{{ $employee->id }}">
-                                                <i data-lucide="edit" class="w-5 h-5"></i>
+                                            {{-- redirecionar para pagina de detalhes --}}
+                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
+                                                <a href="{{ route('admin.user.update', ['userId' => $employee->id,]) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" icon-name="edit" data-lucide="edit"
+                                                        class="lucide lucide-edit w-5 h-5">
+                                                        <path
+                                                            d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7">
+                                                        </path>
+                                                        <path
+                                                            d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </button>
-
-                                            <form action="{{ route('admin.employee.destroy', $employee->id) }}"
-                                                method="post">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger mr-1 mb-2" onclick="deleteConfirm(event)">
-                                                    <i data-lucide="trash" class="w-5 h-5"></i>
-                                                </button>
-                                            </form>
+                                            <livewire:admin.users.destroy :user="$employee"
+                                                :wire:key="'user-'.$employee->id" />
                                         </div>
                                     </x-table.cell>
-                                    @include('livewire.admin.employees.teste', ['employee' => $employee])
-                                    {{-- <livewire:admin.employees.update :employee="$employee" :wire:key="'-update-'.$employee->id" /> --}}
-
                                 </x-table.row>
                             @empty
                                 <x-table.row>
@@ -179,11 +188,15 @@
             </div>
         </div>
     </div>
+   
+    
     <x-slot name="scripts">
         <script>
-            window.deleteConfirm = function(event) {
+            window.deleteConfirm = function(event, id) {
                 event.preventDefault();
-                let form = event.target.form;
+                console.log(event, id)
+                let deleteButton = document.getElementById(`deleteUser-${id}`);
+
                 Swal.fire({
                     title: 'Tem certeza?',
                     text: "Essa acção é irreversível!",
@@ -192,18 +205,17 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonText: 'cancelar',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'sim, apagar!'
+                    confirmButtonText: `sim, apagar ${deleteButton.innerHTML}!`
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        form.submit();
+                        deleteButton.click()
                     }
                 })
             }
         </script>
         <script>
             document.addEventListener('livewire:load', function() {
-                Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-employee').remove()
+                Livewire.on('userAdd', function(message) {
                     Swal.fire({
                         icon: 'success',
                         text: message,
@@ -212,38 +224,13 @@
                         timer: 1500
                     })
                 });
-
-                Livewire.on('show-error-message', function(message) {
-
-                    let closeModal = document.querySelector('#add-employee').remove();
-
-
-                    Swal.fire({
-                        title: '',
-                        icon: 'warning',
-                        html: message,
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText: 'Entendi',
-                        cancelButtonText: 'Fechar',
-                    }).then((result) => {
-                        console.log(result);
-                        // document.querySelector('#add-employee').remove()
-                    })
-                });
             });
         </script>
     </x-slot>
 
     {{-- Início Adicionar Funcionário --}}
-    <livewire:admin.employees.store :wire:key="1" />
+    <livewire:admin.users.create  :companies="$companies" :wire:key="'companies-'.$companies"/>
     {{-- Fim Adicionar Funcionário --}}
-
-    {{-- Início Adicionar Funcionário --}}
-    @if (!empty($employee))
-    @endif
-    {{-- Fim Adicionar Funcionário --}}
-
+{{-- {{dd($companies)}} --}}
 
 </div>

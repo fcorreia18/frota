@@ -231,10 +231,11 @@
                             <td class="text-center">{{ $company->nif }}</td>
                             <td class="text-center">{{ $company->address }}</td>
                             <td class="text-center">{{ $company->contact }}</td>
-                           
+
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{ route('admin.company.update', $company->id) }}"> <svg
+                                    <a class="flex items-center mr-3"
+                                        href="{{ route('admin.company.update', $company->id) }}"> <svg
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -242,8 +243,8 @@
                                             class="lucide lucide-check-square w-4 h-4 mr-1">
                                             <polyline points="9 11 12 14 22 4"></polyline>
                                             <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                        </svg> 
-                                        Editar 
+                                        </svg>
+                                        Editar
                                     </a>
                                     <a class="flex items-center text-danger" href="javascript:;"
                                         data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <svg
@@ -260,18 +261,19 @@
                                             </line>
                                             <line x1="14" y1="11" x2="14" y2="17">
                                             </line>
-                                        </svg> 
+                                        </svg>
                                         Deletar
-                                     </a>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <x-table.row>
                             <x-table.cell colspan="7">
-                                <p class="alert alert-warning"><i class="fa fa-exclamation-x-table.rowiangle">
-                                    </i> Não
-                                    existem dados a pra serem apresentados </p>
+                                <p class="alert alert-warning">
+                                    <i class="fa fa-exclamation-x-table.rowiangle"></i>
+                                    Não existem empresas associadas a esse grupo.
+                                </p>
                             </x-table.cell>
 
                         </x-table.row>

@@ -4,10 +4,7 @@ namespace App\Http\Livewire\Admin\GroupCompanies;
 
 use App\Models\Company;
 use Livewire\Component;
-use Illuminate\Http\Request;
 use App\Models\GroupCompanies;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
 
 class Update extends Component
 {

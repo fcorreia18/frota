@@ -47,7 +47,7 @@
         </li>
 
         <li>
-            <a href="{{ route('admin.employees.index') }}" class="menu">
+            <a href="{{ route('admin.users.index') }}" class="menu">
                 <div class="menu__icon">
                     <i data-lucide="users"></i>
                 </div>
