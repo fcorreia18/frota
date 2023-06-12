@@ -80,8 +80,11 @@ class Create extends Component
     {
         try {
             $existingUser = User::where('email', $this->email)->first();
-            Notification::send($existingUser, new EmployeeRegisteredNotification("url"));
+            $user = Auth::user(); 
+            // $user->notify(new EmployeeRegisteredNotification());
+            // Notification::send($existingUser, new EmployeeRegisteredNotification("url"));
             session()->flash('error', 'enviado');
+            dd($user);
             //     return;
         } catch (\Throwable $th) {
             session()->flash('error', $th->getMessage());
