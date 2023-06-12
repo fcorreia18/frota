@@ -33,14 +33,14 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::prefix('group-companies')->group(function () {
 
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
-        Route::get('/create-group', Create::class)->name('admin.group-companies.create');
-        Route::get('/update-group/{groupId}', Update::class)->name('admin.group-company.update');
-        Route::post('/add-group', [Store::class])->name('admin.company.store');
+        Route::get('/update/{groupId}', Update::class)->name('admin.group-company.update');
+        Route::post('/add', [Store::class])->name('admin.company.store');
     });
 
     Route::prefix('companies')->group(function () {
 
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
+        Route::get('/create', Create::class)->name('admin.group-companies.create');
         Route::post('/add-company', [CompanyStore::class])->name('admin.company.store');
         Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
         Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('admin.company.destroy');

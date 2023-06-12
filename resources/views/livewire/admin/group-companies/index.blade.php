@@ -168,7 +168,7 @@
                                 </x-table.row>
                             @empty
                                 <x-table.row>
-                                    <x-table.cell colspan="7">
+                                    <x-table.cell colspan="8">
                                         <p class="alert alert-warning text-center text-white font-bold text-base"><i
                                                 class="fa fa-exclamation-x-table.rowiangle">
                                             </i> Não

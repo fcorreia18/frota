@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Admin\GroupCompanies;
+
+use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use App\Models\GroupCompanies;
@@ -11,7 +13,7 @@ class Update extends Component
 {
 
     public $groupCompany;
-
+    public $companies;
     
 
     public $groupId;
@@ -54,6 +56,10 @@ class Update extends Component
     {
         $this->groupId = $groupId;
         $groupCompany = GroupCompanies::findOrFail($groupId);
+        $this->companies = Company::where('id_group_company', $groupCompany->id)->get();
+
+
+
         $this->name = $groupCompany->name;
         $this->description = $groupCompany->description;
         $this->country = $groupCompany->country;
@@ -64,7 +70,7 @@ class Update extends Component
     }
     public function render()
     {
-        return view('livewire.admin.group-companies.update', ["groupCompany"=> $this->groupCompany])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.group-companies.update', ["groupCompany"=> $this->groupCompany, "companies"=> $this->companies])->layout(\App\View\Components\AdminLayout::class);
     }
  
     public function updateGroup()
