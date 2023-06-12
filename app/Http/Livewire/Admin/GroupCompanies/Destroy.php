@@ -14,19 +14,16 @@ class Destroy extends Component
     }
     public function destroy($id)
     {
-        $this->emit('info',  "infoss");
 
-        // $groupCompany = GroupCompanies::findOrFail($id);
-        // dd($groupCompany);
-        // try {
-        //     $groupCompany->delete();
-        // } catch (\Throwable $th) {
-        //     session()->flash('error', $th->getMessage());
-        //     $this->emit('error',  $th->getMessage());
-        //     return;
-        // }
-
-        // session()->flash('message', 'Grupo de empresas excluído com sucesso!');
-        // $this->emit('groupDeleted');
+        $groupCompany = GroupCompanies::findOrFail($id);
+        $name = $groupCompany->name;
+        try {
+            $groupCompany->delete();
+        } catch (\Throwable $th) {
+            $this->emit('error',  $th->getMessage());
+            return;
+        }
+        $this->emit('info',  $name.' excluído com sucesso!');
+        $this->emit('groupDeleted');
     }
 }

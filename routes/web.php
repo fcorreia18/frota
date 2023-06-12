@@ -9,6 +9,7 @@ use App\Http\Livewire\Admin\Employees\Store  as EmployeeStore;
 use App\Http\Livewire\Admin\GroupCompanies\AddCompaniesToGroup;
 use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
+use App\Http\Livewire\Admin\GroupCompanies\Show;
 use App\Http\Livewire\Admin\GroupCompanies\Store;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
 use Illuminate\Support\Facades\Route;
@@ -33,10 +34,8 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
         Route::get('/create-group', Create::class)->name('admin.group-companies.create');
+        Route::get('/update-group/{groupId}', Update::class)->name('admin.group-company.update');
         Route::post('/add-group', [Store::class])->name('admin.company.store');
-        Route::put('/update-group/{id}', [Update::class, 'update'])->name('admin.group-company.update');
-        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('admin.group-company.destroy');
-        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('admin.group-company.companies.add');
     });
 
     Route::prefix('companies')->group(function () {

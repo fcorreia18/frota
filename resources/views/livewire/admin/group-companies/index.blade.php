@@ -15,8 +15,14 @@
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-            wire:click="$emit('toggleForm')">
-                <i class="w-4 h-4" data-lucide="plus"></i>Novo Grupo
+                wire:click="$emit('toggleForm')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Novo Grupo
             </x-blue-primary-button>
 
         </div>
@@ -90,6 +96,21 @@
                             <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
                                 Nome
                             </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('description')" :direction="$sortField === 'title' ? $sortDirection : null">
+                                Descrição
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('started_at')" :direction="$sortField === 'title' ? $sortDirection : null">
+                                Data Constituição
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('country')" :direction="$sortField === 'title' ? $sortDirection : null">
+                                País
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('industry')" :direction="$sortField === 'title' ? $sortDirection : null">
+                                Industria
+                            </x-table.heading>
+                            <x-table.heading sortable wire:click="sortBy('status')" :direction="$sortField === 'title' ? $sortDirection : null">
+                                Status
+                            </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
                             </x-table.heading>
@@ -107,14 +128,41 @@
                                         {{ $groupCompany->name }}
                                     </x-table.cell>
                                     <x-table.cell>
+                                        {{ $groupCompany->description }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $groupCompany->started_at }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $groupCompany->country }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $groupCompany->industry }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        {{ $groupCompany->status }}
+                                    </x-table.cell>
+                                    <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
-
                                             {{-- redirecionar para pagina de detalhes --}}
-                                            <button wire:click="exibirDetalhes({{ $groupCompany->id }})"
-                                                class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
-                                                <i data-lucide="edit" class="w-5 h-5"></i>
+                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
+                                                <a href="{{ route('admin.group-company.update', ['groupId' => $groupCompany->id,]) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" icon-name="edit" data-lucide="edit"
+                                                        class="lucide lucide-edit w-5 h-5">
+                                                        <path
+                                                            d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7">
+                                                        </path>
+                                                        <path
+                                                            d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </button>
-                                            <livewire:admin.group-companies.destroy :groupCompany="$groupCompany" :wire:key="'group-company-'.$groupCompany->id" />
+                                            <livewire:admin.group-companies.destroy :groupCompany="$groupCompany"
+                                                :wire:key="'group-company-'.$groupCompany->id" />
                                         </div>
                                     </x-table.cell>
                                 </x-table.row>
@@ -136,12 +184,12 @@
             </div>
         </div>
     </div>
-   
+
     <x-slot name="scripts">
         <script>
             window.deleteConfirm = function(event, id) {
                 event.preventDefault();
-                console.log(event,id)
+                console.log(event, id)
                 let deleteButton = document.getElementById(`deleteGroup-${id}`);
 
                 Swal.fire({
@@ -152,7 +200,7 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonText: 'cancelar',
                     cancelButtonColor: '#d33',
-                    confirmButtonText:`sim, apagar o Grupo ${deleteButton.innerHTML}!`
+                    confirmButtonText: `sim, apagar o Grupo ${deleteButton.innerHTML}!`
                 }).then((result) => {
                     if (result.isConfirmed) {
                         deleteButton.click()
@@ -175,12 +223,8 @@
         </script>
     </x-slot>
 
-    {{-- Início Adicionar Funcionário --}}
+    {{-- Início Adicionar Grupo de Empresa --}}
     <livewire:admin.group-companies.create />
-    {{-- Fim Adicionar Funcionário --}}
-    {{-- Início Adicionar Funcionário --}}
-    @if (!empty($groupCompany))
-        <livewire:admin.group-companies.update :groupCompany="$groupCompany" :wire:key="$groupCompany->id" />
-    @endif
-    {{-- Fim Adicionar Funcionário --}}
+    {{-- Fim Adicionar Grupo de Empresa --}}
+    
 </div>
