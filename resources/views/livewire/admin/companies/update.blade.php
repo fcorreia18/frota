@@ -1,52 +1,3 @@
-<!-- BEGIN: EDIT Modal Content -->
-<div id="header-footer-modal-preview-company{{ $company->id }}" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- BEGIN: Modal Header -->
-            <div class="modal-header">
-                <h2 class="font-medium text-base mr-auto">Editar {{ $company->name }}</h2>
-
-            </div>
-            <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
-            <form wire:submit.prevent="update($company->id)">
-                <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-1" class="form-label">Empresa</label>
-                        <input id="modal-form-1" type="text" class="form-control" value="{{ $company->name }}">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-2" class="form-label">nif</label>
-                        <input id="modal-form-2" type="text" class="form-control" value="{{ $company->nif }}">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-3" class="form-label">Endereço</label>
-                        <input id="modal-form-3" type="text" class="form-control" value="{{ $company->address }}">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-4" class="form-label">Email</label>
-                        <input id="modal-form-4" type="text" class="form-control" value="{{ $company->email }}">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                        <label for="modal-form-5" class="form-label">Contacto</label>
-                        <input id="modal-form-5" type="text" class="form-control" value="{{ $company->contact }}">
-                    </div>
-                </div>
-                <!-- BEGIN: Modal Footer -->
-                <div class="modal-footer">
-                    <button type="button" data-tw-dismiss="modal"
-                        class="btn btn-outline-secondary w-20 mr-1">Cancelar</button>
-                    <button type="submit" class="btn btn-primary w-20">Confirmar</button>
-                </div>
-                <!-- END: Modal Footer -->
-            </form>
-            <!-- END: Modal Body -->
-        </div>
-    </div>
-</div>
-<!-- END: EDIT Modal Content -->
-
 <div>
 
     <x-slot name="breadCrumb">
@@ -54,130 +5,332 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Frota</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item">Grupo de Empresa</li>
+                <li class="breadcrumb-item">Empresas</li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
     </x-slot>
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Editar Grupo de Empresas </h2>
+        <h2 class="text-lg font-medium mr-auto">Editar Empresa</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-
-          
-
         </div>
     </div>
-<!-- component -->
-<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mt-2">
-    <div class="-mx-3 md:flex mb-6">
-      <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-          First Name
-        </label>
-        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Jane">
-        <p class="text-red text-xs italic">Please fill out this field.</p>
-      </div>
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-          Last Name
-        </label>
-        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Doe">
-      </div>
-    </div>
-    <div class="-mx-3 md:flex mb-6">
-      <div class="md:w-full px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
-          Password
-        </label>
-        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="password" placeholder="******************">
-        <p class="text-grey-dark text-xs italic">Make it as long and as crazy as you'd like</p>
-      </div>
-    </div>
-    <div class="-mx-3 md:flex mb-2">
-      <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
-          City
-        </label>
-        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-city" type="text" placeholder="Albuquerque">
-      </div>
-     
-      <div class="md:w-1/2 px-3">
-        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
-          Zip
-        </label>
-        <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="text" placeholder="90210">
-      </div>
-    </div>
-  </div>
-    <div class="intro-y box p-5 mt-5">
-     
+    <!-- Editar -->
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mt-2">
+
         <div class="overflow-x-auto scrollbar-hidden">
             <div class="shadow-sm mt-3 bg-white p-4 col-lg-12">
-                <form wire:submit.prevent="updateGroup" wire:loading.class="opacity-50 pointer-events-none">
-                    <!-- BEGIN: Modal Header -->
-                    <div class="modal-header text-center m-auto  text-2xl flex justify-center mt-4">
-                        <h2 class="font-medium" style="color:gray">Editar {{ $groupCompany->name }}</h2>
-                    </div>
-                    <!-- END: Modal Header -->
-                    <!-- BEGIN: Modal Body -->
+                <form wire:submit.prevent="updateemployee" wire:loading.class="opacity-50 pointer-events-none">
                     <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                         @if (session()->has('error'))
                             <div class="xl:col-span-12 col-span-12 sm:col-span-6 mb-2">
-                                <div class="alert alert-danger alert-dismissible show flex items-center mb-2" role="alert">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" icon-name="alert-octagon" data-lucide="alert-octagon"
-                                        class="lucide lucide-alert-octagon w-6 h-6 mr-2">
-                                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2">
+                                <div class="alert alert-danger alert-dismissible show flex items-center mb-2"
+                                    role="alert">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" icon-name="alert-octagon"
+                                        data-lucide="alert-octagon" class="lucide lucide-alert-octagon w-6 h-6 mr-2">
+                                        <polygon
+                                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2">
                                         </polygon>
                                         <line x1="12" y1="8" x2="12" y2="12"></line>
                                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                     </svg>
                                     {{ session('error') }}
-                                    <button type="button" class="btn-close" data-tw-dismiss="alert" aria-label="Close"> <svg
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="x" data-lucide="x"
-                                            class="lucide lucide-x w-4 h-4 text-white">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    <button type="button" class="btn-close" data-tw-dismiss="alert" aria-label="Close">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="x"
+                                            data-lucide="x" class="lucide lucide-x w-4 h-4 text-white">
+                                            <line x1="18" y1="6" x2="6" y2="18">
+                                            </line>
+                                            <line x1="6" y1="6" x2="18" y2="18">
+                                            </line>
                                         </svg>
                                     </button>
                                 </div>
                             </div>
                         @endif
-                        <div class="xl:col-span-12 col-span-12 sm:col-span-6 mb-2">
-                
-                            <div class="form-inline">
-                                <label for="modal-form-1" class="form-label">{{ strtoupper('Nome:') }}</label> <input id="modal-form-1"
-                                    wire:model="name" type="text" class="form-control w-full" placeholder="FIRMA.GOV.AO"
-                                    style="border:{{ (sizeof($errors) > 0 && strlen($name) < 3) || strlen($name) >= 50 ? '0.5px solid red' : '1px solid #0000001a' }}">
-                
-                            </div>
+
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-1" class="form-label">{{ strtoupper('Nome:') }}</label>
+                            <input wire:model="name" id="modal-form-1" type="text" name="name"
+                                class="form-control" placeholder="FIRMA.GOV.AO"
+                                style="border:{{ (sizeof($errors) > 0 && strlen($name) < 3) || strlen($name) >= 50 ? '0.5px solid red' : '1px solid #0000001a' }}">
                             @error('name')
-                                <span class="error" style="color:red;margin-left: 3.8rem;"> {{ $message }}</span>
+                                <span class="error" style="color:red;"> {{ $message }}</span>
                             @enderror
-                
                         </div>
-                
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-5" class="form-label">Contacto</label>
+                            <input wire:model="contact" id="modal-form-5" type="text" name="contact"
+                                class="form-control" placeholder="933839298"
+                                style="border:{{ sizeof($errors) > 0 && strlen($contact) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
+                            @error('contact')
+                                <span class="error" style="color:red;"> {{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-3" class="form-label">Endereço</label>
+                            <input wire:model="address" id="modal-form-3" type="text" name="address"
+                                class="form-control" placeholder="Samba"
+                                style="border:{{ sizeof($errors) > 0 && strlen($address) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
+                            @error('address')
+                                <span class="error" style="color:red;"> {{ $message }}</span>
+                            @enderror
+                        </div>
+                       
+                       
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-5" class="form-label">Email</label>
+                            <input wire:model="email" id="modal-form-5" type="email" name="email"  class="form-control"
+                                style="border:{{ sizeof($errors) > 0 && strlen($email) < 10 ? '0.5px solid red' : '1px solid #0000001a' }}"
+                                />
+                            @error('email')
+                                <span class="error" style="color:red;"> {{ $message }}</span>
+                            @enderror
+                        </div>
+                       
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-5" class="form-label">NIF</label>
+                            <input wire:model="nif" id="modal-form-5" type="text" name="nif"  class="form-control"
+                                style="border:{{ sizeof($errors) > 0 && strlen($nif) < 10 ? '0.5px solid red' : '1px solid #0000001a' }}"
+                                />
+                            @error('nif')
+                                <span class="error" style="color:red;"> {{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                    <!-- END: Modal Body -->
+
                     <!-- BEGIN: Modal Footer -->
                     <div class="modal-footer" style="display: flex;justify-content:flex-end">
                         <button type="button" class="btn btn-outline-secondary w-20 mr-1">
-                            <a href="{{ route('admin.group-companies.index') }}">
+                            <a href="{{ redirect()->back()->getTargetUrl() }}">
                                 Voltar
                             </a>
                         </button>
-                        <button type="submit" class="btn btn-primary w-20">Atualizar</button>
-                
+                        <button type="submit" class="btn btn-primary w-20">Criar</button>
+
                     </div>
                     <!-- END: Modal Footer -->
                 </form>
             </div>
         </div>
+
     </div>
 
-   
+
+
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="text-lg font-medium mr-auto"> Funcionários </h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <button class="btn btn-primary shadow-md mr-2"> <a href="#"> Cadastrar Funcionário</a></button>
+            <div class="dropdown">
+                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
+                    <span class="w-5 h-5 flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="plus"
+                            class="lucide lucide-plus w-4 h-4" data-lucide="plus">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg> </span>
+                </button>
+                <div class="dropdown-menu w-40">
+                    <ul class="dropdown-content">
+                        <li>
+                            <a href="" class="dropdown-item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" icon-name="printer" data-lucide="printer"
+                                    class="lucide lucide-printer w-4 h-4 mr-2">
+                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2">
+                                    </path>
+                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                </svg> Print </a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" icon-name="file-text" data-lucide="file-text"
+                                    class="lucide lucide-file-text w-4 h-4 mr-2">
+                                    <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <line x1="10" y1="9" x2="8" y2="9"></line>
+                                </svg> Export to Excel </a>
+                        </li>
+                        <li>
+                            <a href="" class="dropdown-item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" icon-name="file-text" data-lucide="file-text"
+                                    class="lucide lucide-file-text w-4 h-4 mr-2">
+                                    <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <line x1="10" y1="9" x2="8" y2="9"></line>
+                                </svg> Export to PDF </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hidden md:block mx-auto text-slate-500">Mostrando 1 á 10 de 3 resultados</div>
+            <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                <div class="w-56 relative text-slate-500">
+                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" icon-name="search"
+                        class="lucide lucide-search w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
+                        data-lucide="search">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN: Data List -->
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <table class="table table-report -mt-2">
+                <thead>
+                    <tr>
+                        <th class="whitespace-nowrap">#</th>
+                        <th class="whitespace-nowrap">NOME</th>
+                        <th class="text-center whitespace-nowrap">Nº IDENTIDADE</th>
+                        <th class="text-center whitespace-nowrap">CARTA CONDUÇÃO</th>
+                        <th class="text-center whitespace-nowrap">CONTACTO</th>
+                        <th class="text-center whitespace-nowrap">ACÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($employees as $key => $employee)
+                        <tr class="intro-x">
+                            <td class="text-center">{{ $key + 1 }}</td>
+
+                            <td>
+                                <a href="" class="font-medium whitespace-nowrap"> {{ $employee->name }}</a>
+                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Tech &amp; Infra</div>
+                            </td>
+                            <td class="text-center">{{ $employee->id_number }}</td>
+                            <td class="text-center">{{ $employee->driver_license }}</td>
+                            <td class="text-center">{{ $employee->contact }}</td>
+
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3"
+                                        href="{{ route('admin.user.update', $employee->id) }}"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            icon-name="check-square" data-lucide="check-square"
+                                            class="lucide lucide-check-square w-4 h-4 mr-1">
+                                            <polyline points="9 11 12 14 22 4"></polyline>
+                                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                                        </svg>
+                                        Editar
+                                    </a>
+                                    <a class="flex items-center text-danger" href="javascript:;"
+                                        data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            icon-name="trash-2" data-lucide="trash-2"
+                                            class="lucide lucide-trash-2 w-4 h-4 mr-1">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path
+                                                d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
+                                            </path>
+                                            <line x1="10" y1="11" x2="10" y2="17">
+                                            </line>
+                                            <line x1="14" y1="11" x2="14" y2="17">
+                                            </line>
+                                        </svg>
+                                        Deletar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <x-table.row>
+                            <x-table.cell colspan="7">
+                                <p class="alert alert-warning">
+                                    <i class="fa fa-exclamation-x-table.rowiangle"></i>
+                                    Não existem empresas associadas a esse grupo.
+                                </p>
+                            </x-table.cell>
+
+                        </x-table.row>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <!-- END: Data List -->
+        <!-- BEGIN: Pagination -->
+        <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+            <nav class="w-full sm:w-auto sm:mr-auto">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                icon-name="chevrons-left" class="lucide lucide-chevrons-left w-4 h-4"
+                                data-lucide="chevrons-left">
+                                <polyline points="11 17 6 12 11 7"></polyline>
+                                <polyline points="18 17 13 12 18 7"></polyline>
+                            </svg> </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                icon-name="chevron-left" class="lucide lucide-chevron-left w-4 h-4"
+                                data-lucide="chevron-left">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg> </a>
+                    </li>
+                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
+                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
+                    <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
+                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
+                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                icon-name="chevron-right" class="lucide lucide-chevron-right w-4 h-4"
+                                data-lucide="chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg> </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                icon-name="chevrons-right" class="lucide lucide-chevrons-right w-4 h-4"
+                                data-lucide="chevrons-right">
+                                <polyline points="13 17 18 12 13 7"></polyline>
+                                <polyline points="6 17 11 12 6 7"></polyline>
+                            </svg> </a>
+                    </li>
+                </ul>
+            </nav>
+            <select class="w-20 form-select box mt-3 sm:mt-0">
+                <option>10</option>
+                <option>25</option>
+                <option>35</option>
+                <option>50</option>
+            </select>
+        </div>
+        <!-- END: Pagination -->
+    </div>
 </div>

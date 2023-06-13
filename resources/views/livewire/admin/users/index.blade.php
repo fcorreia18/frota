@@ -55,7 +55,7 @@
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Valor</label>
                     <x-text-input class="sm:w-40 2xl:w-full mt-2 sm:mt-0 py-2 mb-2"
                         style="border:1px solid rgba(94, 94, 94, 0.48)" placeholder="digite..." wire:model="search"
-                        name="search" id="search" />
+                        name="search" id="search"   wire:input="searchValueChanged"/>
 
                 </div>
                 <div class="mt-2 xl:mt-0">

@@ -62,8 +62,6 @@ class Create extends Component
         'driver_license.required' => 'O campo de data de Constituição é obrigatório.',
         'driver_license.min' => 'O campo de Nº da carta deve ter pelo menos 3 caracteres.',
         'driver_license.max' => 'O campo de Nº da carta deve no máximo 12 caracteres.',
-
-
     ];
     private function resetFields()
     {
@@ -78,76 +76,63 @@ class Create extends Component
     }
     public function addUser()
     {
+          
+        $this->validate();
+
+        $existingUser = User::where('email', $this->email)->first();
+
+        if ($existingUser) {
+            session()->flash('error', 'Já existe um usuário com este email.');
+            return;
+        }
         try {
-            $existingUser = User::where('email', $this->email)->first();
-            $user = Auth::user(); 
-            // $user->notify(new EmployeeRegisteredNotification());
-            // Notification::send($existingUser, new EmployeeRegisteredNotification("url"));
-            session()->flash('error', 'enviado');
-            dd($user);
-            //     return;
+            $userCreated = Employee::create([
+                'name' => $this->name,
+                'id_number' => $this->id_number,
+                'address' => $this->address,
+                'contact' => $this->contact,
+                'driver_license' => $this->driver_license,
+                'license_due_date' => $this->license_due_date,
+                'id_company' => $this->companyId,
+            ]);
+
         } catch (\Throwable $th) {
-            session()->flash('error', $th->getMessage());
-       
+            array_push($this->errors, $th->getMessage());
+            session()->flash('error',  $th->getMessage());
+        }
+        // dd("funcionario");
+
+        try {
+
+            //pesquisar se email já foi cadastrado depois cadastar utilizador!
+
+            $user = User::create([
+                'email' => $this->email,
+                'password' => Hash::make($this->driver_license),
+                'id_employee' => $userCreated->id,
+            ]);
+            // dd("user 1");
+
+            // $token = $user->generateToken();
+
+            // $resetPasswordUrl = route('password.reset', ['token' => $token]);
+
+            // Notification::send($user, new EmployeeRegisteredNotification($resetPasswordUrl));
+            // Redirecionar para a rota desejada
+            // ...
+        // dd("user 2");
+        $this->emit('userAdd', 'utilizador cadastrado com sucesso!');
+
+
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Ocorreu um erro durante o registro de acesso do utilizador, por favor verifique se os campos foram devidamente preenchidos');
+            return;
 
         }
-           
-        // $this->validate();
 
-        // $existingUser = User::where('email', $this->email)->first();
-
-        // if ($existingUser) {
-        //     session()->flash('error', 'Já existe um usuário com este email.');
-        //     return;
-        // }
-        // try {
-        //     $userCreated = Employee::create([
-        //         'name' => $this->name,
-        //         'id_number' => $this->id_number,
-        //         'address' => $this->address,
-        //         'contact' => $this->contact,
-        //         'driver_license' => $this->driver_license,
-        //         'license_due_date' => $this->license_due_date,
-        //         'id_company' => $this->companyId,
-        //     ]);
-
-        // } catch (\Throwable $th) {
-        //     array_push($this->errors, $th->getMessage());
-        //     session()->flash('error',  $th->getMessage());
-        // }
-        // // dd("funcionario");
-
-        // try {
-
-        //     //pesquisar se email já foi cadastrado depois cadastar utilizador!
-
-        //     $user = User::create([
-        //         'email' => $this->email,
-        //         'password' => Hash::make($this->driver_license),
-        //         'id_employee' => $userCreated->id,
-        //     ]);
-        //     // dd("user 1");
-
-        //     $token = $user->generateToken();
-
-        //     $resetPasswordUrl = route('password.reset', ['token' => $token]);
-
-        //     Notification::send($user, new EmployeeRegisteredNotification($resetPasswordUrl));
-        //     // Redirecionar para a rota desejada
-        //     // ...
-        // // dd("user 2");
-        // $this->emit('userAdd', 'utilizador cadastrado com sucesso!');
-
-
-        // } catch (\Throwable $th) {
-        //     session()->flash('error', 'Ocorreu um erro durante o registro de acesso do utilizador');
-        //     return;
-
-        // }
-
-        // $this->resetFields();
-        // // Disparar o evento para atualizar a lista de grupo de empresas
-        // $this->emit('userAdd', 'utilizador cadastrado com sucesso!');
+        $this->resetFields();
+        // Disparar o evento para atualizar a lista de grupo de empresas
+        $this->emit('userAdd', 'utilizador cadastrado com sucesso!');
     }
 
     protected $listeners = ['toggleForm'];

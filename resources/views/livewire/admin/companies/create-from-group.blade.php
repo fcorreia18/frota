@@ -5,30 +5,23 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Frota</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item">Utilizadores</li>
-                <li class="breadcrumb-item active" aria-current="page">Editar</li>
+                <li class="breadcrumb-item">Empresas</li>
+                <li class="breadcrumb-item active" aria-current="page">Adicionar</li>
             </ol>
         </nav>
     </x-slot>
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Editar Utilizador </h2>
+        <h2 class="text-lg font-medium mr-auto">Adicionar Empresa</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
         </div>
     </div>
     <!-- Editar -->
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 mt-2">
-       <div class="flex" style="justify-content:">
-        <div>
-            <h3>Dados Empresariais:</h3>
-            <p>Grupo: {{ $groupCompany->name }}</p>
-            <p>Empresa: {{ $company->name }}</p>
-            
-        </div>
-       </div>
+
         <div class="overflow-x-auto scrollbar-hidden">
             <div class="shadow-sm mt-3 bg-white p-4 col-lg-12">
-                <form wire:submit.prevent="updateUser" wire:loading.class="opacity-50 pointer-events-none">
+                <form wire:submit.prevent="addCompany" wire:loading.class="opacity-50 pointer-events-none">
                     <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                         @if (session()->has('error'))
                             <div class="xl:col-span-12 col-span-12 sm:col-span-6 mb-2">
@@ -69,75 +62,61 @@
                                 <span class="error" style="color:red;"> {{ $message }}</span>
                             @enderror
                         </div>
-                       
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-5" class="form-label">Contacto</label>
-                            <input wire:model="contact" id="modal-form-5" type="text" name="contact" class="form-control"
-                                placeholder="933839298"
+                            <input wire:model="contact" id="modal-form-5" type="text" name="contact"
+                                class="form-control" placeholder="933839298"
                                 style="border:{{ sizeof($errors) > 0 && strlen($contact) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
                             @error('contact')
                                 <span class="error" style="color:red;"> {{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-12 sm:col-span-6">
-                            <label for="modal-form-3" class="form-label">Nº Identidade</label>
-                            <input wire:model="id_number" id="modal-form-3" type="text" name="id_number" class="form-control"
-                                placeholder="0037452LA084"
-                                style="border:{{ sizeof($errors) > 0 && strlen($id_number) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
-                            @error('id_number')
-                                <span class="error" style="color:red;"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                       
-                        <div class="col-span-12 sm:col-span-6">
-                            <label for="modal-form-4" class="form-label">Carta de Condução</label>
-                            <input wire:model="driver_license" id="modal-form-4" type="text" name="driver_license"
-                                class="form-control" placeholder="73MDL23"
-                                style="border:{{ sizeof($errors) > 0 && strlen($driver_license) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
-                            @error('driver_license')
-                                <span class="error" style="color:red;"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-span-12 sm:col-span-6">
-                            <label for="modal-form-5" class="form-label">Endereço</label>
-                            <input wire:model="address" id="modal-form-5" type="text" name="address" class="form-control"
-                                placeholder="Talatona"
+                            <label for="modal-form-3" class="form-label">Endereço</label>
+                            <input wire:model="address" id="modal-form-3" type="text" name="address"
+                                class="form-control" placeholder="Samba"
                                 style="border:{{ sizeof($errors) > 0 && strlen($address) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
                             @error('address')
                                 <span class="error" style="color:red;"> {{ $message }}</span>
                             @enderror
                         </div>
+                        {{-- <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-2" class="form-label">Grupo</label>
+                            <select  id="modal-form-2" class="form-control" disabled>
+                                <option value="">Selecione uma empresa</option>   
+                                    <option value="{{ $groupCompany->id }}" selected>{{ $groupCompany->name }}</option>
+                            </select>
+                        </div> --}}
+                       
                         <div class="col-span-12 sm:col-span-6">
-                            <label for="modal-form-6" class="form-label">Expiração da carta</label>
-                            <input wire:model="license_due_date" id="modal-form-6" type="date" name="license_due_date"
-                                class="form-control"
-                                style="border:{{ sizeof($errors) > 0 && strlen($license_due_date) < 3 ? '0.5px solid red' : '1px solid #0000001a' }}">
-                            @error('license_due_date')
+                            <label for="modal-form-5" class="form-label">Email</label>
+                            <input wire:model="email" id="modal-form-5" type="email" name="email"  class="form-control"
+                                style="border:{{ sizeof($errors) > 0 && strlen($email) < 10 ? '0.5px solid red' : '1px solid #0000001a' }}"
+                                />
+                            @error('email')
                                 <span class="error" style="color:red;"> {{ $message }}</span>
                             @enderror
                         </div>
-            
-                        <div class="col-span-12 sm:col-span-6">
-                            <label for="modal-form-6" class="form-label">Privilégio</label>
-                            
-                                <select wire:model="auth_level" id="modal-form-6" name="auth_level" class="form-control">
-                                    <option value="{{$auth_level??""}}">{{"Selecione o privilégio a ser atribuido"}}</option>
-                                        <option value="employee">usuário padrão</option>
-                                        <option value="fleet_manager">gestor de frota</option>
-                                        <option value="manager">gestor do grupo</option>
-                                </select>
-                        </div>
                        
+                        <div class="col-span-12 sm:col-span-6">
+                            <label for="modal-form-5" class="form-label">NIF</label>
+                            <input wire:model="nif" id="modal-form-5" type="text" name="nif"  class="form-control"
+                                style="border:{{ sizeof($errors) > 0 && strlen($nif) < 10 ? '0.5px solid red' : '1px solid #0000001a' }}"
+                                />
+                            @error('nif')
+                                <span class="error" style="color:red;"> {{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
 
                     <!-- BEGIN: Modal Footer -->
                     <div class="modal-footer" style="display: flex;justify-content:flex-end">
                         <button type="button" class="btn btn-outline-secondary w-20 mr-1">
-                            <a href="{{ route('admin.group-companies.index') }}">
+                            <a href="{{ redirect()->back()->getTargetUrl() }}">
                                 Voltar
                             </a>
                         </button>
-                        <button type="submit" class="btn btn-primary w-20">Atualizar</button>
+                        <button type="submit" class="btn btn-primary w-20">Criar</button>
 
                     </div>
                     <!-- END: Modal Footer -->
@@ -147,7 +126,4 @@
 
     </div>
 
-   
-    
-    
 </div>

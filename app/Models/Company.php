@@ -11,7 +11,7 @@ class Company extends Model
     use HasFactory;
 
     protected $table = 'companies';
-    protected $fillable = ["name", "nif", "address", "contact", "email"];
+    protected $fillable = ["name", "nif", "address", "contact", "email", "id_group_company"];
 
     public function employees()
     {

@@ -34,8 +34,6 @@
                 </div>
             @endif
 
-
-
             <div class="col-span-12 sm:col-span-6">
                 <label for="modal-form-1" class="form-label">{{ strtoupper('Nome:') }}</label>
                 <input wire:model="name" id="modal-form-1" type="text" name="name" class="form-control"
@@ -126,3 +124,12 @@
     </form>
 
 </div>
+
+
+{{-- 
+
+background: #44444463;
+padding-bottom: 2rem;
+padding: 1rem;
+  padding-bottom: 1rem;
+padding-bottom: 2rem; --}}

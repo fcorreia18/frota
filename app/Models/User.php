@@ -66,4 +66,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Employee::class, 'id_employee');
     }
+
+    public function routeNotificationFor($driver, $notification = null)
+{
+    if ($driver === 'mail') {
+        return $this->email; // Retorne o endereço de email do usuário
+    }
+    // Retorne a rota de notificação para outros drivers, se necessário
+}
 }

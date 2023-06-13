@@ -35,7 +35,7 @@ class CompaniesComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.companies.index', ['companies' => Company::search($this->searchField, $this->search)->with('group')->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.companies.index', ['companies' => Company::search($this->searchField, $this->search)->with('group')->orderBy($this->sortField, $this->sortDirection)->paginate(4),])->layout(\App\View\Components\AdminLayout::class);
     }
   
 }

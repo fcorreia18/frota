@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-                            <a href=" {{ route('admin.employees.index') }}">
+                            <a href=" {{ route('admin.users.index') }}">
                                 <div class="report-box zoom-in">
                                     <div class="box p-5">
                                         <div class="flex">

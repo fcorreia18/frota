@@ -49,7 +49,7 @@
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Valor</label>
                     <x-text-input class="sm:w-40 2xl:w-full mt-2 sm:mt-0 py-2 mb-2"
                         style="border:1px solid rgba(94, 94, 94, 0.48)" placeholder="digite..." wire:model="search"
-                        name="search" id="search" />
+                        name="search" id="search"/>
 
                 </div>
                 <div class="mt-2 xl:mt-0">
@@ -147,20 +147,27 @@
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
-                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600"
-                                                data-tw-toggle="modal"
-                                                data-tw-target="#header-footer-modal-preview-company{{ $company->id }}">
-                                                <i data-lucide="edit" class="w-5 h-5"></i>
+                                            <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
+                                                <a href="{{ route('admin.company.update', ['companyId' => $company->id,]) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" icon-name="edit" data-lucide="edit"
+                                                        class="lucide lucide-edit w-5 h-5">
+                                                        <path
+                                                            d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7">
+                                                        </path>
+                                                        <path
+                                                            d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </button>
 
-                                            <form action="{{ route('admin.company.destroy', $company->id) }}"
-                                                method="post">
-                                                @method('delete')
-                                                @csrf
+                                          
                                                 <button class="btn btn-danger mr-1 mb-2" onclick="deleteConfirm(event)">
                                                     <i data-lucide="trash" class="w-5 h-5"></i>
                                                 </button>
-                                            </form>
                                         </div>
                                     </x-table.cell>
 
@@ -245,9 +252,9 @@
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    @if (!empty($company))
+    {{-- @if (!empty($company))
         <livewire:admin.companies.update :company="$company" :wire:key="$company->id" />
-    @endif
+    @endif --}}
     {{-- Fim Adicionar Funcionário --}}
 
 </div>

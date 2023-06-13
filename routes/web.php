@@ -3,7 +3,9 @@
 
 use App\Http\Livewire\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Companies\CompaniesComponent;
+use App\Http\Livewire\Admin\Companies\CreateFromGroup;
 use App\Http\Livewire\Admin\Companies\Store as CompanyStore;
+use App\Http\Livewire\Admin\Companies\Update as CompaniesUpdate;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\Update as UserUpdate;
 use App\Http\Livewire\Admin\GroupCompanies\AddCompaniesToGroup;
@@ -37,7 +39,8 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::prefix('companies')->group(function () {
         Route::get('/', CompaniesComponent::class)->name('admin.companies.index');
         Route::get('/create', Create::class)->name('admin.company.create');
-        Route::put('/update/{id}', [CompaniesComponent::class, 'update'])->name('admin.company.update');
+        Route::get('/create-from-group/{groupId}', CreateFromGroup::class)->name('admin.company.create_from_group');
+        Route::get('/update/{companyId}', CompaniesUpdate::class)->name('admin.company.update');
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
@@ -62,6 +65,12 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
         Route::put('/update-group/{id}', [Update::class, 'update'])->name('manager.group-company.update');
         Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('manager.group-company.destroy');
         Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('manager.group-company.companies.add');
+    
+        //NEW ROUTES 
+        Route::prefix('group-companies')->group(function () {
+            Route::get('/', GroupCompaniesComponent::class)->name('manager.group-companies.index');
+            Route::get('/update/{groupId}', Update::class)->name('manager.group-company.update');
+        });
     });
 
     Route::prefix('companies')->group(function () {

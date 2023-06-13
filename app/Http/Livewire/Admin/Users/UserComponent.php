@@ -16,7 +16,7 @@ class UserComponent extends Component
     public $sortField = "name";
     public $sortDirection = "asc";
 
-    protected $listeners = ['resetSearch' => '$refresh','userAdd' => '$refresh', 'userDeleted' => 'resetPagination',];
+    protected $listeners = ['resetSearch' => '$refresh', 'searchValueChanged'=>'searchValueChanged','userAdd' => '$refresh', 'userDeleted' => 'resetPagination',];
     public function resetSearch()
     {
         $this->search = "";
@@ -37,6 +37,23 @@ class UserComponent extends Component
     {
         return view('livewire.admin.users.index', ['companies' => Company::get(),'employees' =>  Employee::search($this->searchField, $this->search)->with('user')->orderBy($this->sortField, $this->sortDirection)->paginate(2),])->layout(\App\View\Components\AdminLayout::class);
     }
+
+
+    public function searchValueChanged()
+    {
+        // Aqui você pode executar a lógica desejada quando o valor do campo search mudar
+        // Por exemplo, você pode fazer uma consulta no banco de dados ou executar qualquer outra ação necessária
+        // Exemplo de código:
+        $this->resetPagination();
+    }
+    public function scripts()
+{
+    return <<<JS
+        Livewire.on('searchValueChanged', () => {
+            @this.call('resetPage');
+        });
+    JS;
+}
 
     public function resetPagination()
     {

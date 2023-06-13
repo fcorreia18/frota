@@ -219,8 +219,18 @@
                         timer: 1500
                     })
                 });
+                Livewire.on('companyAdd', function(message) {
+                Swal.fire({
+                    icon: 'success',
+                    text: message,
+                    title: 'Cadastro bem sucedido',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
             });
         </script>
+        
     </x-slot>
 
     {{-- Início Adicionar Grupo de Empresa --}}

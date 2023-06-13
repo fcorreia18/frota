@@ -11,32 +11,41 @@ use Livewire\Component;
 class Update extends Component
 {
     protected $employee;    
-
     public $userId;
+    public $company;
+    public $groupCompany;
+
     public $name;
-    public $description;
-    public $started_at;
-    public $country;
-    public $industry;
+    public $id_number;
+    public $address;
+    public $driver_license;
+    public $license_due_date;
     public $contact;
+
+    public $auth_level;
   
     public function mount($userId)
     {
         $this->userId = $userId;
         $employee = Employee::findOrFail($userId);
         $this->employee = $employee;
-
+        $this->company = $this->employee->company;
+        $this->groupCompany = $this->employee->company->group;
+        // dd($this->employee,$this->employee->user, $this->employee->company->group);
         $this->name = $employee->name;
-        $this->description = $employee->description;
-        $this->country = $employee->country;
-        $this->started_at = $employee->started_at;
+        $this->id_number = $employee->id_number;
+        $this->address = $employee->address;
+        $this->driver_license = $employee->driver_license;
+        $this->license_due_date = $employee->license_due_date;
         $this->contact = $employee->contact;
-        $this->industry = $employee->industry;
+    }
+    public function updateUser(){
+        dd("metódo para mudar privilégios");
     }
     public function render()
     {
         // $employees = Employee::all()->load('user');
-        return view('livewire.admin.users.update',["user"=> $this->employee,])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.users.update',["user"=> $this->employee,"company"=>$this->company, "groupCompany" => $this->groupCompany])->layout(\App\View\Components\AdminLayout::class);
     }
    
 }

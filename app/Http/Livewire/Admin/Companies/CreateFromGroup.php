@@ -3,17 +3,14 @@
 namespace App\Http\Livewire\Admin\Companies;
 
 use App\Models\Company;
-use App\Models\Employee;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\GroupCompanies;
 use Livewire\Component;
 
-class Update extends Component
+class CreateFromGroup extends Component
 {
-    public $company;
-    public $companyId;
-    public $employees;
+
+    protected $groupCompany;
+    public $groupId;
 
     public $name;
     public $email;
@@ -21,27 +18,12 @@ class Update extends Component
     public $address;
     public $contact;
 
-    public function mount($companyId)
+    public function mount($groupId)
     {
-        $this->companyId = $companyId;
-        $company = Company::findOrFail($companyId);
-        $this->company = $company;
-        $this->name = $company->name;
-
-
-        // $this->description = $groupCompany->description;
-        // $this->country = $groupCompany->country;
-        // $this->started_at = $groupCompany->started_at;
-        // $this->contact = $groupCompany->contact;
-        // $this->industry = $groupCompany->industry;
-        // $this->groupCompany = $groupCompany;
-
-        //Auto preencher o formulário
-
-        $this->employees = Employee::where('id_company', $company->id)->get();
-
+        $this->groupId = $groupId;
+        $groupCompany = GroupCompanies::findOrFail($groupId);
+        $this->groupCompany = $groupCompany;
     }
-
     protected $rules = [
         'name' => 'required|string|min:3',
         'email' => 'required|string|email',
@@ -72,12 +54,18 @@ class Update extends Component
         $this->nif = "";
         $this->address = "";
         $this->contact = "";
+        $this->groupId = "";
     }
-    public function updateCompany()
+    public function addCompany()
     {
         $this->validate();
 
+        $existingCompany = Company::where('nif', $this->nif)->first();
 
+        if ($existingCompany) {
+            session()->flash('error', 'Já existe uma empresa com este nif.');
+            return;
+        }
         try {
             Company::create([
                 'name' => $this->name,
@@ -85,6 +73,7 @@ class Update extends Component
                 'nif' => $this->nif,
                 'contact' => $this->contact,
                 'address' => $this->address,
+                'id_group_company' => $this->groupId,
             ]);
         } catch (\Throwable $th) {
             array_push($this->errors, $th->getMessage());
@@ -93,11 +82,14 @@ class Update extends Component
 
         // Disparar o evento para atualizar a lista de grupo de empresas
         $this->emit('success', 'Empresa cadastrada com sucesso!');
+        return redirect()->route('admin.group-company.update', ['groupId' => $this->groupId]);
 
         $this->resetFields();
+
     }
+
     public function render()
     {
-        return view('livewire.admin.companies.update',["employees"=> $this->employees])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.companies.create-from-group', ["groupCompany" => $this->groupCompany])->layout(\App\View\Components\AdminLayout::class);
     }
 }

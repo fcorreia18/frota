@@ -137,7 +137,7 @@
 
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <button class="btn btn-primary shadow-md mr-2">Cadastrar Empresa</button>
+            <button class="btn btn-primary shadow-md mr-2"> <a href="{{ route('admin.company.create_from_group', ['groupId' => $groupCompany->id,]) }}"> Cadastrar Empresa</a></button>
             <div class="dropdown">
                 <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                     <span class="w-5 h-5 flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg"
