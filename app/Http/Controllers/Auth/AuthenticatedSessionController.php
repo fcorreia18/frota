@@ -29,22 +29,30 @@ class AuthenticatedSessionController extends Controller
             $request->authenticate();
 
             $request->session()->regenerate();
-    
+
             $user = auth()->user();
-            if ($user->auth_level === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
-            } elseif ($user->auth_level === 'manager') {
-                return redirect()->intended(route('manager.dashboard'));
-            } elseif ($user->auth_level === 'employee') {
-                return redirect()->intended(route('employee.dashboard'));
+            switch ($user->auth_level) {
+                case 'admin':
+                    return redirect()->intended(route('admin.dashboard'));
+                    break;
+                case 'manager':
+                    return redirect()->intended(route('manager.dashboard'));
+                    break;
+                case 'fleet_manager':
+                    return redirect()->intended(route('fleet_manager.dashboard'));
+                    break;
+                case 'employee':
+                    return redirect()->intended(route('employee.dashboard'));
+                    break;
+                default:
+                    return redirect()->back()->with('error', "INDISPONÍVEL");
+                    break;
             }
-    
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Credênciais invalidas!');
+            return redirect()->back()->with('error', $th . " erro ao logar");
             //throw $th;
         }
-    dd("cheguei aqui 2");
-        
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

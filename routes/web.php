@@ -13,6 +13,7 @@ use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
 use App\Http\Livewire\Admin\GroupCompanies\Store;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
+use App\Http\Livewire\Admin\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
     Route::get("/", AdminDashboardComponent::class)->name("admin.dashboard");
-    Route::get("/profile", [AdminDashboardComponent::class, 'profile'])->name("admin.profile");
+    Route::get('/profile', Profile::class)->name("admin.profile");
 
     Route::prefix('group-companies')->group(function () {
         Route::get('/', GroupCompaniesComponent::class)->name('admin.group-companies.index');
@@ -56,6 +57,10 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
 
 Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(function () {
+
+    Route::get('/', Manager::class)->name('manager.index');
+    // Route::get('/profile', manager::class)->name('manager.group-companies.index');
+
 
     Route::prefix('group-companies')->group(function () {
 
