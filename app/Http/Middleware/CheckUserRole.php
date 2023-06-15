@@ -18,7 +18,7 @@ class CheckUserRole
         if (!$request->user() || !in_array($request->user()->auth_level, $roles)) {
             // abort(403, 'Acesso negado.'); RETORNO PARA API
             session()->flush();
-            return redirect()->route("login")->with("error", "you have no access right");
+            return redirect()->route("login")->with("error", "sem permissão de acesso");
         }
 
         return $next($request);

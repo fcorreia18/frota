@@ -14,6 +14,7 @@ use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
 use App\Http\Livewire\Admin\GroupCompanies\Store;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
 use App\Http\Livewire\Admin\Profile;
+use App\Http\Livewire\Manager\ManagerDashboardComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,7 +59,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
 Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(function () {
 
-    Route::get('/', Manager::class)->name('manager.index');
+    Route::get('/', ManagerDashboardComponent::class)->name('manager.dashboard');
     // Route::get('/profile', manager::class)->name('manager.group-companies.index');
 
 
@@ -113,6 +114,12 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     // });
 });
 
+Route::prefix('fleet-manager')->middleware(['auth', 'check.role:fleet_manager'])->group(function () {
+    Route::get("/", AdminDashboardComponent::class)->name("fleet_manager.dashboard");
+});
+Route::prefix('employee')->middleware(['auth', 'check.role:employee'])->group(function () {
+    Route::get("/", AdminDashboardComponent::class)->name("employee.dashboard");
+});
 
 
 
