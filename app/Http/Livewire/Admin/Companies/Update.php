@@ -98,6 +98,6 @@ class Update extends Component
     }
     public function render()
     {
-        return view('livewire.admin.companies.update',["employees"=> $this->employees])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.companies.update',["employees"=> $this->employees])->layout("layouts.app.base");
     }
 }

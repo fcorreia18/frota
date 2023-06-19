@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - ADMIN</title>
+    <title> SIMPLES {{ config('app.name', 'Laravel') }} - {{$title??"APP"}}</title>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -19,7 +19,7 @@
 
     <!-- BEGIN: Mobile Menu -->
     <div class="mobile-menu md:hidden">
-        @include('layouts.admin.mobile-header')
+        @include('layouts.app..mobile-header')
     </div>
     <!-- END: Mobile Menu -->
     <div class="flex mt-[4.7rem] md:mt-0 overflow-hidden">
@@ -29,7 +29,7 @@
         {{-- @if (isset($sidemenu))
             {{ $sidemenu }}
         @endif --}}
-        @include('layouts.admin.side-menu')
+        @include('layouts.app..side-menu')
         {{-- END SIDE MENU --}}
 
         <!-- BEGIN: Content -->
@@ -45,11 +45,11 @@
                 <!-- END: Breadcrumb -->
 
                 <!-- BEGIN: Notifications -->
-                @include('layouts.admin.notifications-component')
+                @include('layouts.app..notifications-component')
                 <!-- END: Notifications -->
 
                 <!-- BEGIN: Account Menu -->
-                @include('layouts.admin.profile-icon')
+                @include('layouts.app..profile-icon')
                 <!-- END: Account Menu -->
 
             </div>

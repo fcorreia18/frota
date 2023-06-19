@@ -90,6 +90,6 @@ class CreateFromGroup extends Component
 
     public function render()
     {
-        return view('livewire.admin.companies.create-from-group', ["groupCompany" => $this->groupCompany])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.companies.create-from-group', ["groupCompany" => $this->groupCompany])->layout("layouts.app.base");
     }
 }

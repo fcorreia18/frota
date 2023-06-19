@@ -38,6 +38,6 @@ class VehicleComponent extends Component
     {
         $companies = Company::with('veiculos')->get();
 
-        return view('livewire.admin.vehicles.vehicle-component', ['companies' => $companies,'activities' => Activity::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.vehicles.vehicle-component', ['companies' => $companies,'activities' => Activity::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
     }
 }

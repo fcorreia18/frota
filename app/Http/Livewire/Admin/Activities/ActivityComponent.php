@@ -32,6 +32,6 @@ class ActivityComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.activities.index', ['activities' => Activity::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.activities.index', ['activities' => Activity::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
     }
 }

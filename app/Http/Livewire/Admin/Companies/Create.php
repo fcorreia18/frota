@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Companies;
 
+use App\Models\Company;
 use Livewire\Component;
 
-class Store extends Component
+class Create extends Component
 {
 
 
@@ -13,7 +14,9 @@ class Store extends Component
     public $nif;
     public $address;
     public $contact;
-    public $showToast = false;
+
+    public $showForm = false;
+
 
     protected $rules = [
         'name' => 'required|string|min:3',
@@ -38,33 +41,45 @@ class Store extends Component
         'contact.min' => 'O campo de contato deve ter pelo menos 9 caracteres.',
         'contact.max' => 'O campo de contato deve ter no máximo 14 caracteres.',
     ];
-    public function store()
+    public function addCompany()
     {
-        try {
-            $this->validate();
-            $this->emit('show-success-message', 'A empresa foi cadastrada com sucesso!');
-        } catch (\Throwable $th) {
-            $this->emit('show-error-message', $th->getMessage());
+        $existingCompany = Company::where('name', $this->name)->first();
+
+        if ($existingCompany) {
+            session()->flash('error', 'Já existe uma empresa com esse nome.');
+            return;
         }
-
-
-        $this->emit('reset-show-toast');
-        // Restante do seu código para o envio do formulário...
+        try {
+            Company::create([
+                'name' => $this->name,
+                'description' => $this->description,
+                'started_at' => $this->started_at,
+                'country' => $this->country,
+                'industry' => $this->industry,
+                'contact' => $this->contact,
+                'status' => "ativo",
+            ]);
+        } catch (\Throwable $th) {
+            array_push($this->errors, $th->getMessage());
+            session()->flash('error',  $th->getMessage());
+            return;
+        }
+        $this->resetFields();
+        // Disparar o evento para atualizar a lista de grupo de empresas
+        $this->emit('groupAdd', 'Grupo de empresas cadastrado com sucesso!');
 
 
 
     }
-    protected function showToast($type, $message)
+    protected $listeners = ['toggleForm'];
+    public function toggleForm()
     {
-        $this->showToast = true;
-        $this->dispatchBrowserEvent('show-toast', [
-            'type' => $type,
-            'message' => $message,
-        ]);
+        $this->showForm = !$this->showForm;
     }
+
     public function render()
     {
-        return view('livewire.admin.companies.store');
+        return view('livewire.admin.companies.create');
     }
 
     

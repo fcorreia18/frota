@@ -35,7 +35,7 @@ class UserComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.users.index', ['companies' => Company::get(),'employees' =>  Employee::search($this->searchField, $this->search)->with('user')->orderBy($this->sortField, $this->sortDirection)->paginate(2),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.users.index', ['companies' => Company::get(),'employees' =>  Employee::search($this->searchField, $this->search)->with('user')->orderBy($this->sortField, $this->sortDirection)->paginate(2),])->layout("layouts.app.base");
     }
 
 

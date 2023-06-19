@@ -43,7 +43,7 @@ class AdminDashboardComponent extends Component
          $totalExpenses = $expenses->sum('valor');
          $totalProjects = $projects->count();
  
-         return view('livewire.admin.dashboard-component', compact('projects', 'expensesPerProject', 'totalExpenses', 'totalProjects'))->layout(\App\View\Components\AdminLayout::class);
+         return view('livewire.admin.dashboard-component', compact('projects', 'expensesPerProject', 'totalExpenses', 'totalProjects'))->layout("layouts.app.base");
      
 
         // return view('livewire.admin.dashboard-component', [

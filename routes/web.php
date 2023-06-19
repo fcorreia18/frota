@@ -8,25 +8,17 @@ use App\Http\Livewire\Admin\Companies\Store as CompanyStore;
 use App\Http\Livewire\Admin\Companies\Update as CompaniesUpdate;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\Update as UserUpdate;
-use App\Http\Livewire\Admin\GroupCompanies\AddCompaniesToGroup;
 use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
-use App\Http\Livewire\Admin\GroupCompanies\Store;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
 use App\Http\Livewire\Admin\Profile;
+use App\Http\Livewire\Manager\Companies\Index as CompaniesIndex;
 use App\Http\Livewire\Manager\ManagerDashboardComponent;
+use App\Http\Livewire\Manager\Employees\Index;
+use App\Http\Livewire\Manager\Employees\Update as EmployeesUpdate;
+use App\Http\Livewire\Manager\Projects\Create as ProjectsCreate;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 
 Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
@@ -44,7 +36,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
         Route::get('/create-from-group/{groupId}', CreateFromGroup::class)->name('admin.company.create_from_group');
         Route::get('/update/{companyId}', CompaniesUpdate::class)->name('admin.company.update');
     });
-    //->middleware('middleware_subgrupo'); in case to assign one more middleware
 
     Route::prefix('users')->group(function () {
         Route::get('/', UserComponent::class)->name('admin.users.index');
@@ -54,73 +45,52 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
 
 });
 
-
-
-
 Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(function () {
 
     Route::get('/', ManagerDashboardComponent::class)->name('manager.dashboard');
-    // Route::get('/profile', manager::class)->name('manager.group-companies.index');
-
-
-    Route::prefix('group-companies')->group(function () {
-
-        Route::get('/', GroupCompaniesComponent::class)->name('manager.group-companies.index');
-        Route::get('/create-group', Create::class)->name('manager.group-companies.create');
-        Route::post('/add-group', [Store::class])->name('manager.company.store');
-        Route::put('/update-group/{id}', [Update::class, 'update'])->name('manager.group-company.update');
-        Route::delete('/delete-group/{id}', [GroupCompaniesComponent::class, 'destroy'])->name('manager.group-company.destroy');
-        Route::get('/{grupoId}/add-companies', AddCompaniesToGroup::class)->name('manager.group-company.companies.add');
-    
-        //NEW ROUTES 
-        Route::prefix('group-companies')->group(function () {
-            Route::get('/', GroupCompaniesComponent::class)->name('manager.group-companies.index');
-            Route::get('/update/{groupId}', Update::class)->name('manager.group-company.update');
-        });
-    });
+    Route::get('/profile', ManagerDashboardComponent::class)->name('manager.profile');
 
     Route::prefix('companies')->group(function () {
-
-        Route::get('/', CompaniesComponent::class)->name('manager.companies.index');
+        Route::get('/', CompaniesIndex::class)->name('manager.companies.index');
         Route::post('/add-company', [CompanyStore::class])->name('manager.company.store');
         Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('manager.company.update');
-        Route::delete('/delete-company/{id}', [CompaniesComponent::class, 'destroy'])->name('manager.company.destroy');
-
-
-        //manager/EMPLOYEES ROUTES
-        // Route::prefix('employees')->group(function () {
-
-        //     Route::get('/', EmployeeComponent::class)->name('manager.employees.index');
-        //     Route::post('/add-employee', EmployeeStore::class)->name('manager.employee.store');
-        //     Route::put('/update-employee/{id}', [EmployeeComponent::class, 'update'])->name('manager.employee.update');
-        //     Route::delete('/delete-employee/{id}', [EmployeeComponent::class, 'destroy'])->name('manager.employee.destroy');
-        // });
+        
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware
-
-
-    // Route::prefix('reports')->group(function () {
-
-    //     Route::get('/reports/abastecimento', \App\Http\Livewire\Relatorios\Abastecimento::class)->name('relatorios.abastecimento');
-
-    //     Route::get('/reports/manutencao', \App\Http\Livewire\Relatorios\Manutencao::class)->name('relatorios.manutencao');
-
-    //     Route::get('/reports/incidentes', \App\Http\Livewire\Relatorios\Incidentes::class)->name('relatorios.incidentes');
-        
-    //     Route::get('/relatorios/gastos-projeto', \App\Http\Livewire\Relatorios\GastosProjeto::class)->name('relatorios.gastos-projeto');
-
-    //     Route::get('/relatorios/gastos-veiculo-projeto', \App\Http\Livewire\Relatorios\GastosVeiculoProjeto::class)->name('relatorios.gastos-veiculo-projeto');
     
-    // });
+    Route::prefix('employees')->group(function () {
+
+        Route::get('/', Index::class)->name('manager.employees.index');
+        Route::post('/add-employee', ProjectsCreate::class)->name('manager.employee.create');
+        Route::put('/update-employee/{id}', [EmployeesUpdate::class, 'update'])->name('manager.employee.update');
+    });
+
+    
 });
 
 Route::prefix('fleet-manager')->middleware(['auth', 'check.role:fleet_manager'])->group(function () {
     Route::get("/", AdminDashboardComponent::class)->name("fleet_manager.dashboard");
-});
-Route::prefix('employee')->middleware(['auth', 'check.role:employee'])->group(function () {
-    Route::get("/", AdminDashboardComponent::class)->name("employee.dashboard");
+    Route::get("/profile", AdminDashboardComponent::class)->name("fleet_manager.profile");
 });
 
+Route::prefix('employee')->middleware(['auth', 'check.role:employee'])->group(function () {
+    Route::get("/", AdminDashboardComponent::class)->name("employee.dashboard");
+    Route::get("/profile", AdminDashboardComponent::class)->name("employee.profile");
+});
+
+// Route::prefix('reports')->group(function () {
+
+    //     Route::get('/reports/abastecimento', \App\Http\Livewire\Reports\Abastecimento::class)->name('reports.abastecimento');
+
+    //     Route::get('/reports/manutencao', \App\Http\Livewire\Reports\Manutencao::class)->name('reports.manutencao');
+
+    //     Route::get('/reports/incidentes', \App\Http\Livewire\Reports\Incidentes::class)->name('reports.incidentes');
+        
+    //     Route::get('/reports/gastos-projeto', \App\Http\Livewire\Reports\GastosProjeto::class)->name('reports.gastos-projeto');
+
+    //     Route::get('/reports/gastos-veiculo-projeto', \App\Http\Livewire\Reports\GastosVeiculoProjeto::class)->name('reports.gastos-veiculo-projeto');
+    
+// });
 
 
 require __DIR__ . '/auth.php';

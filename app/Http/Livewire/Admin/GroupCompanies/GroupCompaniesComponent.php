@@ -36,7 +36,7 @@ class GroupCompaniesComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.group-companies.index', ['groupCompanies' =>  GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(5),])->layout(\App\View\Components\AdminLayout::class);
+        return view('livewire.admin.group-companies.index', ['groupCompanies' =>  GroupCompanies::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(5),])->layout("layouts.app.base");
     }
     public function resetPagination()
 {
