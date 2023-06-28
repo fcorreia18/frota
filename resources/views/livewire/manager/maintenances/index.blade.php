@@ -1,6 +1,41 @@
+<div>
+
+
+    <x-slot name="breadCrumb">
+        <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Frota</a></li>
+                <li class="breadcrumb-item">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+            </ol>
+        </nav>
+    </x-slot>
+
+
+    
+    <div class="error-section">
+        @if ($errors->any())
+            <ul class="error-list">
+                @foreach ($errors->all() as $error)
+                    <li class="error-item">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <button class="btn btn-primary shadow-md mr-2">Adicionar Veículo </button>
+        <x-blue-primary-button class="btn btn-primary shadow-md mr-2" 
+            wire:click="$emit('toggleForm')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Manutenção
+        </x-blue-primary-button>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -70,40 +105,31 @@
             <thead>
                 <tr>
                     <th class="whitespace-nowrap">#</th>
-                    <th class="whitespace-nowrap">MARCA</th>
-                    <th class="text-center whitespace-nowrap">MODELO</th>
+                    <th class="text-center whitespace-nowrap">REF</th>
+                    <th class="whitespace-nowrap">VEÍCULO</th>
                     <th class="text-center whitespace-nowrap">MATRÍCULA</th>
                     <th class="text-center whitespace-nowrap">KILOMETRAGEM</th>
+                    <th class="text-center whitespace-nowrap">RESPONSÁVEL</th>
+                    <th class="text-center whitespace-nowrap">CUSTO</th>
                     <th class="text-center whitespace-nowrap">STATUS</th>
                     <th class="text-center whitespace-nowrap">ACÇÕES</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/2.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                        </div>
+                    <td class="w-10">
+                        1
                     </td>
+                    <td class="text-center">000001</td>
                     <td>
                         <a href="" class="font-medium whitespace-nowrap">Renault</a>
                         <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sandero</div>
                     </td>
-                    <td class="text-center">Sandero</td>
                     <td class="text-center">LD-19-38-FQ</td>
                     <td class="text-center">88 mil km</td>
-                    <td class="w-40">
+                    <td class="text-center">Alberto Silva</td>
+                    <td class="text-center">29.000,00kz</td>
+                    <td class="w-10">
                         <div class="flex items-center justify-center text-success"> <svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -111,7 +137,7 @@
                             class="lucide lucide-check-square w-4 h-4 mr-2">
                             <polyline points="9 11 12 14 22 4"></polyline>
                             <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                        </svg> Activo </div>
+                        </svg> Realizada </div>
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
@@ -122,7 +148,7 @@
                                     data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 mr-1">
                                     <polyline points="9 11 12 14 22 4"></polyline>
                                     <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                </svg> Editar </a>
+                                </svg> detalhes </a>
                             <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
                                 data-tw-target="#delete-confirmation-modal"> <svg xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -139,38 +165,27 @@
                     </td>
                 </tr> 
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/2.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                        </div>
+                    <td class="w-10">
+                       2
                     </td>
+                    <td class="text-center">000002</td>
                     <td>
                         <a href="" class="font-medium whitespace-nowrap">Nissan</a>
                         <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Quashai</div>
                     </td>
-                    <td class="text-center">Quashai</td>
                     <td class="text-center">LD-02-38-IH</td>
                     <td class="text-center">70 mil km</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-danger"> <svg
+                    <td class="text-center">Eduardo Costa</td>
+                    <td class="text-center">26.000,00kz</td>
+                    <td class="w-10">
+                        <div class="flex items-center justify-center text-warning"> <svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" icon-name="check-square" data-lucide="check-square"
                                 class="lucide lucide-check-square w-4 h-4 mr-2">
                                 <polyline points="9 11 12 14 22 4"></polyline>
                                 <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                            </svg> Inativo </div>
+                            </svg> Pendente </div>
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
@@ -198,38 +213,28 @@
                     </td>
                 </tr>
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/2.jpg">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                    src="http://localhost/storage/1.jpg">
-                            </div>
-                        </div>
+                    <td class="w-10">
+                       3
                     </td>
+                    <td class="text-center">000003</td>
+
                     <td>
                         <a href="" class="font-medium whitespace-nowrap">Toyota</a>
                         <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Hilux</div>
                     </td>
-                    <td class="text-center">Hilux</td>
                     <td class="text-center">LD-04-12-GD</td>
                     <td class="text-center">120 mil km</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <svg
+                    <td class="text-center">Alberto Silva</td>
+                    <td class="text-center">33.000,00kz</td>
+                    <td class="w-10">
+                        <div class="flex items-center justify-center text-warning"> <svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" icon-name="check-square" data-lucide="check-square"
                             class="lucide lucide-check-square w-4 h-4 mr-2">
                             <polyline points="9 11 12 14 22 4"></polyline>
                             <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                        </svg> Activo </div>
+                        </svg> Pendente </div>
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
@@ -318,4 +323,6 @@
         </select>
     </div>
     <!-- END: Pagination -->
+</div>
+
 </div>

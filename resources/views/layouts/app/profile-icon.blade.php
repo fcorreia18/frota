@@ -1,6 +1,6 @@
 <div class="intro-x dropdown w-8 h-8">
     <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false" data-tw-toggle="dropdown">
-        <img alt="ETIC - FROTA" src="{{ __("#") }}">
+        <img alt="ETIC - FROTA" src="http://localhost/storage/user.png">
         {{-- user()->employee()->avatar ??= asset("/dist/images/avatar.jpg") --}}
     </div>
     <div class="dropdown-menu w-56">

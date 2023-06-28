@@ -150,6 +150,16 @@
                <!-- Menu a ser exibido apenas para usuários com a role 'manager' -->
                <li class="side-nav__devider my-6"></li>
                <li>
+                   <a href="{{ route('manager.projects.index') }}" class="side-menu">
+                       <div class="side-menu__icon">
+                           <i data-lucide="folder-plus"></i>
+                       </div>
+                       <div class="side-menu__title">
+                           Projetos
+                       </div>
+                   </a>
+               </li>
+               <li>
                    <a href="javascript:;" class="side-menu">
                        <div class="side-menu__icon">
                            <i data-lucide="truck"></i>
@@ -195,7 +205,7 @@
                    </ul>
                </li>
                <li>
-                   <a href="javascript:;" class="side-menu">
+                   <a href="{{ route('manager.dashboard') }}" class="side-menu">
                        <div class="side-menu__icon">
                            <i data-lucide="map"></i>
                        </div>
@@ -205,7 +215,79 @@
                    </a>
                </li>
 
+
+
                <li class="side-nav__devider my-6"></li>
+
+               <li>
+                   <a href="{{ route('manager.dashboard') }}" class="side-menu">
+                       <div class="side-menu__icon">
+                           <i data-lucide="dollar-sign"></i>
+                       </div>
+                       <div class="side-menu__title">
+                           Transações
+                       </div>
+                   </a>
+               </li>
+
+               <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="side-menu__title">
+                        Relatórios
+                        <div class="side-menu__sub-icon ">
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                    </div>
+                </a>
+                <ul class="">
+                    <li>
+                        <a href="{{ route('manager.vehicles.index') }}" class="side-menu">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Gastos por projeto
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('manager.maintenances.index') }}" class="side-menu">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Manutenção
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('manager.incidents.index') }}" class="side-menu">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Abastecimento
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('manager.incidents.index') }}" class="side-menu">
+                            <div class="side-menu__icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="side-menu__title">
+                                Incidente
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+               <li class="side-nav__devider my-6"></li>
+
                <li>
                    <a href="{{ route('manager.profile') }}" class="side-menu">
                        <div class="side-menu__icon">

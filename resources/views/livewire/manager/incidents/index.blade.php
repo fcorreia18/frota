@@ -1,6 +1,51 @@
+<div>
+
+
+    <x-slot name="breadCrumb">
+        <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Frota</a></li>
+                <li class="breadcrumb-item">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+            </ol>
+        </nav>
+    </x-slot>
+
+
+    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+        <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
+        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" 
+                wire:click="$emit('toggleForm')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Nova Empresa
+            </x-blue-primary-button>
+
+        </div>
+    </div>
+    <div class="error-section">
+        @if ($errors->any())
+            <ul class="error-list">
+                @foreach ($errors->all() as $error)
+                    <li class="error-item">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+
+
+
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <button class="btn btn-primary shadow-md mr-2">Adicionar Veículo </button>
+        <button class="btn btn-primary shadow-md mr-2"> Incidentes </button>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -318,4 +363,5 @@
         </select>
     </div>
     <!-- END: Pagination -->
+</div>
 </div>

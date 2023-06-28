@@ -30,8 +30,8 @@
                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                 </svg> </div>
                             <div class="flex items-center justify-start mt-4">
-                                <div class="relative text-2xl font-medium pl-3 ml-0.5"> <span
-                                        class="absolute text-xl font-medium top-0 left-0 -ml-0.5">$</span> 1,413,102.02
+                                <div class="relative text-2xl font-medium pl-3 ml-0.5"> 
+                                    1.413,02 kz
                                 </div>
                                 <a class="text-slate-500 ml-4" href=""> <svg xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -44,7 +44,6 @@
                                         <path d="M3 12a9 9 0 0015 6.7l3-2.7"></path>
                                     </svg> </a>
                             </div>
-                            <div class="mt-4 text-slate-500 text-xs">Ultima atualização a 1h atrás</div>
                             <button class="btn btn-outline-secondary relative justify-start rounded-full mt-12">
                                 Ver mais
                                 <span
@@ -77,7 +76,7 @@
                                 <div class="tab-pane grid grid-cols-12 gap-y-8 gap-x-10 active" id="weekly-report"
                                     role="tabpanel" aria-labelledby="weekly-report-tab" style="width: 530px;">
                                     <div class="col-span-6 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Unpaid Loan</div>
+                                        <div class="text-slate-500">Saldo Negativo</div>
                                         <div class="mt-1.5 flex items-center">
                                             <div class="text-base">4.501</div>
                                             <div
@@ -93,30 +92,30 @@
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Active Partner</div>
+                                        <div class="text-slate-500">Provedores de Serviço</div>
                                         <div class="mt-1.5 flex items-center">
                                             <div class="text-base">2</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Paid Installment</div>
+                                        <div class="text-slate-500">Parcelas</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">$72.000</div>
+                                            <div class="text-base">72.000kz</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Disbursement</div>
+                                        <div class="text-slate-500">Saídas</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">$54.000</div>
+                                            <div class="text-base">54.000kz</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Success Payment</div>
+                                        <div class="text-slate-500">Redução de custo</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">2.500</div>
+                                            <div class="text-base">290</div>
                                             <div
                                                 class="text-success flex text-xs font-medium tooltip cursor-pointer ml-2">
-                                                52% <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                16% <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" icon-name="chevron-up"
@@ -127,27 +126,27 @@
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Unpaid Loan</div>
+                                        <div class="text-slate-500">Saídas</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">$72.000</div>
+                                            <div class="text-base">72.000kz</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Posted Campaign</div>
+                                        <div class="text-slate-500">Viaturas</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">4.501</div>
+                                            <div class="text-base">9</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Social Media</div>
+                                        <div class="text-slate-500">Projetos</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">2</div>
+                                            <div class="text-base">12</div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 md:col-span-4">
-                                        <div class="text-slate-500">Net Margin</div>
+                                        <div class="text-slate-500">Est</div>
                                         <div class="mt-1.5 flex items-center">
-                                            <div class="text-base">$72.000</div>
+                                            <div class="text-base">72.000kz</div>
                                             <div
                                                 class="text-success flex text-xs font-medium tooltip cursor-pointer ml-2">
                                                 49% <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -187,17 +186,17 @@
                         <div class="w-52 sm:w-auto mx-auto mt-8">
                             <div class="flex items-center">
                                 <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                <span class="truncate">17 - 30 Years old</span> <span
+                                <span class="truncate">Manutenções</span> <span
                                     class="font-medium ml-auto">62%</span>
                             </div>
                             <div class="flex items-center mt-4">
                                 <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                <span class="truncate">31 - 50 Years old</span> <span
+                                <span class="truncate">Abastecimento</span> <span
                                     class="font-medium ml-auto">33%</span>
                             </div>
                             <div class="flex items-center mt-4">
                                 <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                <span class="truncate">&gt;= 50 Years old</span> <span
+                                <span class="truncate">Incidentes</span> <span
                                     class="font-medium ml-auto">10%</span>
                             </div>
                         </div>
@@ -227,73 +226,20 @@
                             <div
                                 class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-5.jpg">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
                                 <div class="flex items-center">
-                                    <div class="font-medium">Tom Cruise</div>
+                                    <div class="font-medium">Eduardo Costa</div>
                                     <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
                                 </div>
-                                <div class="text-slate-500 mt-1">Has joined the team</div>
+                                <div class="text-slate-500 mt-1">Realizou um apoio logistico</div>
                             </div>
                         </div>
                         <div class="intro-x relative flex items-center mb-3">
                             <div
                                 class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-1.jpg">
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">Johnny Depp</div>
-                                    <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                </div>
-                                <div class="text-slate-500">
-                                    <div class="mt-1">Added 3 new photos</div>
-                                    <div class="flex mt-2">
-                                        <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                            <img alt="Midone - HTML Admin Template"
-                                                class="rounded-md border border-white"
-                                                src="dist/images/preview-6.jpg">
-                                        </div>
-                                        <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                            <img alt="Midone - HTML Admin Template"
-                                                class="rounded-md border border-white"
-                                                src="dist/images/preview-7.jpg">
-                                        </div>
-                                        <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                            <img alt="Midone - HTML Admin Template"
-                                                class="rounded-md border border-white"
-                                                src="dist/images/preview-15.jpg">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="intro-x text-slate-500 text-xs text-center my-4">12 November</div>
-                        <div class="intro-x relative flex items-center mb-3">
-                            <div
-                                class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">Denzel Washington</div>
-                                    <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                </div>
-                                <div class="text-slate-500 mt-1">Has changed <a class="text-primary"
-                                        href="">Samsung Galaxy S20 Ultra</a> price and description</div>
-                            </div>
-                        </div>
-                        <div class="intro-x relative flex items-center mb-3">
-                            <div
-                                class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-14.jpg">
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
@@ -301,8 +247,8 @@
                                     <div class="font-medium">Alberto Miguel</div>
                                     <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
                                 </div>
-                                <div class="text-slate-500 mt-1">Has changed <a class="text-primary"
-                                        href="">Oppo Find X2 Pro</a> description</div>
+                                <div class="text-slate-500 mt-1">cadastrou uma <a class="text-primary"
+                                        href=""> manutenção</a></div>
                             </div>
                         </div>
                     </div>
@@ -316,64 +262,46 @@
                         </h2>
                     </div>
                     <div class="mt-5">
+                       
                         <div class="intro-x">
                             <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Eduardo Costa</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">20 Julho 2022</div>
-                                </div>
-                                <div class="text-success">+$94</div>
-                            </div>
-                        </div>
-                        <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Mário Gonçalves</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">10 Setembro 2021</div>
-                                </div>
-                                <div class="text-success">+$33</div>
-                            </div>
-                        </div>
-                        <div class="intro-x">
-                            <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-14.jpg">
+                                    <img alt="Midone - HTML Admin Template" src="http://localhost/storage/user.png">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">Alberto Miguel</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">10 Fevereiro 2021</div>
+                                    <div class="text-xs text-slate-500 ml-auto">Manutenção</div>
+                                    <div class="text-slate-500 text-xs mt-0.5">10 Junho 2023</div>
                                 </div>
-                                <div class="text-danger">-$188</div>
+                                <div class="text-danger">-188kz</div>
                             </div>
                         </div>
                         <div class="intro-x">
                             <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-11.jpg">
+                                    <img alt="Midone - HTML Admin Template" src="http://localhost/storage/user.png">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">Alberto Miguel</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">22 Fevereiro 2021</div>
+                                    <div class="text-xs text-slate-500 ml-auto">Abastecimento</div>
+
+                                    <div class="text-slate-500 text-xs mt-0.5">22 Maio 2023</div>
                                 </div>
-                                <div class="text-danger">-$22</div>
+                                <div class="text-danger">-22kz</div>
                             </div>
                         </div>
                         <div class="intro-x">
                             <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-2.jpg">
+                                    <img alt="Midone - HTML Admin Template" src="http://localhost/storage/user.png">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">Eduardo Costa</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">18 Setembro 2021</div>
+                                    <div class="text-xs text-slate-500 ml-auto">Abastecimento</div>
+
+                                    <div class="text-slate-500 text-xs mt-0.5">18 Maio 2023</div>
                                 </div>
-                                <div class="text-danger">-$79</div>
+                                <div class="text-danger">-79kz</div>
                             </div>
                         </div>
                         <a href=""
@@ -382,115 +310,7 @@
                     </div>
                 </div>
                 <!-- END: Transactions -->
-                <!-- BEGIN: Schedules -->
-                <div
-                    class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 xl:col-start-1 xl:row-start-2 2xl:col-start-auto 2xl:row-start-auto mt-3">
-                    <div class="intro-x flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">
-                            Agendas
-                        </h2>
-                        {{-- <a href="" class="ml-auto text-primary truncate flex items-center"> <svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" icon-name="plus" data-lucide="plus"
-                                class="lucide lucide-plus w-4 h-4 mr-1">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg> Fazer marcação </a> --}}
-                    </div>
-                    <div class="mt-5">
-                        <div class="intro-x box">
-                            <div class="p-5">
-                                <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-left"
-                                        data-lucide="chevron-left"
-                                        class="lucide lucide-chevron-left w-5 h-5 text-slate-500">
-                                        <polyline points="15 18 9 12 15 6"></polyline>
-                                    </svg>
-                                    <div class="font-medium text-base mx-auto">April</div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-right"
-                                        data-lucide="chevron-right"
-                                        class="lucide lucide-chevron-right w-5 h-5 text-slate-500">
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
-                                </div>
-                                <div class="grid grid-cols-7 gap-4 mt-5 text-center">
-                                    <div class="font-medium">Su</div>
-                                    <div class="font-medium">Mo</div>
-                                    <div class="font-medium">Tu</div>
-                                    <div class="font-medium">We</div>
-                                    <div class="font-medium">Th</div>
-                                    <div class="font-medium">Fr</div>
-                                    <div class="font-medium">Sa</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">29</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">30</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">31</div>
-                                    <div class="py-0.5 rounded relative">1</div>
-                                    <div class="py-0.5 rounded relative">2</div>
-                                    <div class="py-0.5 rounded relative">3</div>
-                                    <div class="py-0.5 rounded relative">4</div>
-                                    <div class="py-0.5 rounded relative">5</div>
-                                    <div class="py-0.5 bg-success/20 dark:bg-success/30 rounded relative">6</div>
-                                    <div class="py-0.5 rounded relative">7</div>
-                                    <div class="py-0.5 bg-primary text-white rounded relative">8</div>
-                                    <div class="py-0.5 rounded relative">9</div>
-                                    <div class="py-0.5 rounded relative">10</div>
-                                    <div class="py-0.5 rounded relative">11</div>
-                                    <div class="py-0.5 rounded relative">12</div>
-                                    <div class="py-0.5 rounded relative">13</div>
-                                    <div class="py-0.5 rounded relative">14</div>
-                                    <div class="py-0.5 rounded relative">15</div>
-                                    <div class="py-0.5 rounded relative">16</div>
-                                    <div class="py-0.5 rounded relative">17</div>
-                                    <div class="py-0.5 rounded relative">18</div>
-                                    <div class="py-0.5 rounded relative">19</div>
-                                    <div class="py-0.5 rounded relative">20</div>
-                                    <div class="py-0.5 rounded relative">21</div>
-                                    <div class="py-0.5 rounded relative">22</div>
-                                    <div class="py-0.5 bg-pending/20 dark:bg-pending/30 rounded relative">23</div>
-                                    <div class="py-0.5 rounded relative">24</div>
-                                    <div class="py-0.5 rounded relative">25</div>
-                                    <div class="py-0.5 rounded relative">26</div>
-                                    <div class="py-0.5 bg-primary/10 dark:bg-primary/50 rounded relative">27</div>
-                                    <div class="py-0.5 rounded relative">28</div>
-                                    <div class="py-0.5 rounded relative">29</div>
-                                    <div class="py-0.5 rounded relative">30</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">1</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">2</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">3</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">4</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">5</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">6</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">7</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">8</div>
-                                    <div class="py-0.5 rounded relative text-slate-500">9</div>
-                                </div>
-                            </div>
-                            <div class="border-t border-slate-200/60 p-5">
-                                <div class="flex items-center">
-                                    <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                    <span class="truncate">Manutenção</span> <span
-                                        class="font-medium xl:ml-auto">23th</span>
-                                </div>
-                                <div class="flex items-center mt-4">
-                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                    <span class="truncate">Visita Mokbel</span> <span
-                                        class="font-medium xl:ml-auto">10th</span>
-                                </div>
-                                <div class="flex items-center mt-4">
-                                    <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                    <span class="truncate">Viagem Namibe</span> <span
-                                        class="font-medium xl:ml-auto">31th</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Schedules -->
+              
             </div>
         </div>
     </div>
