@@ -64,7 +64,7 @@ class User extends Authenticatable
      */
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'id_employee');
+        return $this->hasOne(Employee::class, 'id');
     }
 
     public function routeNotificationFor($driver, $notification = null)

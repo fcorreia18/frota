@@ -6,24 +6,19 @@
     <div class="dropdown-menu w-56">
         <ul class="dropdown-content bg-primary text-white">
             <li class="p-2">
-                <div class="font-medium">{{  __("#") }}</div>
-                {{-- ucwords(user()->employee()->name) --}}
-                <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">{{ __("#") }}</div>
-                {{-- strtoupper(user()->auth_level) --}}
+                <div class="font-medium">{{ ucwords(Auth::user()->employee->name)}}</div>
+               
+                <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">{{ ucwords(Auth::user()->auth_level)}}</div>
+               
             </li>
             <li>
                 <hr class="dropdown-divider border-white/[0.08]">
             </li>
             <li>
-                <a href="" class="dropdown-item hover:bg-white/5">
-                    <i data-lucide="user" class="w-4 h-4 mr-2"></i> Perfil
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="dropdown-item hover:bg-white/5">
+                <a href="/profile" class="dropdown-item hover:bg-white/5">
                     <i data-lucide="lock" class="w-4 h-4 mr-2"></i> Trocar palavra passe
                 </a>
+                
             </li>
 
             <li>
