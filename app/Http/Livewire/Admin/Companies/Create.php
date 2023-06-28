@@ -14,6 +14,7 @@ class Create extends Component
     public $nif;
     public $address;
     public $contact;
+    public $groupId;
 
     public $showForm = false;
 
@@ -41,36 +42,49 @@ class Create extends Component
         'contact.min' => 'O campo de contato deve ter pelo menos 9 caracteres.',
         'contact.max' => 'O campo de contato deve ter no máximo 14 caracteres.',
     ];
+   
+
+    private function resetFields()
+    {
+        $this->name = "";
+        $this->email = "";
+        $this->nif = "";
+        $this->address = "";
+        $this->contact = "";
+        $this->groupId = "";
+    }
     public function addCompany()
     {
-        $existingCompany = Company::where('name', $this->name)->first();
+        $this->validate();
+
+        $existingCompany = Company::where('nif', $this->nif)->first();
 
         if ($existingCompany) {
-            session()->flash('error', 'Já existe uma empresa com esse nome.');
+            session()->flash('error', 'Já existe uma empresa com este nif.');
             return;
         }
         try {
             Company::create([
                 'name' => $this->name,
-                'description' => $this->description,
-                'started_at' => $this->started_at,
-                'country' => $this->country,
-                'industry' => $this->industry,
+                'email' =>  $this->email,
+                'nif' => $this->nif,
                 'contact' => $this->contact,
-                'status' => "ativo",
+                'address' => $this->address,
+                'id_group_company' => $this->groupId,
             ]);
         } catch (\Throwable $th) {
             array_push($this->errors, $th->getMessage());
             session()->flash('error',  $th->getMessage());
-            return;
         }
-        $this->resetFields();
+
         // Disparar o evento para atualizar a lista de grupo de empresas
-        $this->emit('groupAdd', 'Grupo de empresas cadastrado com sucesso!');
+        $this->emit('success', 'Empresa cadastrada com sucesso!');
+        return redirect()->route('admin.group-company.update', ['groupId' => $this->groupId]);
 
-
+        $this->resetFields();
 
     }
+
     protected $listeners = ['toggleForm'];
     public function toggleForm()
     {
