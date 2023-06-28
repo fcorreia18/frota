@@ -12,11 +12,15 @@ use App\Http\Livewire\Admin\GroupCompanies\Create;
 use App\Http\Livewire\Admin\GroupCompanies\GroupCompaniesComponent;
 use App\Http\Livewire\Admin\GroupCompanies\Update;
 use App\Http\Livewire\Admin\Profile;
+use App\Http\Livewire\Admin\Vehicles\VehicleComponent;
 use App\Http\Livewire\Manager\Companies\Index as CompaniesIndex;
 use App\Http\Livewire\Manager\ManagerDashboardComponent;
 use App\Http\Livewire\Manager\Employees\Index;
 use App\Http\Livewire\Manager\Employees\Update as EmployeesUpdate;
 use App\Http\Livewire\Manager\Projects\Create as ProjectsCreate;
+use App\Http\Livewire\Manager\Vehicles\Create as VehiclesCreate;
+use App\Http\Livewire\Manager\Vehicles\Index as VehiclesIndex;
+use App\Http\Livewire\Manager\Vehicles\Update as VehiclesUpdate;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,7 +60,7 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
         Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('manager.company.update');
         
     });
-    //->middleware('middleware_subgrupo'); in case to assign one more middleware
+    //->middleware('middleware_subgrupo'); in case to assign one more middleware or array of middleware
     
     Route::prefix('employees')->group(function () {
 
@@ -65,6 +69,26 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
         Route::put('/update-employee/{id}', [EmployeesUpdate::class, 'update'])->name('manager.employee.update');
     });
 
+    Route::prefix('vehicles')->group(function () {
+        Route::get('/', VehiclesIndex::class)->name('manager.vehicles.index');
+        Route::post('/add-vehicle', [VehiclesCreate::class])->name('manager.vehicle.create');
+        Route::put('/update-vehicle/{id}', [VehiclesUpdate::class, 'update'])->name('manager.vehicle.update');
+        
+    });
+
+    // Route::prefix('maintenances')->group(function () {
+    //     Route::get('/', index::class)->name('manager.vehicles.index');
+    //     Route::post('/add-vehicle', [VehiclesCreate::class])->name('manager.vehicle.create');
+    //     Route::put('/update-vehicle/{id}', [VehiclesUpdate::class, 'update'])->name('manager.vehicle.update');
+        
+    // });
+
+    // Route::prefix('incidents')->group(function () {
+    //     Route::get('/', VehiclesIndex::class)->name('manager.vehicles.index');
+    //     Route::post('/add-vehicle', [VehiclesCreate::class])->name('manager.vehicle.create');
+    //     Route::put('/update-vehicle/{id}', [VehiclesUpdate::class, 'update'])->name('manager.vehicle.update');
+        
+    // });
     
 });
 
