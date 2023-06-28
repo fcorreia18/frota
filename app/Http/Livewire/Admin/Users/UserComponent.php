@@ -16,7 +16,7 @@ class UserComponent extends Component
     public $sortField = "name";
     public $sortDirection = "asc";
 
-    protected $listeners = ['resetSearch' => '$refresh', 'searchValueChanged'=>'searchValueChanged','userAdd' => '$refresh', 'userDeleted' => 'resetPagination',];
+    protected $listeners = ['resetSearch' => '$refresh', 'searchValueChanged'=>'searchValueChanged','userAdd' => '$refresh','userUpdated' => '$refresh', 'userDeleted' => 'resetPagination',];
     public function resetSearch()
     {
         $this->search = "";

@@ -40,7 +40,7 @@ class Create extends Component
         'name' => 'required|string|min:3|max:50',
         'id_number' => 'required|string|min:3|max:50',
         'driver_license' => 'required|string|min:5|max:12',
-        'contact' => 'required|string|min:9|max:15',
+        'contact' => 'required|min:9|max:15',
         'address' => 'required|string|min:4|max:100',
         'email' => 'required|email',
     ];

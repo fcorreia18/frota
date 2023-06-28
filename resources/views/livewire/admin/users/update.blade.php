@@ -63,7 +63,7 @@
                         <div class="col-span-12 sm:col-span-6">
                             <label for="modal-form-1" class="form-label">{{ strtoupper('Nome:') }}</label>
                             <input wire:model="name" id="modal-form-1" type="text" name="name"
-                                class="form-control" placeholder="FIRMA.GOV.AO"
+                                class="form-control" placeholder="Miguel Augusto"
                                 style="border:{{ (sizeof($errors) > 0 && strlen($name) < 3) || strlen($name) >= 50 ? '0.5px solid red' : '1px solid #0000001a' }}">
                             @error('name')
                                 <span class="error" style="color:red;"> {{ $message }}</span>

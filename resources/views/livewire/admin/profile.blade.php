@@ -67,14 +67,14 @@
                         </div>
                     </div>
                     <div class="p-4 shadow-sm bg-white mt-3 col-lg-12">
-                        <form action="<?= $router->route('admin.editPerfil', ['id' => user()->funcionario()->id]) ?>" method="post" class="form-perfil" enctype="multipart/form-data" id="perfil">
+                        <form   class="form-perfil" enctype="multipart/form-data" id="perfil">
                             <div class="mt-4 mb-4">
                                 <span>Dados Biográficos</span>
-                                <?= flash() ?>
+                               
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-4">
-                                    <input type="text" name="nome" value="<?= user()->funcionario()->nome ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="text" name="nome" value="" class="form-control shadow-sm" placeholder="">
                                     <small>Nome Completo <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
@@ -82,19 +82,19 @@
                                     <small>Foto de perfil <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="text" name="num_bilhete" value="<?= user()->funcionario()->num_bilhete ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="text" name="num_bilhete" value="" class="form-control shadow-sm" placeholder="">
                                     <small>Número de BI <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="date" name="emissao_bilhete" value="<?= user()->funcionario()->emissao_bilhete ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="date" name="emissao_bilhete" value="" class="form-control shadow-sm" placeholder="">
                                     <small>Data de Emissão do BI <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="text" name="endereco" value="<?= user()->funcionario()->endereco ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="text" name="endereco" value="" class="form-control shadow-sm" placeholder="">
                                     <small>Endereço <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="text" name="telemovel" value="<?= user()->funcionario()->telemovel ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="text" name="telemovel" value="" class="form-control shadow-sm" placeholder="">
                                     <small>Telefone <sup class="text-danger">*</sup></small>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
 
                             <div class="row">
                                 <div class="form-group col-lg-4">
-                                    <input type="email" name="email" value="<?= user()->email ?>" class="form-control shadow-sm" placeholder="">
+                                    <input type="email" name="email" value="" class="form-control shadow-sm" placeholder="">
                                     <small>E-mail <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
@@ -118,7 +118,7 @@
                                     <small>Password <sup class="text-danger">*</sup></small>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="password" name="password1" class="form-control password1 shadow-sm" placeholder="">
+                                    <input type="password" name="password" class="form-control password shadow-sm" placeholder="">
                                     <small>Confirmar password <sup class="text-danger">*</sup></small>
                                 </div>
                             </div>

@@ -24,6 +24,6 @@ class Destroy extends Component
             return;
         }
         $this->emit('info',  $name.' excluído com sucesso!');
-        $this->emit('groupDeleted');
+        $this->emit('userDeleted');
     }
 }
