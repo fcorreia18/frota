@@ -244,7 +244,7 @@
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
                                 <div class="flex items-center">
-                                    <div class="font-medium">Alberto Miguel</div>
+                                    <div class="font-medium">Alberto Silva</div>
                                     <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
                                 </div>
                                 <div class="text-slate-500 mt-1">cadastrou uma <a class="text-primary"
@@ -269,7 +269,7 @@
                                     <img alt="Midone - HTML Admin Template" src="http://localhost/storage/user.png">
                                 </div>
                                 <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Alberto Miguel</div>
+                                    <div class="font-medium">Alberto Silva</div>
                                     <div class="text-xs text-slate-500 ml-auto">Manutenção</div>
                                     <div class="text-slate-500 text-xs mt-0.5">10 Junho 2023</div>
                                 </div>
@@ -282,7 +282,7 @@
                                     <img alt="Midone - HTML Admin Template" src="http://localhost/storage/user.png">
                                 </div>
                                 <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Alberto Miguel</div>
+                                    <div class="font-medium">Alberto Silva</div>
                                     <div class="text-xs text-slate-500 ml-auto">Abastecimento</div>
 
                                     <div class="text-slate-500 text-xs mt-0.5">22 Maio 2023</div>

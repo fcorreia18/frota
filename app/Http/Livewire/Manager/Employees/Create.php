@@ -2,86 +2,131 @@
 
 namespace App\Http\Livewire\Manager\Employees;
 
+use App\Models\User;
+use App\Models\Company;
 use Livewire\Component;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Create extends Component
 {
 
 
     public $name;
-    public $email;
-    public $nif;
+    public $id_number;
+    public $driver_license;
+    public $license_due_date;
     public $address;
     public $contact;
+    public $email;
+
+    public $companyId;
+
     public $groupId;
+    public $groupCompany;
+
+    public $errors = [] ;
 
     public $showForm = false;
 
-
     protected $rules = [
-        'name' => 'required|string|min:3',
-        'email' => 'required|string|email',
-        'nif' => 'required|string|min:3|max:10',
-        'address' => 'required|string|min:4|max:50',
-        'contact' => 'required|string|min:9|max:14',
+        'name' => 'required|string|min:3|max:50',
+        'id_number' => 'required|string|min:3|max:50',
+        'driver_license' => 'required|string|min:5|max:12',
+        'contact' => 'required|min:9|max:15',
+        'address' => 'required|string|min:4|max:100',
+        'email' => 'required|email',
     ];
 
     protected $messages = [
         'name.required' => 'O campo de nome é obrigatório.',
         'name.min' => 'O campo de nome deve ter pelo menos 3 caracteres.',
+        'name.max' => 'O campo de nome deve no máximo 50 caracteres.',
         'email.required' => 'O campo de email é obrigatório.',
-        'email.email' => 'O campo de email deve ser um endereço de email válido.',
-        'nif.required' => 'O campo de NIF é obrigatório.',
-        'nif.min' => 'O campo de NIF deve ter pelo menos 3 caracteres.',
-        'nif.max' => 'O campo de NIF deve ter no máximo 10 caracteres.',
         'address.required' => 'O campo de endereço é obrigatório.',
         'address.min' => 'O campo de endereço deve ter pelo menos 4 caracteres.',
-        'address.max' => 'O campo de endereço deve ter no máximo 50 caracteres.',
-        'contact.required' => 'O campo de contato é obrigatório.',
-        'contact.min' => 'O campo de contato deve ter pelo menos 9 caracteres.',
-        'contact.max' => 'O campo de contato deve ter no máximo 14 caracteres.',
+        'address.max' => 'O campo de endereço deve ter no máximo 100 caracteres.',
+        'id_number.required' => 'O campo de Nº de Identificação é obrigatório.',
+        'id_number.min' => 'O campo de Nº de Identificação deve ter pelo menos 3 caracteres.',
+        'id_number.max' => 'O campo de Nº de Identificação deve no máximo 50 caracteres.',
+        'contact.required' => 'O campo de contacto é obrigatório.',
+        'contact.min' => 'O campo de contacto deve ter pelo menos 9 caracteres.',
+        'contact.max' => 'O campo de contacto deve no máximo 12 caracteres.',
+        'driver_license.required' => 'O campo de data de Constituição é obrigatório.',
+        'driver_license.min' => 'O campo de Nº da carta deve ter pelo menos 3 caracteres.',
+        'driver_license.max' => 'O campo de Nº da carta deve no máximo 12 caracteres.',
     ];
-   
-
     private function resetFields()
     {
-        $this->name = "";
-        $this->email = "";
-        $this->nif = "";
+        $this->name = '';
         $this->address = "";
+        $this->driver_license = "";
+        $this->id_number = "";
         $this->contact = "";
-        $this->groupId = "";
+        $this->license_due_date = "";
+        $this->email = "";
+        $this->companyId = "";
     }
-    public function addCompany()
+    public function addUser()
     {
+          
         $this->validate();
 
-        $existingCompany = Company::where('nif', $this->nif)->first();
+        $existingUser = User::where('email', $this->email)->first();
 
-        if ($existingCompany) {
-            session()->flash('error', 'Já existe uma empresa com este nif.');
+        if ($existingUser) {
+            session()->flash('error', 'Já existe um usuário com este email.');
             return;
         }
         try {
-            Company::create([
+            $userCreated = Employee::create([
                 'name' => $this->name,
-                'email' =>  $this->email,
-                'nif' => $this->nif,
-                'contact' => $this->contact,
+                'id_number' => $this->id_number,
                 'address' => $this->address,
-                'id_group_company' => $this->groupId,
+                'contact' => $this->contact,
+                'driver_license' => $this->driver_license,
+                'license_due_date' => $this->license_due_date,
+                'id_company' => $this->companyId,
             ]);
+
         } catch (\Throwable $th) {
             array_push($this->errors, $th->getMessage());
             session()->flash('error',  $th->getMessage());
         }
+        // dd("funcionario");
 
-        // Disparar o evento para atualizar a lista de grupo de empresas
-        $this->emit('success', 'Empresa cadastrada com sucesso!');
-        return redirect()->route('admin.group-company.update', ['groupId' => $this->groupId]);
+        try {
+
+            //pesquisar se email já foi cadastrado depois cadastar utilizador!
+
+            $user = User::create([
+                'email' => $this->email,
+                'password' => Hash::make($this->driver_license),
+                'id_employee' => $userCreated->id,
+            ]);
+            // dd("user 1");
+
+            // $token = $user->generateToken();
+
+            // $resetPasswordUrl = route('password.reset', ['token' => $token]);
+
+            // Notification::send($user, new EmployeeRegisteredNotification($resetPasswordUrl));
+            // Redirecionar para a rota desejada
+            // ...
+        // dd("user 2");
+        $this->emit('employeeAdd', 'utilizador cadastrado com sucesso!');
+
+
+        } catch (\Throwable $th) {
+            session()->flash('error', 'Ocorreu um erro durante o registro de acesso do utilizador, por favor verifique se os campos foram devidamente preenchidos');
+            return;
+
+        }
 
         $this->resetFields();
-
+        // Disparar o evento para atualizar a lista de grupo de empresas
+        $this->emit('employeeAdd', 'utilizador cadastrado com sucesso!');
     }
 
     protected $listeners = ['toggleForm'];
@@ -89,8 +134,14 @@ class Create extends Component
     {
         $this->showForm = !$this->showForm;
     }
+    public function mount()
+    {
+        $userCompany = Auth::user()->employee->company;
+        $groupCompany = $userCompany->group;
+        $this->groupCompany = $groupCompany;
+    }
     public function render()
     {
-        return view('livewire.manager.employees.create');
+        return view('livewire.manager.employees.create',['companies' => Company::where("id_group_company", $this->groupCompany->id)->get()]);
     }
 }

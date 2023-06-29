@@ -34,7 +34,7 @@ class Index extends Component
     }
 
     protected $listeners = [
-        'companiesAdd' => '$refresh',
+        'companiesAdd' => '$refresh','employeeUpdated' => '$refresh'
     ];
 
     public function mount()
@@ -42,10 +42,9 @@ class Index extends Component
         $userCompany = Auth::user()->employee->company;
         $groupCompany = $userCompany->group;
         $this->groupCompany = $groupCompany;
-      
-        }
+    }
     public function render()
     {
-        return view('livewire.manager.companies.index', ['companies' => Company::search($this->searchField, $this->search)->where("id_group_company", $this->groupCompany->id )->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
+        return view('livewire.manager.companies.index', ['companies' => Company::search($this->searchField, $this->search)->where("id_group_company", $this->groupCompany->id)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
     }
 }

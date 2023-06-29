@@ -5,14 +5,14 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Frota</a></li>
                 <li class="breadcrumb-item">Dashboard</li>
-                <li class="breadcrumb-item active" aria-current="page">Empresas</li>
+                <li class="breadcrumb-item active" aria-current="page">Funcionários</li>
             </ol>
         </nav>
     </x-slot>
 
 
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
+        <h2 class="text-lg font-medium mr-auto">Lista de Funcionários</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
             <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" <x-blue-primary-button
@@ -23,7 +23,7 @@
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                Nova Empresa
+                Novo Funcionário
             </x-blue-primary-button>
 
         </div>
@@ -202,11 +202,16 @@
         </div>
     </div>
 
+
+
+
     <x-slot name="scripts">
         <script>
-            window.deleteConfirm = function(event) {
+            window.deleteConfirm = function(event, id) {
                 event.preventDefault();
-                let form = event.target.form;
+                console.log(event, id)
+                let deleteButton = document.getElementById(`deleteUser-${id}`);
+
                 Swal.fire({
                     title: 'Tem certeza?',
                     text: "Essa acção é irreversível!",
@@ -215,44 +220,23 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonText: 'cancelar',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'sim, apagar!'
+                    confirmButtonText: `sim, apagar ${deleteButton.innerHTML}!`
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        form.submit();
+                        deleteButton.click()
                     }
                 })
             }
         </script>
         <script>
             document.addEventListener('livewire:load', function() {
-                Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-employee').remove()
+                Livewire.on('employeeAdd', function(message) {
                     Swal.fire({
                         icon: 'success',
                         text: message,
                         title: 'Cadastro bem sucedido',
                         showConfirmButton: false,
                         timer: 1500
-                    })
-                });
-
-                Livewire.on('show-error-message', function(message) {
-
-                    let closeModal = document.querySelector('#add-employee').remove();
-
-
-                    Swal.fire({
-                        title: '',
-                        icon: 'warning',
-                        html: message,
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText: 'Entendi',
-                        cancelButtonText: 'Fechar',
-                    }).then((result) => {
-                        console.log(result);
-                        // document.querySelector('#add-employee').remove()
                     })
                 });
             });

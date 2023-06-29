@@ -1,6 +1,6 @@
    <!-- BEGIN: Side Menu -->
    <nav class="side-nav">
-       <a href="{{ config('app.url', 'Laravel') }}" class="intro-x flex items-center pl-5 pt-4 mt-3">
+       <a href="#" class="intro-x flex items-center pl-5 pt-4 mt-3" style="cursor:initial">
            <x-application-logo class="w-25 h-8 fill-current text-gray-500" />
        </a>
        <div class="side-nav__devider my-6"></div>
