@@ -15,8 +15,12 @@ class Company extends Model
 
     public function employees()
     {
-        return $this->hasMany(Employee::class, 'id_employee');
+        return $this->hasMany(Employee::class,'id_company', 'id');
     }
+    // public function employees()
+    // {
+    //     return $this->hasMany(Employee::class, 'id_employee');
+    // }
 
     /**
      * Get the user that owns the Company

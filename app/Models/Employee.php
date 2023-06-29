@@ -16,7 +16,6 @@ class Employee extends Model
 
     public function company()
     {
-        
         // dd($this->hasOne(Employee::class, 'id_company'), $this->hasOne(User::class, 'id_employee')->toSql());
         return $this->hasOne(Company::class, 'id','id_company');
     }

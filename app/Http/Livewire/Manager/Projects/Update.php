@@ -70,7 +70,7 @@ class Update extends Component
             }
         }
         foreach ($this->selectedOptions as $novo) {
-            array_push($this->selectedOptions, $value);
+            array_push($this->selectedOptions, $novo);
         }
         // array_replace($this->selectedOptions,$value);
         // print_r($this->selectedOptions);

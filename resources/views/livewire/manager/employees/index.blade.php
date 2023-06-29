@@ -104,22 +104,19 @@
                                 #
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                Grupo
-                            </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
-                                Empresa
+                                EMPRESA
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
-                                NIF
+                                NOME
                             </x-table.heading>
-                            <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
-                                Endereço
+                            <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                                IDENTIDADE
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
-                                Email
+                                ENDEREÇO
                             </x-table.heading>
                             <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
-                                Contacto
+                                CONTACTO
                             </x-table.heading>
                             <x-table.heading class="text-center">
                                 Acções
@@ -128,34 +125,32 @@
                         </x-slot>
 
                         <x-slot name="body">
-                            @forelse ($companies as $key => $company)
+                            @forelse ($employees as $key => $employeeArray)
+                            @foreach ($employeeArray as $key=> $employee)
                                 <x-table.row>
                                     <x-table.cell>
                                         {{ $key + 1 }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->name ? $company->name : 'Sem relação' }}
+                                        {{ $employee->company->name }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->name }}
+                                        {{ $employee->name}}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->nif }}
+                                        {{ $employee->id_number }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->address }}
+                                        {{ $employee->address }}
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $company->email }}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                        {{ $company->contact }}
+                                        {{ $employee->contact }}
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex lg:justify-center items-center">
                                             <button class="btn btn-primary-soft mr-2 mb-2 text-gray-600">
                                                 <a
-                                                    href="{{ route('admin.company.update', ['companyId' => $company->id]) }}">
+                                                    href="{{ route('manager.employee.update', ['employeeId' => $employee->id]) }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -187,6 +182,8 @@
                                     </x-table.cell>
 
                                 </x-table.row>
+                            @endforeach
+
                             @empty
                                 <x-table.row>
                                     <x-table.cell colspan="7">
@@ -200,7 +197,6 @@
                             @endforelse
                         </x-slot>
                     </x-table>
-                    {{ $companies->links() }}
                 </div>
             </div>
         </div>
@@ -230,7 +226,7 @@
         <script>
             document.addEventListener('livewire:load', function() {
                 Livewire.on('show-success-message', function(message) {
-                    let closeModal = document.querySelector('#add-company').remove()
+                    let closeModal = document.querySelector('#add-employee').remove()
                     Swal.fire({
                         icon: 'success',
                         text: message,
@@ -242,7 +238,7 @@
 
                 Livewire.on('show-error-message', function(message) {
 
-                    let closeModal = document.querySelector('#add-company').remove();
+                    let closeModal = document.querySelector('#add-employee').remove();
 
 
                     Swal.fire({
@@ -256,7 +252,7 @@
                         cancelButtonText: 'Fechar',
                     }).then((result) => {
                         console.log(result);
-                        // document.querySelector('#add-company').remove()
+                        // document.querySelector('#add-employee').remove()
                     })
                 });
             });
@@ -268,8 +264,8 @@
     {{-- Fim Adicionar Funcionário --}}
 
     {{-- Início Adicionar Funcionário --}}
-    {{-- @if (!empty($company))
-        <livewire:admin.companies.update :company="$company" :wire:key="$company->id" />
+    {{-- @if (!empty($employee))
+        <livewire:manager.employees.update :employee="$employee" :wire:key="$employee->id" />
     @endif --}}
     {{-- Fim Adicionar Funcionário --}}
 

@@ -15,6 +15,8 @@ class Index extends Component
 
 
     public object $groupCompany;
+    public $employees = [];
+
     public $search;
     public $searchField = "name";
     public $sortField = "name";
@@ -34,7 +36,7 @@ class Index extends Component
     }
 
     protected $listeners = [
-        'companiesAdd' => '$refresh',
+        'employeeAdd' => '$refresh',
     ];
 
     public function mount()
@@ -42,9 +44,14 @@ class Index extends Component
         $userCompany = Auth::user()->employee->company;
         $groupCompany = $userCompany->group;
         $this->groupCompany = $groupCompany;
+        $companies =  GroupCompanies::search($this->searchField, $this->search)->where("id", $this->groupCompany->id)->get();
+        foreach ($groupCompany->companies as $companies) {
+            array_push($this->employees, $companies->employees);
+        }
+        
     }
     public function render()
     {
-        return view('livewire.manager.employees.index', ['companies' => Company::search($this->searchField, $this->search)->where("id_group_company", $this->groupCompany->id)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
+        return view('livewire.manager.employees.index', ['employees' => $this->employees])->layout("layouts.app.base");
     }
 }

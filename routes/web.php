@@ -71,7 +71,7 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     Route::prefix('companies')->group(function () {
         Route::get('/', CompaniesIndex::class)->name('manager.companies.index');
         Route::post('/add-company', [CompanyStore::class])->name('manager.company.store');
-        Route::put('/update-company/{id}', [CompaniesComponent::class, 'update'])->name('manager.company.update');
+        Route::put('/update-company/{companyId}', [CompaniesComponent::class, 'update'])->name('manager.company.update');
     });
     //->middleware('middleware_subgrupo'); in case to assign one more middleware or array of middleware
 
@@ -79,7 +79,7 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
 
         Route::get('/', Index::class)->name('manager.employees.index');
         Route::get('/add-employee', ProjectsCreate::class)->name('manager.employee.create');
-        Route::get('/update-employee/{id}', EmployeesUpdate::class)->name('manager.employee.update');
+        Route::get('/update-employee/{employeeId}', EmployeesUpdate::class)->name('manager.employee.update');
     });
 
     Route::prefix('vehicles')->group(function () {
