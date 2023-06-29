@@ -19,8 +19,13 @@ class Maintenance extends Model
 
     public function getStatusColorAttribute(){
         return [
-            "scheduled" => "info",
+            "scheduled" => "warning",
             "done" => "success",
         ][$this->status] ?? "info";
+    }
+
+    public function service()
+    {
+        return $this->hasOne(ServiceProviderServices::class, 'id','service_type');
     }
 }

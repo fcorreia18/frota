@@ -15,9 +15,8 @@
         <h2 class="text-lg font-medium mr-auto">Lista de Empresas</h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 
-            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal"
-            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" 
-                wire:click="$emit('toggleForm')">
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" <x-blue-primary-button
+                class="btn btn-primary shadow-md mr-2" wire:click="$emit('toggleForm')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
@@ -191,9 +190,10 @@
                             @empty
                                 <x-table.row>
                                     <x-table.cell colspan="7">
-                                        <p class="alert alert-warning"><i class="fa fa-exclamation-x-table.rowiangle">
-                                            </i> Não
-                                            existem dados a pra serem apresentados </p>
+                                        <p class="alert alert-warning">
+                                            <i class="fa fa-exclamation-x-table.rowiangle"></i>
+                                            Não existem dados a pra serem apresentados
+                                        </p>
                                     </x-table.cell>
 
                                 </x-table.row>

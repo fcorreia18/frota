@@ -36,6 +36,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.manager.maintenances.index', ['companies' => Maintenance::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(4),])->layout("layouts.app.base");
+        return view('livewire.manager.maintenances.index', ['maintenances' => Maintenance::search($this->searchField, $this->search)->with("vehicle", "service")->orderBy($this->sortField, $this->sortDirection)->paginate(4),])->layout("layouts.app.base");
     }
 }
