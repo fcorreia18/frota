@@ -23,7 +23,7 @@
 
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" wire:click="$emit('toggleForm')">
+            <x-blue-primary-button class="btn btn-primary shadow-md mr-2" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     icon-name="plus" class="lucide lucide-plus w-4 h-4" data-lucide="plus">
@@ -85,7 +85,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="hidden md:block mx-auto text-slate-500">Mostrando 1 até 3 de 15 registos</div>
+            <div class="hidden md:block mx-auto text-slate-500">Mostrando 1 até 10 de 15 registos</div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
                     <input type="text" class="form-control w-56 box pr-10" placeholder="pesquisar...">
@@ -149,7 +149,7 @@
                             </td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <svg
+                                    <a class="flex items-center mr-3" href="{{route("manager.maintenance.update", ['maintenanceId' => $maintenance->id])}}"> <svg
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

@@ -78,31 +78,31 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     Route::prefix('employees')->group(function () {
 
         Route::get('/', Index::class)->name('manager.employees.index');
-        Route::post('/add-employee', ProjectsCreate::class)->name('manager.employee.create');
-        Route::put('/update-employee/{id}', [EmployeesUpdate::class, 'update'])->name('manager.employee.update');
+        Route::get('/add-employee', ProjectsCreate::class)->name('manager.employee.create');
+        Route::get('/update-employee/{id}', EmployeesUpdate::class)->name('manager.employee.update');
     });
 
     Route::prefix('vehicles')->group(function () {
         Route::get('/', VehiclesIndex::class)->name('manager.vehicles.index');
-        Route::post('/add-vehicle', [VehiclesCreate::class])->name('manager.vehicle.create');
-        Route::put('/update-vehicle/{id}', [VehiclesUpdate::class, 'update'])->name('manager.vehicle.update');
+        Route::get('/add-vehicle', VehiclesCreate::class)->name('manager.vehicle.create');
+        Route::get('/update-vehicle/{id}', VehiclesUpdate::class)->name('manager.vehicle.update');
     });
 
     Route::prefix('maintenances')->group(function () {
         Route::get('/', MaintenancesIndex::class)->name('manager.maintenances.index');
-        Route::post('/add-vehicle', [MaintenancesCreate::class])->name('manager.maintenance.create');
-        Route::put('/update-vehicle/{id}', [MaintenancesUpdate::class, 'update'])->name('manager.maintenance.update');
+        Route::get('/add-vehicle', MaintenancesCreate::class)->name('manager.maintenance.create');
+        Route::get('/update-maintenance/{maintenanceId}', MaintenancesUpdate::class)->name('manager.maintenance.update');
     });
 
     Route::prefix('incidents')->group(function () {
         Route::get('/', IncidentsIndex::class)->name('manager.incidents.index');
-        Route::post('/add-vehicle', [IncidentsCreate::class])->name('manager.incident.create');
-        Route::put('/update-vehicle/{id}', [IncidentsUpdate::class, 'update'])->name('manager.incident.update');
+        Route::get('/add-vehicle', IncidentsCreate::class)->name('manager.incident.create');
+        Route::get('/update-vehicle/{id}', IncidentsUpdate::class)->name('manager.incident.update');
     });
 
     Route::prefix('projects')->group(function () {
         Route::get('/', ProjectsIndex::class)->name('manager.projects.index');
-        Route::get('/add-project', [ProjectsCreate::class])->name('manager.project.create');
+        Route::get('/add-project', ProjectsCreate::class)->name('manager.project.create');
         Route::get('/update-project/{projectId}', ProjectsUpdate::class)->name('manager.project.update');
     });
 });

@@ -142,7 +142,7 @@
                            <i data-lucide="users"></i>
                        </div>
                        <div class="side-menu__title">
-                           Utilizadores
+                           Funcionários
 
                        </div>
                    </a>
@@ -225,7 +225,7 @@
                            <i data-lucide="dollar-sign"></i>
                        </div>
                        <div class="side-menu__title">
-                           Transações
+                           Despesas
                        </div>
                    </a>
                </li>
