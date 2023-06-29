@@ -1,6 +1,5 @@
 <div>
 
-
     <x-slot name="breadCrumb">
         <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
             <ol class="breadcrumb">
@@ -10,8 +9,6 @@
             </ol>
         </nav>
     </x-slot>
-
-
     
     <div class="error-section">
         @if ($errors->any())
@@ -99,6 +96,7 @@
             </div>
         </div>
     </div>
+
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
         <table class="table table-report -mt-2">
@@ -130,7 +128,8 @@
                     <td class="text-center">Alberto Silva</td>
                     <td class="text-center">29.000,00kz</td>
                     <td class="w-10">
-                        <div class="flex items-center justify-center text-success"> <svg
+                        <div class="flex items-center justify-center text-success"> 
+                            <svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" icon-name="check-square" data-lucide="check-square"
@@ -266,6 +265,8 @@
         </table>
     </div>
     <!-- END: Data List -->
+
+
     <!-- BEGIN: Pagination -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
         <nav class="w-full sm:w-auto sm:mr-auto">

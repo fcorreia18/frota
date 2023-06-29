@@ -14,4 +14,11 @@ class Maintenance extends Model
     {
         return $this->belongsTo(Vehicle::class, 'id_vehicle');
     }
+
+    public function getStatusColorAttribute(){
+        return [
+            "scheduled" => "info",
+            "scheduled" => "success",
+        ][$this->status] ?? "info";
+    }
 }

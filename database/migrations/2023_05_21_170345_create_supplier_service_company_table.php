@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('supplier_service_company', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_id');
-            $table->unsignedBigInteger('service_id');
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('id_service_provider');
+            $table->unsignedBigInteger('id_service');
+            $table->unsignedBigInteger('id_company');
             $table->float('cost');
             $table->timestamps();
 
-            $table->foreign('supplier_id')->references('id')->on('service_providers')->onDelete('cascade');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->foreign('id_service_provider')->references('id')->on('service_providers')->onDelete('cascade');
+            $table->foreign('id_service')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('id_company')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

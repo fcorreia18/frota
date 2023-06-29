@@ -102,8 +102,8 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
 
     Route::prefix('projects')->group(function () {
         Route::get('/', ProjectsIndex::class)->name('manager.projects.index');
-        Route::post('/add-vehicle', [ProjectsCreate::class])->name('manager.project.create');
-        Route::put('/update-vehicle/{id}', [ProjectsUpdate::class, 'update'])->name('manager.project.update');
+        Route::get('/add-project', [ProjectsCreate::class])->name('manager.project.create');
+        Route::get('/update-project/{projectId}', ProjectsUpdate::class)->name('manager.project.update');
     });
 });
 
