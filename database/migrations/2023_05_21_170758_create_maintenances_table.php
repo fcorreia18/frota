@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('service_type')->nullable();
             $table->unsignedBigInteger('id_vehicle');
             $table->string('ref', 45);
             $table->float('cost')->nullable();
             $table->integer('mileage')->nullable();
             $table->string('responsible', 45)->nullable();
-            $table->unsignedBigInteger('service_type')->nullable();
             $table->string('payment_receipt', 100)->nullable();
-            $table->string('date_scheduled', 100)->nullable();
-            $table->string('date_held', 100)->nullable();
+            $table->date('date_scheduled')->nullable();
+            $table->date('date_held')->nullable();
             $table->enum('status', ['scheduled', 'done']);
             $table->timestamps();
 
             $table->foreign('id_vehicle')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('service_type')->references('id')->on('services')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('service_type')->references('id')->on('service_provider_services')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

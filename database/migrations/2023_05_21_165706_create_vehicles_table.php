@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('model', 45);
             $table->string('color', 45);
             $table->string('license_plate', 45);
-            $table->string('year', 100);
+            $table->date('year');
             $table->float('mileage');
-            $table->string('description', 100);
+            $table->string('description', 200)->nullable();
             $table->enum('status', ['assigned', 'pending', 'released']);
             $table->timestamps();
 

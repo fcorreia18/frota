@@ -9,6 +9,8 @@ class Maintenance extends Model
 {
     use HasFactory;
     protected $table = 'maintenances';
+    protected $fillable = ["id_vehicle", "service_type",  "ref", "mileage", "responsible","paymente_receipt","date_scheduled","date_held"];
+
 
     public function vehicle()
     {
@@ -18,7 +20,7 @@ class Maintenance extends Model
     public function getStatusColorAttribute(){
         return [
             "scheduled" => "info",
-            "scheduled" => "success",
+            "done" => "success",
         ][$this->status] ?? "info";
     }
 }

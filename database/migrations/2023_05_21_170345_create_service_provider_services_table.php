@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supplier_service_company', function (Blueprint $table) {
+        Schema::create('service_provider_services', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_service_provider');
             $table->unsignedBigInteger('id_service');
-            $table->unsignedBigInteger('id_company');
-            $table->float('cost');
+            $table->float('unit_cost')->nullable();
+            $table->integer('qtd')->nullable();
             $table->timestamps();
 
             $table->foreign('id_service_provider')->references('id')->on('service_providers')->onDelete('cascade');
             $table->foreign('id_service')->references('id')->on('services')->onDelete('cascade');
-            $table->foreign('id_company')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supplier_service_company');
+        Schema::dropIfExists('service_provider_services');
     }
 };
