@@ -30,7 +30,7 @@
                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                 </svg> </div>
                             <div class="flex items-center justify-start mt-4">
-                                <div class="relative text-2xl font-medium pl-3 ml-0.5"> 
+                                <div class="relative text-2xl font-medium pl-3 ml-0.5">
                                     1.413,02 kz
                                 </div>
                                 <a class="text-slate-500 ml-4" href=""> <svg xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +171,7 @@
                 class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 row-start-4 lg:row-start-3 xl:row-start-auto mt-6 xl:mt-8">
                 <div class="intro-y flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        Gráfico estatistico
+                        Gráfico estatistico(semestral)
                     </h2>
                 </div>
                 <div class="report-box-2 before:hidden xl:before:block intro-y mt-5">
@@ -186,8 +186,7 @@
                         <div class="w-52 sm:w-auto mx-auto mt-8">
                             <div class="flex items-center">
                                 <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                <span class="truncate">Manutenções</span> <span
-                                    class="font-medium ml-auto">62%</span>
+                                <span class="truncate">Manutenções</span> <span class="font-medium ml-auto">62%</span>
                             </div>
                             <div class="flex items-center mt-4">
                                 <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
@@ -196,16 +195,17 @@
                             </div>
                             <div class="flex items-center mt-4">
                                 <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                <span class="truncate">Incidentes</span> <span
-                                    class="font-medium ml-auto">10%</span>
+                                <span class="truncate">Incidentes</span> <span class="font-medium ml-auto">10%</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- END: Sales Report -->
-            <div class="h-[400px] col-span-12 xl:col-span-12 mt-8 box" style="height:35rem"> <canvas
-                    id="vertical-bar-chart-widget"></canvas> </div>
+
+            <div class="col-span-12 xl:col-span-12  box mb-8 pb-10" style="height: 33rem">
+                <canvas id="expensesPerProject"></canvas>
+            </div>
         </div>
     </div>
     <div class="col-span-12 2xl:col-span-3">
@@ -262,7 +262,7 @@
                         </h2>
                     </div>
                     <div class="mt-5">
-                       
+
                         <div class="intro-x">
                             <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
@@ -310,8 +310,38 @@
                     </div>
                 </div>
                 <!-- END: Transactions -->
-              
+
             </div>
         </div>
     </div>
+
+    <x-slot name="scripts">
+        <script>
+            document.addEventListener('livewire:load', function() {
+
+                const expensesPerProject = new Chart(document.getElementById('expensesPerProject'), {
+                    type: 'line',
+                    data: {
+                        labels: @json($projects->pluck('name')),
+                        datasets: [{
+                            label: `Total Gastos`,
+                            data: @json($expensesPerProject->values()),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                    }
+                });
+            });
+        </script>
+
+    </x-slot>
 </div>

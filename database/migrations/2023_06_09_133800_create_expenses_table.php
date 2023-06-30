@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_project');
             $table->unsignedBigInteger('id_vehicle');
-            $table->float('valor');
+            $table->float('amount');
             $table->enum('type', ['incident', 'maintenance', 'supply']);
-            $table->date('data');
+            $table->date('date');
             $table->timestamps();
 
             $table->foreign('id_project')->references('id')->on('projects')->onDelete('cascade')->onUpdate('cascade');

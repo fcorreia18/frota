@@ -2,12 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Expenses;
+use App\Models\Project;
 use Livewire\Component;
+use App\Models\Expenses;
 use App\Models\Projects;
 
 class AdminDashboardComponent extends Component
 {
+
+
+    public $totalUsers;
+    public $totalVehicles;
+    public $totalMaintenances;
+    public $totalIncidents;
 
 
     public function total(){
@@ -31,7 +38,7 @@ class AdminDashboardComponent extends Component
     {
 
          // Consultar os dados necessários para o dashboard
-         $projects = Projects::all();
+         $projects = Project::all();
          $expenses = Expenses::all();
  
          // Calcular os valores totais dos expenses por projeto
@@ -46,11 +53,5 @@ class AdminDashboardComponent extends Component
          return view('livewire.admin.dashboard-component', compact('projects', 'expensesPerProject', 'totalExpenses', 'totalProjects'))->layout("layouts.app.base");
      
 
-        // return view('livewire.admin.dashboard-component', [
-
-        //     'total_companies' => 12,#Post::all()
-        //     'total_employees' => 12,#Post::all()
-
-        // ]);
     }
 }

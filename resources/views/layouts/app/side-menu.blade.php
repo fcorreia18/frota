@@ -8,40 +8,18 @@
            {{-- MENU ADMINISTRADOR PRINCIPAL --}}
            @can('admin')
                <li>
-                   <a href="javascript:;" class="side-menu side-menu--active">
+                   <a href="{{ route('admin.dashboard') }}" class="side-menu side-menu--active">
                        <div class="side-menu__icon">
                            <i data-lucide="home"></i>
                        </div>
                        <div class="side-menu__title">
                            Dashboard
                            <div class="side-menu__sub-icon transform rotate-180">
-                               <i data-lucide="chevron-down"></i>
+                               <i data-lucide="chevron-left"></i>
                            </div>
                        </div>
                    </a>
-                   <ul class="side-menu__sub-open">
-                       <li>
-                           <a href="{{ route('admin.dashboard') }}" class="side-menu side-menu--active">
-                               <div class="side-menu__icon">
-                                   <i data-lucide="activity"></i>
-                               </div>
-                               <div class="side-menu__title">
-                                   Painel 1
-                               </div>
-                           </a>
-                       </li>
-                       <li>
-                           <a href="{{ route('admin.dashboard') }}" class="side-menu">
-                               <div class="side-menu__icon">
-                                   <i data-lucide="activity"></i>
-                               </div>
-                               <div class="side-menu__title">
-                                   Painel 2
-                               </div>
-                           </a>
-                       </li>
-
-                   </ul>
+                  
                </li>
 
                <li class="side-nav__devider my-6"></li>

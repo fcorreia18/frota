@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> SIMPLES {{ config('app.name', 'Laravel') }} - {{$title??"APP"}}</title>
+    <title> SIMPLES {{ config('app.name', 'Laravel') }} - {{ $title ?? 'APP' }}</title>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -60,15 +60,13 @@
         </div>
     </div>
 
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcUcow5QHjitBVOfkTdy44l7jnaoFzW1k&libraries=places">
-    </script>
+
+
+
 
     @if (isset($scripts))
         {{ $scripts }}
     @endif
-
     <script>
         document.addEventListener('livewire:load', function() {
             Livewire.on('error', function(message) {
@@ -128,10 +126,11 @@
 
         });
     </script>
-
-
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcUcow5QHjitBVOfkTdy44l7jnaoFzW1k&libraries=places">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @livewireScripts
-
 </body>
-
 </html>
