@@ -320,7 +320,7 @@
             document.addEventListener('livewire:load', function() {
 
                 const expensesPerProject = new Chart(document.getElementById('expensesPerProject'), {
-                    type: 'bar',
+                    type: 'line',
                     data: {
                         labels: @json($projects->pluck('name')),
                         datasets: [{

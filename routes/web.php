@@ -20,8 +20,7 @@ use App\Http\Livewire\Manager\Companies\Index as CompaniesIndex;
 use App\Http\Livewire\Manager\ManagerDashboardComponent;
 use App\Http\Livewire\Manager\Employees\Index;
 use App\Http\Livewire\Manager\Employees\Update as EmployeesUpdate;
-use App\Http\Livewire\Manager\Expenses\Index as ExpensesIndex;
-use App\Http\Livewire\Manager\Expenses\Show;
+
 use App\Http\Livewire\Manager\Maintenances\Create as MaintenancesCreate;
 use App\Http\Livewire\Manager\Maintenances\Index as MaintenancesIndex;
 use App\Http\Livewire\Manager\Maintenances\Update as MaintenancesUpdate;
@@ -86,7 +85,7 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     Route::prefix('vehicles')->group(function () {
         Route::get('/', VehiclesIndex::class)->name('manager.vehicles.index');
         Route::get('/add-vehicle', VehiclesCreate::class)->name('manager.vehicle.create');
-        Route::get('/update-vehicle/{vehicleId}', VehiclesUpdate::class)->name('manager.vehicle.update');
+        Route::get('/update-vehicle/{id}', VehiclesUpdate::class)->name('manager.vehicle.update');
     });
 
     Route::prefix('maintenances')->group(function () {
@@ -98,18 +97,13 @@ Route::prefix('manager')->middleware(['auth', 'check.role:manager'])->group(func
     Route::prefix('incidents')->group(function () {
         Route::get('/', IncidentsIndex::class)->name('manager.incidents.index');
         Route::get('/add-vehicle', IncidentsCreate::class)->name('manager.incident.create');
-        Route::get('/update-vehicle/{vehicleId}', IncidentsUpdate::class)->name('manager.incident.update');
+        Route::get('/update-vehicle/{id}', IncidentsUpdate::class)->name('manager.incident.update');
     });
 
     Route::prefix('projects')->group(function () {
         Route::get('/', ProjectsIndex::class)->name('manager.projects.index');
         Route::get('/add-project', ProjectsCreate::class)->name('manager.project.create');
         Route::get('/update-project/{projectId}', ProjectsUpdate::class)->name('manager.project.update');
-    });
-
-    Route::prefix('expenses')->group(function () {
-        Route::get('/', ExpensesIndex::class)->name('manager.expenses.index');
-        Route::get('/expense/{expenseId}', Show::class)->name('manager.expense.show');
     });
 });
 
