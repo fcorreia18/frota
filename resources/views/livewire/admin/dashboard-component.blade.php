@@ -32,7 +32,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $this->total() }}</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $this->getTotal('companies') }}
+                                    </div>
                                     <div class="text-base text-slate-500 mt-1">Empresas</div>
                                 </div>
                             </div>
@@ -49,7 +50,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">0</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $this->getTotal('vehicles') }}
+                                    </div>
                                     <div class="text-base text-slate-500 mt-1">Veículos</div>
                                 </div>
                             </div>
@@ -66,7 +68,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">0</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $this->getTotal('incidents') }}
+                                    </div>
                                     <div class="text-base text-slate-500 mt-1">Incidentes Resolvidos</div>
                                 </div>
                             </div>
@@ -84,7 +87,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-3xl font-medium leading-8 mt-6">{{ $this->total() }}</div>
+                                        <div class="text-3xl font-medium leading-8 mt-6">{{ $this->getTotal('users') }}
+                                        </div>
                                         <div class="text-base text-slate-500 mt-1">Usuários</div>
                                     </div>
                                 </div>
@@ -108,14 +112,14 @@
                             <div class="flex">
                                 <div>
                                     <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">
-                                        150,000kz</div>
+                                        4</div>
                                     <div class="mt-0.5 text-slate-500">Este Mês</div>
                                 </div>
                                 <div
                                     class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
                                 </div>
                                 <div>
-                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">94,000kz</div>
+                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">2</div>
                                     <div class="mt-0.5 text-slate-500">Mês Passado</div>
                                 </div>
                             </div>
@@ -140,14 +144,24 @@
                     </div>
                 </div>
                 <!-- END: Sales Report -->
-
-                <!-- BEGIN: Weekly Top Seller -->
                 <div class="col-span-12 lg:col-span-6 mt-8">
-                    <div class="intro-y flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">Esta semana</h2>
+                      <div class="intro-y flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">Total de utilizadores</h2>
                         <a href="" class="ml-auto text-primary truncate">+ detalhes</a>
                     </div>
-                    <div class="intro-y box p-5 mt-5">
+                    <div class="intro-y box  mt-5">
+                        <div class="mt-3">
+                                <canvas id="grafico"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- BEGIN: Weekly Top Seller -->
+                {{-- <div class="col-span-12 lg:col-span-6 mt-8"> --}}
+                    {{-- <div class="intro-y flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">Esta semana</h2>
+                        <a href="" class="ml-auto text-primary truncate">+ detalhes</a>
+                    </div> --}}
+                    {{-- <div class="intro-y box p-5 mt-5">
                         <div class="mt-3">
                             <div class="h-[213px]">
                                 <canvas id="report-pie-chart"></canvas>
@@ -171,37 +185,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
     </div>
 
 
-    <div class="grid grid-cols-12 gap-6 mb-10">
-        <div class="col-span-12 2xl:col-span-12">
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-12 lg:col-span-6 mt-8">
-                    <h2>Estatísticas</h2>
-
-                    <canvas id="grafico" width="400" height="200"></canvas>
-                </div>
-
-
-                <div class="h-[400px] col-span-12 xl:col-span-12 mt-8 box" style="height:35rem">
-                    <div>
-                        <h2>Informações Gerais:</h2>
-                        <p>Total de Projetos: {{ $totalProjects }}</p>
-                        <p>Total de Gastos: R$ {{ $totalExpenses }}</p>
-                    </div>
-                    <h2>Gráfico de Gastos por Projeto:</h2>
-                    <canvas id="expensesPerProject"
-                        style="display: block; box-sizing: border-box; height: 560px; width: 1198px;" width="1198"
-                        height="560" id="expensesPerProject"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
 
 
@@ -281,26 +272,7 @@
                         responsive: true,
                     }
                 });
-                const expensesPerProject = new Chart(document.getElementById('expensesPerProject'), {
-                    type: 'bar',
-                    data: {
-                        labels: @json($projects->pluck('name')),
-                        datasets: [{
-                            label: 'Gastos',
-                            data: @json($expensesPerProject->values()),
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
+
             });
         </script>
     </x-slot>

@@ -28,8 +28,8 @@
                         <img alt="Midone - HTML Admin Template" class="rounded-full" src="http://localhost/storage/2.jpg">
                     </div>
                     <div class="ml-4 mr-auto">
-                        <div class="font-medium text-base">Robert De Niro</div>
-                        <div class="text-slate-500">Software Engineer</div>
+                        <div class="font-medium text-base">RENAULT</div>
+                        <div class="text-slate-500"> Sandero </div>
                     </div>
                     <div class="dropdown">
                         <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"
@@ -46,7 +46,7 @@
                             <ul class="dropdown-content">
                                 <li>
                                     <h6 class="dropdown-header">
-                                        Export Options
+                                        exportar opções 
                                     </h6>
                                 </li>
                                 <li>
@@ -59,57 +59,17 @@
                                             stroke-linejoin="round" icon-name="activity" data-lucide="activity"
                                             class="lucide lucide-activity w-4 h-4 mr-2">
                                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                                        </svg> English </a>
+                                        </svg> Português </a>
                                 </li>
-                                <li>
-                                    <a href="" class="dropdown-item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" icon-name="box"
-                                            data-lucide="box" class="lucide lucide-box w-4 h-4 mr-2">
-                                            <path
-                                                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z">
-                                            </path>
-                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                                        </svg> Indonesia
-                                        <div class="text-xs text-white px-1 rounded-full bg-danger ml-auto">10</div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="layout" data-lucide="layout"
-                                            class="lucide lucide-layout w-4 h-4 mr-2">
-                                            <rect x="3" y="3" width="18" height="18"
-                                                rx="2" ry="2"></rect>
-                                            <line x1="3" y1="9" x2="21" y2="9">
-                                            </line>
-                                            <line x1="9" y1="21" x2="9" y2="9">
-                                            </line>
-                                        </svg> English </a>
-                                </li>
-                                <li>
-                                    <a href="" class="dropdown-item"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="sidebar" data-lucide="sidebar"
-                                            class="lucide lucide-sidebar w-4 h-4 mr-2">
-                                            <rect x="3" y="3" width="18" height="18"
-                                                rx="2" ry="2"></rect>
-                                            <line x1="9" y1="3" x2="9" y2="21">
-                                            </line>
-                                        </svg> Indonesia </a>
-                                </li>
+                               
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
                                     <div class="flex p-1">
-                                        <button type="button" class="btn btn-primary py-1 px-2">Settings</button>
-                                        <button type="button" class="btn btn-secondary py-1 px-2 ml-auto">View
-                                            Profile</button>
+                                        <button type="button" class="btn btn-primary py-1 px-2">definições</button>
+                                        <button type="button" class="btn btn-secondary py-1 px-2 ml-auto">ver
+                                            </button>
                                     </div>
                                 </li>
                             </ul>
@@ -123,7 +83,7 @@
                             stroke-linejoin="round" icon-name="activity" data-lucide="activity"
                             class="lucide lucide-activity w-4 h-4 mr-2">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg> Personal Information </a>
+                        </svg> Informações Gerais </a>
                     <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="box"
@@ -133,63 +93,13 @@
                             </path>
                             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                             <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg> Account Settings </a>
-                    <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="lock"
-                            data-lucide="lock" class="lucide lucide-lock w-4 h-4 mr-2">
-                            <rect x="3" y="11" width="18" height="11" rx="2"
-                                ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0110 0v4"></path>
-                        </svg> Change Password </a>
-                    <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="settings"
-                            data-lucide="settings" class="lucide lucide-settings w-4 h-4 mr-2">
-                            <path
-                                d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z">
-                            </path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg> User Settings </a>
-                </div>
-                <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                    <a class="flex items-center" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="activity"
-                            data-lucide="activity" class="lucide lucide-activity w-4 h-4 mr-2">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg> Email Settings </a>
-                    <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="box"
-                            data-lucide="box" class="lucide lucide-box w-4 h-4 mr-2">
-                            <path
-                                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z">
-                            </path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg> Saved Credit Cards </a>
-                    <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="lock"
-                            data-lucide="lock" class="lucide lucide-lock w-4 h-4 mr-2">
-                            <rect x="3" y="11" width="18" height="11" rx="2"
-                                ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0110 0v4"></path>
-                        </svg> Social Networks </a>
-                    <a class="flex items-center mt-5" href=""> <svg xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="settings"
-                            data-lucide="settings" class="lucide lucide-settings w-4 h-4 mr-2">
-                            <path
-                                d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z">
-                            </path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg> Tax Information </a>
-                </div>
+                        </svg> Atualizações 
+                    </a>
+                  </div>
+               
                 <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400 flex">
-                    <button type="button" class="btn btn-primary py-1 px-2">New Group</button>
-                    <button type="button" class="btn btn-outline-secondary py-1 px-2 ml-auto">New Quick Link</button>
+                    <button type="button" class="btn btn-primary py-1 px-2">+</button>
+                    <button type="button" class="btn btn-outline-secondary py-1 px-2 ml-auto">-</button>
                 </div>
             </div>
         </div>
@@ -232,7 +142,7 @@
             <div class="intro-y box lg:mt-5">
                 <div class="flex items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="font-medium text-base mr-auto">
-                        Display Information
+                        Informações Gerais
                     </h2>
                 </div>
                 <div class="p-5">
@@ -241,26 +151,22 @@
                             <div class="grid grid-cols-12 gap-x-5">
                                 <div class="col-span-12 2xl:col-span-6">
                                     <div>
-                                        <label for="update-profile-form-1" class="form-label">Display Name</label>
+                                        <label for="update-profile-form-1" class="form-label">Veículo</label>
                                         <input id="update-profile-form-1" type="text" class="form-control"
-                                            placeholder="Input text" value="Robert De Niro" disabled="">
+                                            placeholder="Input text" value="Renault " disabled="">
                                     </div>
                                     <div class="mt-3">
                                         <label for="update-profile-form-2-tomselected" class="form-label"
-                                            id="update-profile-form-2-ts-label">Nearest MRT Station</label>
+                                            id="update-profile-form-2-ts-label">AB</label>
                                         <select id="update-profile-form-2" data-search="true"
                                             class="tom-select w-full tomselected" tabindex="-1" hidden="hidden">
-                                            <option value="1" selected="true">Admiralty</option>
+                                            <option value="1" selected="true">2SEC</option>
 
-                                            <option value="2">Aljunied</option>
-                                            <option value="3">Ang Mo Kio</option>
-                                            <option value="4">Bartley</option>
-                                            <option value="5">Beauty World</option>
                                         </select>
                                         <div class="ts-control tom-select w-full single plugin-dropdown_input"
                                             tabindex="0">
                                             <div class="items ts-input full has-items">
-                                                <div data-value="1" class="item">Admiralty</div>
+                                                <div data-value="1" class="item">2SEC</div>
                                             </div>
                                             <div class="ts-dropdown single tom-select w-full plugin-dropdown_input"
                                                 style="display: none;">
@@ -279,22 +185,20 @@
                                 <div class="col-span-12 2xl:col-span-6">
                                     <div class="mt-3 2xl:mt-0">
                                         <label for="update-profile-form-3-tomselected" class="form-label"
-                                            id="update-profile-form-3-ts-label">Postal Code</label>
+                                            id="update-profile-form-3-ts-label">Modelo</label>
                                         <select id="update-profile-form-3" data-search="true"
                                             class="tom-select w-full tomselected" tabindex="-1" hidden="hidden">
-                                            <option value="1" selected="true">018906 - 1 STRAITS BOULEVARD
-                                                SINGA...</option>
+                                            <option value="1" selected="true">sandero</option>
 
-                                            <option value="2">018910 - 5A MARINA GARDENS DRIVE...</option>
-                                            <option value="3">018915 - 100A CENTRAL BOULEVARD...</option>
-                                            <option value="4">018925 - 21 PARK STREET MARINA...</option>
-                                            <option value="5">018926 - 23 PARK STREET MARINA...</option>
+                                            <option value="2">sandero</option>
+                                            <option value="3">sandero</option>
+                                            <option value="4">sandero</option>
+                                            <option value="5">sandero</option>
                                         </select>
                                         <div class="ts-control tom-select w-full single plugin-dropdown_input"
                                             tabindex="0">
                                             <div class="items ts-input full has-items">
-                                                <div data-value="1" class="item">018906 - 1 STRAITS BOULEVARD
-                                                    SINGA...</div>
+                                                <div data-value="1" class="item">sandero</div>
                                             </div>
                                             <div class="ts-dropdown single tom-select w-full plugin-dropdown_input"
                                                 style="display: none;">
@@ -310,19 +214,19 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <label for="update-profile-form-4" class="form-label">Phone Number</label>
+                                        <label for="update-profile-form-4" class="form-label">KM </label>
                                         <input id="update-profile-form-4" type="text" class="form-control"
-                                            placeholder="Input text" value="65570828">
+                                            placeholder="Input text" value="88000">
                                     </div>
                                 </div>
-                                <div class="col-span-12">
+                                {{-- <div class="col-span-12">
                                     <div class="mt-3">
                                         <label for="update-profile-form-5" class="form-label">Address</label>
                                         <textarea id="update-profile-form-5" class="form-control" placeholder="Adress">10 Anson Road, International Plaza, #10-11, 079903 Singapore, Singapore</textarea>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
-                            <button type="button" class="btn btn-primary w-20 mt-3">Save</button>
+                            <button type="button" class="btn btn-primary w-20 mt-3">salvar</button>
                         </div>
                         <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                             <div
@@ -343,10 +247,10 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="mx-auto cursor-pointer relative mt-5">
-                                    <button type="button" class="btn btn-primary w-full">Change Photo</button>
+                                {{-- <div class="mx-auto cursor-pointer relative mt-5">
+                                    <button type="button" class="btn btn-primary w-full">mudar imagem</button>
                                     <input type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -354,7 +258,7 @@
             </div>
             <!-- END: Display Information -->
             <!-- BEGIN: Personal Information -->
-            <div class="intro-y box mt-5">
+            {{-- <div class="intro-y box mt-5">
                 <div class="flex items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="font-medium text-base mr-auto">
                         Personal Information
@@ -447,7 +351,7 @@
                             </svg> Delete Account </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- END: Personal Information -->
         </div>
     </div>

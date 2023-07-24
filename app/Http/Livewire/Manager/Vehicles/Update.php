@@ -8,6 +8,6 @@ class Update extends Component
 {
     public function render()
     {
-        return view('livewire.manager.vehicles.update');
+        return view('livewire.manager.vehicles.update')->layout("layouts.app.base");
     }
 }

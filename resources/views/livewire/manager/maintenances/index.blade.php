@@ -147,9 +147,10 @@
                                     </svg> {{ $maintenance->status == "done"? "realizada":"agendada" }}
                                 </div>
                             </td>
+                            {{-- {{route("manager.maintenance.update", ['maintenanceId' => $maintenance->id])}} --}}
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{route("manager.maintenance.update", ['maintenanceId' => $maintenance->id])}}"> <svg
+                                    <a class="flex items-center mr-3" href="#"> <svg
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -216,11 +217,7 @@
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg> </a>
                     </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                    <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
+                    <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
                     <li class="page-item">
                         <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"

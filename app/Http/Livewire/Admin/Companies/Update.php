@@ -15,6 +15,7 @@ class Update extends Component
     public $companyId;
     public $employees;
 
+    
     public $name;
     public $email;
     public $nif;

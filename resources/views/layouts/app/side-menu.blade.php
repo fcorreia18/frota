@@ -182,7 +182,7 @@
                        </li>
                    </ul>
                </li>
-               <li>
+               {{-- <li>
                    <a href="{{ route('manager.dashboard') }}" class="side-menu">
                        <div class="side-menu__icon">
                            <i data-lucide="map"></i>
@@ -191,14 +191,14 @@
                            Actividades
                        </div>
                    </a>
-               </li>
+               </li> --}}
 
 
 
                <li class="side-nav__devider my-6"></li>
 
                <li>
-                   <a href="{{ route('manager.dashboard') }}" class="side-menu">
+                   <a href="{{ route('manager.expenses.index') }}" class="side-menu">
                        <div class="side-menu__icon">
                            <i data-lucide="dollar-sign"></i>
                        </div>
