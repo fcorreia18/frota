@@ -85,7 +85,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="hidden md:block mx-auto text-slate-500">Mostrando 1 até 10 de 15 registos</div>
+            <div class="hidden md:block mx-auto text-slate-500"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
                     <input type="text" class="form-control w-56 box pr-10" placeholder="pesquisar...">
@@ -103,40 +103,59 @@
 
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-            <table class="table table-report -mt-2">
-                <thead>
-                    <tr>
-                        <th class="whitespace-nowrap">#</th>
-                        <th class="text-center whitespace-nowrap">REF</th>
-                        <th class="whitespace-nowrap">VEÍCULO</th>
-                        <th class="text-center whitespace-nowrap">MATRÍCULA</th>
-                        <th class="text-center whitespace-nowrap">KILOMETRAGEM</th>
-                        <th class="text-center whitespace-nowrap">RESPONSÁVEL</th>
-                        <th class="text-center whitespace-nowrap">CUSTO</th>
-                        <th class="text-center whitespace-nowrap">DATA/MARCAÇÃO</th>
-                        <th class="text-center whitespace-nowrap">DATA/REALIZADA</th>
-                        <th class="text-center whitespace-nowrap">STATUS</th>
-                        <th class="text-center whitespace-nowrap">ACÇÕES</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <x-table>
+                <x-slot name="head">
+                    <x-table.heading>
+                        #
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                        REF
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('name')" :direction="$sortField === 'title' ? $sortDirection : null">
+                        VEÍCULO
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('nif')" :direction="$sortField === 'nif' ? $sortDirection : null">
+                        MATRÍCULA
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortField === 'address' ? $sortDirection : null">
+                        KILOMETRAGEM
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
+                        RESPONSÁVEL
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
+                        DATA/MARCAÇÃO
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
+                        DATA/REALIZADA
+                    </x-table.heading>
+                    <x-table.heading sortable wire:click="sortBy('contact')" :direction="$sortField === 'contact' ? $sortDirection : null">
+                        STATUS
+                    </x-table.heading>
+                    <x-table.heading class="text-center">
+                        Acções
+                    </x-table.heading>
+
+                </x-slot>
+
+                <x-slot name="body">
                     @forelse ($maintenances as $key => $maintenance)
-                        <tr class="intro-x">
-                            <td class="w-10">
+                        <x-table.row class="intro-x">
+                            <x-table.cell class="w-10">
                                 {{ $key + 1 }}
-                            </td>
-                            <td class="text-center"> {{ $maintenance->ref }}</td>
-                            <td>
+                            </x-table.cell>
+                            <x-table.cell class="text-center"> {{ $maintenance->ref }}</x-table.cell>
+                            <x-table.cell>
                                 <a href="" class="font-medium whitespace-nowrap">{{ $maintenance->vehicle->brand }}</a>
                                 <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{ $maintenance->vehicle->model }}</div>
-                            </td>
-                            <td class="text-center">{{ $maintenance->vehicle->license_plate }}</td>
-                            <td class="text-center">{{ $maintenance->mileage }}km</td>
-                            <td class="text-center">{{ $maintenance->responsible }}</td>
-                            <td class="text-center">{{ $maintenance->service->unit_cost }}kz</td>
-                            <td class="text-center">{{ $maintenance->date_scheduled }}</td>
-                            <td class="text-center">{{ $maintenance->date_held }}</td>
-                            <td class="w-10">
+                            </x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->vehicle->license_plate }}</x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->mileage }}km</x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->responsible }}</x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->service->unit_cost }}kz</x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->date_scheduled }}</x-table.cell>
+                            <x-table.cell class="text-center">{{ $maintenance->date_held }}</x-table.cell>
+                            <x-table.cell class="w-10">
                                 <div class="flex items-center justify-center text-{{$maintenance->status_color}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -146,8 +165,8 @@
                                         <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
                                     </svg> {{ $maintenance->status == "done"? "realizada":"agendada" }}
                                 </div>
-                            </td>
-                            <td class="table-report__action w-56">
+                            </x-table.cell>
+                            <x-table.cell class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="{{route("manager.maintenance.update", ['maintenanceId' => $maintenance->id])}}"> <svg
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -175,81 +194,27 @@
                                             </line>
                                         </svg> Remover </a>
                                 </div>
-                            </td>
-                        </tr>
+                            </x-table.cell>
+                        </x-table.row>
                     @empty
-                        <tr class="intro-x">
-                            <td class="table-report__action w-56" colspan="7">
+                        <x-table.row class="intro-x">
+                            <x-table.cell class="table-report__action w-56" colspan="7">
                                 <p class="alert alert-warning">
                                     <i class="fa fa-exclamation-x-table.rowiangle"></i>
                                     Não existem dados a pra serem apresentados
                                 </p>
-                            </td>
-                        </tr>
+                            </x-table.cell>
+                        </x-table.row>
                     @endforelse
-                </tbody>
-            </table>
+                </x-slot>
+            </x-table>
+            {{ $maintenances->links() }}
         </div>
         <!-- END: Data List -->
 
 
         <!-- BEGIN: Pagination -->
-        <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-            <nav class="w-full sm:w-auto sm:mr-auto">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                icon-name="chevrons-left" class="lucide lucide-chevrons-left w-4 h-4"
-                                data-lucide="chevrons-left">
-                                <polyline points="11 17 6 12 11 7"></polyline>
-                                <polyline points="18 17 13 12 18 7"></polyline>
-                            </svg> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                icon-name="chevron-left" class="lucide lucide-chevron-left w-4 h-4"
-                                data-lucide="chevron-left">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg> </a>
-                    </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                    <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                icon-name="chevron-right" class="lucide lucide-chevron-right w-4 h-4"
-                                data-lucide="chevron-right">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                icon-name="chevrons-right" class="lucide lucide-chevrons-right w-4 h-4"
-                                data-lucide="chevrons-right">
-                                <polyline points="13 17 18 12 13 7"></polyline>
-                                <polyline points="6 17 11 12 6 7"></polyline>
-                            </svg> </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
-        </div>
+       
         <!-- END: Pagination -->
     </div>
 

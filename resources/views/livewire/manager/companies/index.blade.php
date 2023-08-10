@@ -39,8 +39,8 @@
         @endif
     </div>
 
-    <div class="intro-y box p-5 mt-5">
-        <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
+    <div class=" p-5 mt-5">
+        <div class="box flex flex-col sm:flex-row sm:items-end xl:items-start p-5">
             <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto">
                 <div class="sm:flex items-center sm:mr-4">
                     <label class="w-12 flex-none xl:w-auto xl:flex-initial mr-2">Campos</label>
@@ -94,11 +94,8 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-x-auto scrollbar-hidden">
-            <div class="shadow-sm mt-3 bg-white p-4 col-lg-12">
-                <div class="table-responsive">
-                    {{-- MESSAGE --}}
-
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+         
                     <x-table>
                         <x-slot name="head">
                             <x-table.heading>
@@ -190,7 +187,7 @@
                                 </x-table.row>
                             @empty
                                 <x-table.row>
-                                    <x-table.cell colspan="7">
+                                    <x-table.cell colspan="8">
                                         <p class="alert alert-warning"><i class="fa fa-exclamation-x-table.rowiangle">
                                             </i> Não
                                             existem dados a pra serem apresentados </p>

@@ -45,6 +45,6 @@ class Index extends Component
     }
     public function render()
     {
-        return view('livewire.manager.companies.index', ['companies' => Company::search($this->searchField, $this->search)->where("id_group_company", $this->groupCompany->id)->orderBy($this->sortField, $this->sortDirection)->paginate(1),])->layout("layouts.app.base");
+        return view('livewire.manager.companies.index', ['companies' => Employee::search($this->searchField, $this->search)->orderBy($this->sortField, $this->sortDirection)->paginate(3),])->layout("layouts.app.base");
     }
 }
