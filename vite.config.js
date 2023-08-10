@@ -11,9 +11,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    // server:{
-    //     host:"ip_local ou localhost",
-    //     port:"nº da porta",
-    // },
+     server:{
+	hmr:{
+           host:'localhost',
+     }
+},
 });
 
